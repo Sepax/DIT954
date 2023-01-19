@@ -1,4 +1,6 @@
-public class Car implement Moveable{
+import java.awt.*;
+
+public class Car implements Moveable {
     protected int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
@@ -43,15 +45,15 @@ public class Car implement Moveable{
   }
 
 
-  void move() {
+  public void move() {
 
   }
 
-  void turnLeft() {
+  public void turnLeft() {
 
   }
 
-  void turnRight() {
+  public void turnRight() {
 
   }
 

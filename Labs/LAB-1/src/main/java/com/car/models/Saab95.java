@@ -1,3 +1,4 @@
+package com.car.models;
 
 import java.awt.*;
 
@@ -26,13 +27,22 @@ public class Saab95 extends Car {
         return this.enginePower * 0.01 * turbo;
     }
 
-    @Override
     public void incrementSpeed(double amount) {
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
-    @Override
     public void decrementSpeed(double amount) {
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
+    
+    // TODO: gas() och break() bara accepterar värden i intervallet [0,1],
+    // Anrop till gas() inte kan resultera i att farten sänks och
+    // Anrop till break() inte kan resultera i att farten höjs.
+	  public void gas(double amount) {
+		  incrementSpeed(amount);
+	  }
+  
+	  public void brake(double amount) {
+		  decrementSpeed(amount);
+	  }
 }

@@ -1,7 +1,8 @@
-package main.model.car;
+package com.car.models;
 
 import java.awt.*;
-import main.model.movable.Moveable;
+
+import com.car.interfaces.Moveable;
 
 public class Car implements Moveable {
 	protected int nrDoors; // Number of doors on the car
@@ -12,6 +13,8 @@ public class Car implements Moveable {
 	protected Dir direction; // Direction of the car
 	protected double x;
 	protected double y;
+  
+  // TODO: getter for Dir
 
 	enum Dir {
 		NORTH, EAST, SOUTH, WEST
@@ -47,30 +50,16 @@ public class Car implements Moveable {
 	public void setColor(Color clr) {
 		color = clr;
 	}
+  
 
+  // TODO: setter for currentSpeed
+  // currentSpeed alltid ligger i intervallet [0,enginePower],
 	public void startEngine() {
 		currentSpeed = 0.1;
 	}
 
 	public void stopEngine() {
 		currentSpeed = 0;
-	}
-
-	// TODO fix this method according to lab pm
-	public void gas(double amount) {
-		incrementSpeed(amount);
-	}
-
-	// TODO fix this method according to lab pm
-	public void brake(double amount) {
-		decrementSpeed(amount);
-	}
-
-	protected void incrementSpeed(double amount) {
-	}
-
-	protected void decrementSpeed(double amount) {
-		
 	}
 
 	public void move() {

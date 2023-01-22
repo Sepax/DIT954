@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
  *
  */
 
-public class CarTest {
+public class VolvoTest {
   private Volvo240 mockVolvo;
 
   @BeforeEach

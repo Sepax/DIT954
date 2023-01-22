@@ -3,6 +3,7 @@ package com.car.models;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+
 /**
  * Unit tests for Volvo cars.
  *
@@ -18,6 +19,7 @@ public class CarTest {
 
   @Test
   public void shouldIncreaseSpeed() {
+    mockVolvo.startEngine();
     double speedBefore = mockVolvo.getCurrentSpeed();
     mockVolvo.gas(1);
     assert (mockVolvo.getCurrentSpeed() > speedBefore);
@@ -25,6 +27,7 @@ public class CarTest {
 
   @Test
   public void shouldDecreaseSpeed() {
+    mockVolvo.startEngine();
     double speedBefore = mockVolvo.getCurrentSpeed();
     mockVolvo.brake(1);
     assert (mockVolvo.getCurrentSpeed() < speedBefore);

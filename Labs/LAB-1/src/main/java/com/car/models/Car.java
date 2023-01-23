@@ -26,8 +26,6 @@ public abstract class Car implements Moveable {
 		stopEngine();
 	}
 
-	// TODO setter getter direction
-	// TODO setter getter speed
 	public int getNrDoors() {
 		return nrDoors;
 	}
@@ -48,6 +46,30 @@ public abstract class Car implements Moveable {
 		color = clr;
 	}
 
+	public Dir getDirection() {
+		return direction;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setDirection(Dir direction) {
+		this.direction = direction;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
 	public void startEngine() {
 		currentSpeed = 0.1;
 	}
@@ -57,30 +79,30 @@ public abstract class Car implements Moveable {
 	}
 
 	public void gas(double amount) {
-		incrementSpeed(amount);
+		if (amount > 0 && amount <= 1) {
+			incrementSpeed(amount);
+		}
 	}
 
 	public void brake(double amount) {
-		decrementSpeed(amount);
+		if (amount > 0 && amount <= 1) {
+			decrementSpeed(amount);
+		}
 	}
-
-	protected abstract void incrementSpeed(double amount);
-
-	protected abstract void decrementSpeed(double amount);
 
 	public void move() {
 		switch (this.direction) {
 			case NORTH:
-				this.y += currentSpeed;
+				setY(getY() + currentSpeed);
 				break;
 			case EAST:
-				this.x += currentSpeed;
+				setX(getX() + currentSpeed);
 				break;
 			case SOUTH:
-				this.y -= currentSpeed;
+				setY(getY() - currentSpeed);
 				break;
 			case WEST:
-				this.x -= currentSpeed;
+				setX(getX() - currentSpeed);
 				break;
 		}
 	}
@@ -88,43 +110,38 @@ public abstract class Car implements Moveable {
 	public void turnLeft() {
 		switch (this.direction) {
 			case NORTH:
-				this.direction = Dir.WEST;
+				setDirection(Dir.WEST);
 				break;
 			case EAST:
-				this.direction = Dir.NORTH;
+				setDirection(Dir.NORTH);
 				break;
 			case SOUTH:
-				this.direction = Dir.EAST;
+				setDirection(Dir.EAST);
 				break;
 			case WEST:
-				this.direction = Dir.SOUTH;
+				setDirection(Dir.SOUTH);
 				break;
 		}
 	}
 
 	public void turnRight() {
-		switch (this.direction) {
+		switch (getDirection()) {
 			case NORTH:
-				this.direction = Dir.EAST;
+				setDirection(Dir.EAST);
 				break;
 			case EAST:
-				this.direction = Dir.SOUTH;
-				break;				
+				setDirection(Dir.SOUTH);
+				break;
 			case SOUTH:
-				this.direction = Dir.WEST;
+				setDirection(Dir.WEST);
 				break;
 			case WEST:
-				this.direction = Dir.NORTH;
+				setDirection(Dir.NORTH);
 				break;
 		}
 	}
 
+	protected abstract void incrementSpeed(double amount);
 
-  public void setDirection(Dir direction) {
-    this.direction = direction;
-  }
-
-  public Dir getDirection() {
-    return direction;
-  }
+	protected abstract void decrementSpeed(double amount);
 }

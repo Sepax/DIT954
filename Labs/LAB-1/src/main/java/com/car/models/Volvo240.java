@@ -13,24 +13,21 @@ public class Volvo240 extends Car {
     public double speedFactor() {
         return enginePower * 0.01 * TRIM_FACTOR;
     }
-    
-    // TODO: gas() och break() bara accepterar värden i intervallet [0,1],
-    // Anrop till gas() inte kan resultera i att farten sänks och
-    // Anrop till break() inte kan resultera i att farten höjs.
-	  public void gas(double amount) {
-		incrementSpeed(amount);
-	  }
-
-	  public void brake(double amount) {
-		decrementSpeed(amount);
-	  }
 
     public void incrementSpeed(double amount) {
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+
+        if (newSpeed >= 0 && newSpeed <= enginePower) {
+            currentSpeed = newSpeed;
+        }
     }
-    
+
     public void decrementSpeed(double amount) {
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+        double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+
+        if (newSpeed >= 0 && newSpeed <= enginePower) {
+            currentSpeed = newSpeed;
+        }
     }
 
 }

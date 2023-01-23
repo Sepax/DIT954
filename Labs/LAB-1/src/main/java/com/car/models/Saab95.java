@@ -28,21 +28,18 @@ public class Saab95 extends Car {
     }
 
     public void incrementSpeed(double amount) {
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        double newSpeed = getCurrentSpeed() + speedFactor() * amount;
+
+        if (newSpeed >= 0 && newSpeed <= enginePower) {
+            currentSpeed = newSpeed;
+        }
     }
 
     public void decrementSpeed(double amount) {
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+        double newSpeed = getCurrentSpeed() - speedFactor() * amount;
+        
+        if (newSpeed >= 0 && newSpeed <= enginePower) {
+            currentSpeed = newSpeed;
+        }
     }
-    
-    // TODO: gas() och break() bara accepterar värden i intervallet [0,1],
-    // Anrop till gas() inte kan resultera i att farten sänks och
-    // Anrop till break() inte kan resultera i att farten höjs.
-	  public void gas(double amount) {
-		  incrementSpeed(amount);
-	  }
-  
-	  public void brake(double amount) {
-		  decrementSpeed(amount);
-	  }
 }

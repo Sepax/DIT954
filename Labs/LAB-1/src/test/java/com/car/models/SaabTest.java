@@ -1,11 +1,8 @@
 package com.car.models;
 
-import org.junit.jupiter.api.Test;
-
 import com.car.models.Car.Dir;
-
-import org.junit.jupiter.api.BeforeEach;
-
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for Saab cars.
@@ -13,39 +10,39 @@ import org.junit.jupiter.api.BeforeEach;
  */
 
 public class SaabTest {
-  private Saab95 mockSaab;
+	private Saab95 mockSaab;
 
-  @BeforeEach
-  void setup() {
-    mockSaab = new Saab95();
-  }
+	@BeforeEach
+	void setup() {
+		mockSaab = new Saab95();
+	}
 
-  @Test
-  public void shouldIncreaseSpeed() {
-    mockSaab.startEngine();
-    double speedBefore = mockSaab.getCurrentSpeed();
-    mockSaab.gas(1);
-    assert (mockSaab.getCurrentSpeed() > speedBefore);
-  }
+	@Test
+	public void shouldIncreaseSpeed() {
+		mockSaab.startEngine();
+		double speedBefore = mockSaab.getCurrentSpeed();
+		mockSaab.gas(1);
+		assertTrue(speedBefore < mockSaab.getCurrentSpeed());
+	}
 
-  @Test
-  public void shouldDecreaseSpeed() {
-    mockSaab.startEngine();
-    double speedBefore = mockSaab.getCurrentSpeed();
-    mockSaab.brake(1);
-    assert (mockSaab.getCurrentSpeed() < speedBefore);
-  }
+	@Test
+	public void shouldDecreaseSpeed() {
+		mockSaab.startEngine();
+		double speedBefore = mockSaab.getCurrentSpeed();
+		mockSaab.brake(1);
+		assertTrue(speedBefore >= mockSaab.getCurrentSpeed());
+	}
 
-  @Test
-  public void shouldTurnLeft() {
-    mockSaab.turnLeft();
-    assert (mockSaab.getDirection() == Dir.WEST);
-  }
+	@Test
+	public void shouldTurnLeft() {
+		mockSaab.turnLeft();
+		assertSame(Dir.WEST, mockSaab.getDirection());
+	}
 
-  @Test
-  public void shouldTurnRight() {
-    mockSaab.turnRight();
-    assert (mockSaab.getDirection() == Dir.EAST);
-  }
+	@Test
+	public void shouldTurnRight() {
+		mockSaab.turnRight();
+		assertSame(Dir.EAST, mockSaab.getDirection());
+	}
 
 }

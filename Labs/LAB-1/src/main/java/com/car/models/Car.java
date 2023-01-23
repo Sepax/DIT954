@@ -56,12 +56,10 @@ public abstract class Car implements Moveable {
 		currentSpeed = 0;
 	}
 
-	// TODO fix this method according to lab pm
 	public void gas(double amount) {
 		incrementSpeed(amount);
 	}
 
-	// TODO fix this method according to lab pm
 	public void brake(double amount) {
 		decrementSpeed(amount);
 	}
@@ -120,4 +118,13 @@ public abstract class Car implements Moveable {
 				break;
 		}
 	}
+
+
+  public void setDirection(Dir direction) {
+    this.direction = direction;
+  }
+
+  public Dir getDirection() {
+    return direction;
+  }
 }

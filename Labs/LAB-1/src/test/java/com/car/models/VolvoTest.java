@@ -1,6 +1,9 @@
 package com.car.models;
 
 import org.junit.jupiter.api.Test;
+
+import com.car.models.Car.Dir;
+
 import org.junit.jupiter.api.BeforeEach;
 
 
@@ -31,6 +34,18 @@ public class VolvoTest {
     double speedBefore = mockVolvo.getCurrentSpeed();
     mockVolvo.brake(1);
     assert (mockVolvo.getCurrentSpeed() < speedBefore);
+  }
+
+  @Test
+  public void shouldTurnLeft() {
+    mockVolvo.turnLeft();
+    assert (mockVolvo.getDirection() == Dir.WEST);
+  }
+
+  @Test
+  public void shouldTurnRight() {
+    mockVolvo.turnRight();
+    assert (mockVolvo.getDirection() == Dir.EAST);
   }
 
 }

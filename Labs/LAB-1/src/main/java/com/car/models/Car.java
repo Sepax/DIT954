@@ -1,7 +1,7 @@
-package main.model.car;
+package com.car.models;
 
 import java.awt.*;
-import main.model.moveable.Moveable;
+import com.car.interfaces.*;
 
 public abstract class Car implements Moveable {
 	protected int nrDoors; // Number of doors on the car

@@ -1,4 +1,4 @@
-package main.java.com.car.interfaces;
+package com.car.interfaces;
 
 public interface Moveable {
   void move();

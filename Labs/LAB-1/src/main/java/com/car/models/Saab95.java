@@ -1,4 +1,4 @@
-package com.car.models;
+package main.java.com.car.models;
 
 import java.awt.*;
 

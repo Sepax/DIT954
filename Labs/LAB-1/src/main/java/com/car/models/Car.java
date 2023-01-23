@@ -1,10 +1,9 @@
-package com.car.models;
+package main.model.car;
 
 import java.awt.*;
+import main.model.moveable.Moveable;
 
-import com.car.interfaces.Moveable;
-
-public class Car implements Moveable {
+public abstract class Car implements Moveable {
 	protected int nrDoors; // Number of doors on the car
 	protected double enginePower; // Engine power of the car
 	protected double currentSpeed; // The current speed of the car
@@ -13,14 +12,12 @@ public class Car implements Moveable {
 	protected Dir direction; // Direction of the car
 	protected double x;
 	protected double y;
-  
-  // TODO: getter for Dir
 
 	enum Dir {
 		NORTH, EAST, SOUTH, WEST
 	}
 
-	public Car(int nrDoors, Color color, double enginePower, String modelName) {
+	protected Car(int nrDoors, Color color, double enginePower, String modelName) {
 		this.nrDoors = nrDoors;
 		this.enginePower = enginePower;
 		this.color = color;
@@ -50,10 +47,7 @@ public class Car implements Moveable {
 	public void setColor(Color clr) {
 		color = clr;
 	}
-  
 
-  // TODO: setter for currentSpeed
-  // currentSpeed alltid ligger i intervallet [0,enginePower],
 	public void startEngine() {
 		currentSpeed = 0.1;
 	}
@@ -61,6 +55,20 @@ public class Car implements Moveable {
 	public void stopEngine() {
 		currentSpeed = 0;
 	}
+
+	// TODO fix this method according to lab pm
+	public void gas(double amount) {
+		incrementSpeed(amount);
+	}
+
+	// TODO fix this method according to lab pm
+	public void brake(double amount) {
+		decrementSpeed(amount);
+	}
+
+	protected abstract void incrementSpeed(double amount);
+
+	protected abstract void decrementSpeed(double amount);
 
 	public void move() {
 		switch (this.direction) {
@@ -83,12 +91,16 @@ public class Car implements Moveable {
 		switch (this.direction) {
 			case NORTH:
 				this.direction = Dir.WEST;
+				break;
 			case EAST:
 				this.direction = Dir.NORTH;
+				break;
 			case SOUTH:
 				this.direction = Dir.EAST;
+				break;
 			case WEST:
 				this.direction = Dir.SOUTH;
+				break;
 		}
 	}
 
@@ -96,12 +108,16 @@ public class Car implements Moveable {
 		switch (this.direction) {
 			case NORTH:
 				this.direction = Dir.EAST;
+				break;
 			case EAST:
 				this.direction = Dir.SOUTH;
+				break;				
 			case SOUTH:
 				this.direction = Dir.WEST;
+				break;
 			case WEST:
 				this.direction = Dir.NORTH;
+				break;
 		}
 	}
 }

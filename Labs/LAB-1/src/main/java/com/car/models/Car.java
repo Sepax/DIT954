@@ -1,9 +1,9 @@
-package main.model.car;
+package com.car.models;
 
 import java.awt.*;
-import main.model.movable.Moveable;
+import com.car.interfaces.*;
 
-public class Car implements Moveable {
+public abstract class Car implements Moveable {
 	protected int nrDoors; // Number of doors on the car
 	protected double enginePower; // Engine power of the car
 	protected double currentSpeed; // The current speed of the car
@@ -17,7 +17,7 @@ public class Car implements Moveable {
 		NORTH, EAST, SOUTH, WEST
 	}
 
-	public Car(int nrDoors, Color color, double enginePower, String modelName) {
+	protected Car(int nrDoors, Color color, double enginePower, String modelName) {
 		this.nrDoors = nrDoors;
 		this.enginePower = enginePower;
 		this.color = color;
@@ -66,12 +66,9 @@ public class Car implements Moveable {
 		decrementSpeed(amount);
 	}
 
-	protected void incrementSpeed(double amount) {
-	}
+	protected abstract void incrementSpeed(double amount);
 
-	protected void decrementSpeed(double amount) {
-		
-	}
+	protected abstract void decrementSpeed(double amount);
 
 	public void move() {
 		switch (this.direction) {
@@ -94,12 +91,16 @@ public class Car implements Moveable {
 		switch (this.direction) {
 			case NORTH:
 				this.direction = Dir.WEST;
+				break;
 			case EAST:
 				this.direction = Dir.NORTH;
+				break;
 			case SOUTH:
 				this.direction = Dir.EAST;
+				break;
 			case WEST:
 				this.direction = Dir.SOUTH;
+				break;
 		}
 	}
 
@@ -107,12 +108,16 @@ public class Car implements Moveable {
 		switch (this.direction) {
 			case NORTH:
 				this.direction = Dir.EAST;
+				break;
 			case EAST:
 				this.direction = Dir.SOUTH;
+				break;				
 			case SOUTH:
 				this.direction = Dir.WEST;
+				break;
 			case WEST:
 				this.direction = Dir.NORTH;
+				break;
 		}
 	}
 }

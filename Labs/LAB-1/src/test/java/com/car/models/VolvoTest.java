@@ -47,4 +47,53 @@ public class VolvoTest {
 		assertSame(Dir.EAST, mockVolvo.getDirection());
 	}
 
+	@Test
+	public void shouldNotMove() {
+		double xBefore = mockVolvo.getX();
+		double yBefore = mockVolvo.getY();
+		mockVolvo.move();
+		assertTrue(xBefore == mockVolvo.getX() && yBefore == mockVolvo.getY());
+	}
+
+	@Test
+	public void shouldMove() {
+		mockVolvo.startEngine();
+		double xBefore = mockVolvo.getX();
+		double yBefore = mockVolvo.getY();
+		mockVolvo.gas(1);
+		mockVolvo.move();
+		assertTrue(xBefore != mockVolvo.getX() || yBefore != mockVolvo.getY());
+
+	}
+
+	@Test
+	public void shouldStartEngine() {
+		mockVolvo.startEngine();
+		assertTrue(mockVolvo.getCurrentSpeed() > 0);
+	}
+
+	@Test
+	public void shouldStopEngine() {
+		mockVolvo.startEngine();
+		mockVolvo.stopEngine();
+		assertTrue(mockVolvo.getCurrentSpeed() == 0);
+	}
+
+	@Test
+	public void shouldNotHaveSpeedAboveMaxEnginePower() {
+		mockVolvo.startEngine();
+
+		for(int i = 0; i < 100; i++) {
+			mockVolvo.gas(1);
+		}
+		assertTrue(mockVolvo.getCurrentSpeed() <= mockVolvo.getEnginePower());
+	}
+
+	@Test
+	public void shouldNotHaveSpeedBelowZero() {
+		mockVolvo.startEngine();
+		mockVolvo.brake(1);
+		assertTrue(mockVolvo.getCurrentSpeed() >= 0);
+	}
+
 }

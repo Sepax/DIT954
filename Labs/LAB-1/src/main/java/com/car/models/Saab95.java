@@ -32,6 +32,14 @@ public class Saab95 extends Car {
     public void setTurboOff() {
         turboOn = false;
     }
+    /**
+     * Returns whether the turbo feature is on or off.
+     * @return true if the turbo feature is on, false otherwise
+     */
+    public boolean isTurboOn() {
+        return turboOn;
+    }
+
 
 /**
  * Returns the speed factor of the car, which is the engine power multiplied by 0.01 and the turbo factor.
@@ -43,29 +51,5 @@ public class Saab95 extends Car {
             turbo = 1.3;
         }
         return this.enginePower * 0.01 * turbo;
-    }
-
-/**
- * Increments the current speed of the car by the specified amount, up to the maximum engine power.
- * @param amount the amount to increase the speed of the car
- */
-    public void incrementSpeed(double amount) {
-        double newSpeed = getCurrentSpeed() + speedFactor() * amount;
-
-        if (newSpeed >= 0 && newSpeed <= enginePower) {
-            currentSpeed = newSpeed;
-        }
-    }
-
-/**
- * Decrements the current speed of the car by the specified amount, down to a minimum of 0.
- * @param amount the amount to decrease the speed of the car
- */
-    public void decrementSpeed(double amount) {
-        double newSpeed = getCurrentSpeed() - speedFactor() * amount;
-        
-        if (newSpeed >= 0 && newSpeed <= enginePower) {
-            currentSpeed = newSpeed;
-        }
     }
 }

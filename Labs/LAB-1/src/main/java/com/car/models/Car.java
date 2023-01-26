@@ -9,7 +9,7 @@ import com.car.interfaces.*;
  * The class implements the Moveable interface, which requires the move() method to be implemented. 
  * The class also has methods to start and stop the engine, set and get various properties and drive the car forward or backward.
  *
- * @authors Sebastian Påhlsson, Gabriele Frattini, Kiril Curlinov
+ * @author Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @version 1.0
  * @since 2023-01-25
  */
@@ -244,16 +244,21 @@ public abstract class Car implements Moveable {
 		}
 	}
 /**
- * Increments the current speed of the car.
+ * Increments the current speed of the car by the specified amount, up to the maximum engine power.
  *
  * @param amount the amount to increase the speed of the car
  */
-	protected abstract void incrementSpeed(double amount);
+public void incrementSpeed(double amount) {
+	double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+}
 
 /**
- * Decrements the current speed of the car.
- *
- * @param amount the amount to decrease the speed of the car
- */
-	protected abstract void decrementSpeed(double amount);
+* Decrements the current speed of the car by the specified amount, down to a minimum of 0.
+*
+* @param amount the amount to decrease the speed of the car
+*/
+public void decrementSpeed(double amount) {
+	double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+}
+
 }

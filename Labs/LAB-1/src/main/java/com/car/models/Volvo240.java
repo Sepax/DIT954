@@ -29,30 +29,4 @@ public class Volvo240 extends Car {
         return enginePower * 0.01 * TRIM_FACTOR;
     }
 
-/**
- * Increments the current speed of the car by the specified amount, up to the maximum engine power.
- *
- * @param amount the amount to increase the speed of the car
- */
-    public void incrementSpeed(double amount) {
-        double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
-
-        if (newSpeed >= 0 && newSpeed <= enginePower) {
-            currentSpeed = newSpeed;
-        }
-    }
-
-/**
- * Decrements the current speed of the car by the specified amount, down to a minimum of 0.
- *
- * @param amount the amount to decrease the speed of the car
- */
-    public void decrementSpeed(double amount) {
-        double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
-
-        if (newSpeed >= 0 && newSpeed <= enginePower) {
-            currentSpeed = newSpeed;
-        }
-    }
-
 }

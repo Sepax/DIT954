@@ -252,6 +252,11 @@ public void incrementSpeed(double amount) {
 	double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
 }
 
+
+public double speedFactor() {
+	return 0;
+}
+
 /**
 * Decrements the current speed of the car by the specified amount, down to a minimum of 0.
 *

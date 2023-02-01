@@ -44,5 +44,49 @@ public class Scania extends Car {
 	public void setFlatbedTilt(double tilt) {
 		flatbedTilt = tilt;
 	}
+    public Object getModelName() {
+        return null;
+    }
 
+	/**
+	 * Raises the flatbed by the specified amount of degrees if the truck is not moving.
+	 *
+	 * @param degrees the amount of degrees to raise the flatbed by if the truck is not moving.
+	 */
+	public void raiseFlatbed(double degrees) {
+		if (getCurrentSpeed() == 0) {
+			if (flatbedTilt + degrees <= 70) {
+				flatbedTilt += degrees;
+			}
+
+		}
+	}
+
+	/**
+	 * Lowers the flatbed by the specified amount of degrees.
+	 *
+	 * @param degrees the amount of degrees to lower the flatbed by
+	 */
+	public void lowerFlatbed(double degrees) {
+		if (getCurrentSpeed() == 0) {
+			if (flatbedTilt - degrees >= 0) {
+				flatbedTilt -= degrees;
+			}
+		}
+	}
+
+	/**
+	 * Truck can only move if the flatbed is not tilted.
+	 * 
+	 * @param enginePower the engine power of the car
+	 */
+	@Override
+	public void incrementSpeed(double enginePower) {
+		if (flatbedTilt == 0) {
+			super.incrementSpeed(enginePower);
+		}
+	}
+		
 }
+
+

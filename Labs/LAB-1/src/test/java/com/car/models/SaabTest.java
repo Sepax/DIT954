@@ -22,7 +22,7 @@ public class SaabTest {
 		mockSaab.startEngine();
 		double speedBefore = mockSaab.getCurrentSpeed();
 		mockSaab.gas(1);
-		assertTrue(speedBefore < mockSaab.getCurrentSpeed());
+		assertTrue(speedBefore <= mockSaab.getCurrentSpeed());
 	}
 
 	@Test

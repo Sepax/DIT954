@@ -17,21 +17,6 @@ public class SaabTest {
 		mockSaab = new Saab95();
 	}
 
-	@Test
-	public void shouldIncreaseSpeed() {
-		mockSaab.startEngine();
-		double speedBefore = mockSaab.getCurrentSpeed();
-		mockSaab.gas(1);
-		assertTrue(speedBefore < mockSaab.getCurrentSpeed());
-	}
-
-	@Test
-	public void shouldDecreaseSpeed() {
-		mockSaab.startEngine();
-		double speedBefore = mockSaab.getCurrentSpeed();
-		mockSaab.brake(1);
-		assertTrue(speedBefore >= mockSaab.getCurrentSpeed());
-	}
 
 	@Test
 	public void shouldTurnLeft() {

@@ -1,9 +1,12 @@
 package com.car.models;
 
 import java.awt.Color;
+import java.util.function.BooleanSupplier;
+
+import com.car.models.Car;
 
 /**
- * Scania is a class that represents a Scania car and extends the Car class.
+ * Scania is a class that represents a Scania truck and extends the Car class.
  * The class has the same properties and methods as the Car class, with the addition of a flatbed tilt property.
  *
  * @authors Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
@@ -14,20 +17,14 @@ public class Scania extends Car {
 
 	/**
 	 * Constructs a new Scania object with the specified number of doors, color, engine power, and model name.
-	 * The car is initially facing north and has its engine stopped.
-	 *
-	 * @param nrDoors the number of doors on the car
-	 * @param color the color of the car
-	 * @param enginePower the engine power of the car
-	 * @param modelName the car model name
 	 */
-
-    
 	public Scania() {
-		super(nrDoors = 2, Color.cyan, enginePower = 200, modelName = "Scania");
-		flatbedTilt = 0;
+        super(2, Color.ORANGE, 500, "Scania");
+        flatbedTilt = 0;
 	}
-	/**
+
+
+    /**
 	 * Returns the tilt of the flatbed in degrees.
 	 *
 	 * @return the tilt of the flatbed in degrees
@@ -37,12 +34,38 @@ public class Scania extends Car {
 	}
 
 	/**
-	 * Sets the tilt of the flatbed in degrees.
+	 * Sets the tilt of the flatbed in degrees if the angle is between 0 and 70.
 	 *
 	 * @param tilt the new tilt of the flatbed in degrees
 	 */
 	public void setFlatbedTilt(double tilt) {
-		flatbedTilt = tilt;
+		if (tilt >= 0 && tilt <= 70) {
+			flatbedTilt = tilt;
+		}
+    }
+
+
+	/**
+	 * Raises the flatbed (degrees) if the truck is not moving.
+	 * 
+	 * @param degrees the degrees to raise the flatbed
+	 */
+	public void raiseFlatbed(double degrees) {
+		if (getCurrentSpeed() == 0) {
+			flatbedTilt = Math.min(flatbedTilt + degrees, 70);
+		}
 	}
 
+	/**
+	 * Lowers the flatbed (degrees) if the truck is not moving.
+	 * 
+	 * @param degrees the degrees to lower the flatbed
+	 */
+	public void lowerFlatbed(double degrees) {
+		if (getCurrentSpeed() == 0) {
+			flatbedTilt = Math.max(flatbedTilt - degrees, 0);
+		}
+	}
 }
+
+

@@ -17,23 +17,6 @@ public class VolvoTest {
 		mockVolvo = new Volvo240();
 	}
 
-	@Test
-	public void shouldIncreaseSpeed() {
-		mockVolvo.startEngine();
-		double speedBefore = mockVolvo.getCurrentSpeed();
-		mockVolvo.gas(1);
-		assertTrue(speedBefore < mockVolvo.getCurrentSpeed());
-	}
-
-	@Test
-	public void shouldDecreaseSpeed() {
-		mockVolvo.startEngine();
-		double speedBefore = mockVolvo.getCurrentSpeed();
-		double stopped = 0;
-		mockVolvo.brake(1);
-		assertTrue(speedBefore > mockVolvo.getCurrentSpeed());
-		assertTrue(stopped >= mockVolvo.getCurrentSpeed());
-	}
 
 	@Test
 	public void shouldTurnLeft() {

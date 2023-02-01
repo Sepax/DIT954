@@ -17,7 +17,7 @@ public abstract class Car implements Moveable {
 	protected static int nrDoors; // Number of doors on the car
 	protected static double enginePower; // Engine power of the car
 	protected double currentSpeed; // The current speed of the car
-	protected Color color; // Color of the car
+	protected static Color color; // Color of the car
 	protected static String modelName; // The car model name
 	protected Dir direction; // Direction of the car
 	protected double x;
@@ -250,6 +250,10 @@ public abstract class Car implements Moveable {
  */
 public void incrementSpeed(double amount) {
 	double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+}
+
+private double speedFactor() {
+	return 0;
 }
 
 /**

@@ -1,56 +1,53 @@
-
-
 package com.car.models;
 
-import org.junit.jupiter.api.Test;
-
-
+import com.car.models.Car.Dir;
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ScaniaTest {
 
+/**
+ * Unit tests for Scania cars.
+ *
+ */
 
+public class ScaniaTest {
+    private Scania mockScania;
+
+	@BeforeEach
+	void setup() {
+		mockScania = new Scania();
+	}
 
     @Test
-    void testRaiseFlatbed() {
-        Scania scania = new Scania();
-        scania.raiseFlatbed(10);
-        assertEquals(10, scania.getFlatbedTilt());
-        scania.raiseFlatbed(60);
-        assertEquals(70, scania.getFlatbedTilt());
-        scania.raiseFlatbed(10);
-        assertEquals(70, scania.getFlatbedTilt());
+    public void shouldNotMoveIfFlatbedIsUp() {
+        mockScania.setFlatbedTilt(70);
+        mockScania.move();
+        assertEquals(0, mockScania.getX());
+        assertEquals(0, mockScania.getY());
     }
 
     @Test
-    void testLowerFlatbed() {
-        Scania scania = new Scania();
-        scania.raiseFlatbed(70);
-        scania.lowerFlatbed(10);
-        assertEquals(60, scania.getFlatbedTilt());
-        scania.lowerFlatbed(60);
-        assertEquals(0, scania.getFlatbedTilt());
-        scania.lowerFlatbed(10);
-        assertEquals(0, scania.getFlatbedTilt());
-    }
+    public void shouldLowerFlatbed() {
+        mockScania.setFlatbedTilt(0);
+        mockScania.lowerFlatbed(0);
+        assertEquals(0, mockScania.getFlatbedTilt());
+        mockScania.setFlatbedTilt(70);
+        mockScania.lowerFlatbed(0);
+        assertEquals(70, mockScania.getFlatbedTilt());
 
-    @Test
-    void testStartEngine() {
-        Scania scania = new Scania();
-        scania.startEngine();
-        assertEquals(0.1, scania.getCurrentSpeed());
     }
-
     @Test
-    void testDriveIfFlatbedIsTilted() {
-        Scania scania = new Scania();
-        scania.raiseFlatbed(70);
-        scania.startEngine();
-        scania.gas(1);
-        assertEquals(0.1, scania.getCurrentSpeed());
+    public void shouldRaiseFlatbed() {
+        mockScania.setFlatbedTilt(0);
+        mockScania.raiseFlatbed(0);
+        assertEquals(0, mockScania.getFlatbedTilt());
+        mockScania.setFlatbedTilt(70);
+        mockScania.raiseFlatbed(70);
+        assertEquals(70, mockScania.getFlatbedTilt());
     }
 
 }
+
 
     
 

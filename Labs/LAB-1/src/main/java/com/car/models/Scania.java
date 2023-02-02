@@ -1,9 +1,6 @@
 package com.car.models;
 
 import java.awt.Color;
-import java.util.function.BooleanSupplier;
-
-import com.car.models.Car;
 
 /**
  * Scania is a class that represents a Scania truck and extends the Car class.
@@ -19,7 +16,7 @@ public class Scania extends Car {
 	 * Constructs a new Scania object with the specified number of doors, color, engine power, and model name.
 	 */
 	public Scania() {
-        super(2, Color.ORANGE, 500, "Scania");
+        super(2, Color.ORANGE, 500, "Scania", Dir.NORTH,  false);
         flatbedTilt = 0;
 	}
 

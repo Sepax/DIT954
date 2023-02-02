@@ -1,10 +1,6 @@
 package com.car.models;
 
 import java.awt.Color;
-import java.util.Deque;
-
-import com.car.interfaces.CarTransporter;
-import com.car.models.Hauler.RampState;
 
 /**
  * Carferry class
@@ -14,42 +10,20 @@ import com.car.models.Hauler.RampState;
  * Separera på Car och Vehicle i olika klasser
  */
 
-public class CarFerry extends Car implements CarTransporter {
+public class CarFerry extends Transporter {
 
   public CarFerry() {
     super(2, Color.ORANGE, 500, "CarFerry", Dir.NORTH, false);
     ramp = RampState.RAISED;
   }
 
-  private RampState ramp;
-  Deque<Car> cars;
-
-  public void loadCar(Car car) {
-    cars.addLast(car);
-  }
-
   public void unloadCar() {
-    cars.removeFirst();
-  }
-
-  public Deque<Car> getLoadedCars() {
-    return cars;
-  }
-
-  public RampState getRampState() {
-    return ramp;
-  }
-
-  public void lowerRamp() {
-    if (currentSpeed == 0) {
-      ramp = RampState.LOWERED;
+    if (ramp == RampState.RAISED || cars.isEmpty()) {
+      return;
     }
-  }
-
-  public void raiseRamp() {
-    if (currentSpeed == 0) {
-      ramp = RampState.RAISED;
-    }
+    cars.peek().setX(x + 5);
+    cars.peek().setY(y + 5);
+    cars.removeLast();
   }
 
 }

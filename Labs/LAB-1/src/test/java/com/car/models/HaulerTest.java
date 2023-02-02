@@ -1,7 +1,7 @@
 package com.car.models;
 
 import com.car.models.Car.Dir;
-import com.car.models.Hauler.RampState;
+import com.car.models.Transporter.RampState;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;

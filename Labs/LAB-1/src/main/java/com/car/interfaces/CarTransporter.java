@@ -3,7 +3,7 @@ package com.car.interfaces;
 import java.util.Deque;
 
 import com.car.models.Car;
-import com.car.models.Hauler.RampState;
+import com.car.models.Transporter.RampState;
 
 public interface CarTransporter {
 

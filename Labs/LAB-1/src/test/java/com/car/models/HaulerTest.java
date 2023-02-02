@@ -116,7 +116,7 @@ public class HaulerTest {
         mockHauler.startEngine();
         mockHauler.gas(1);
         mockHauler.move();
-        assertEquals(RampState.RAISED, mockHauler.getRampState());
+        assertEquals(RampState.RAISED.toString(), mockHauler.getRampState().toString());
     }
 
     @Test

@@ -48,6 +48,12 @@ public class ScaniaTest {
 
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> Kiril
 
     
 

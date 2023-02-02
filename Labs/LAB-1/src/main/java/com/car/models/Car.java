@@ -184,7 +184,6 @@ public abstract class Car implements Moveable {
     }
   }
 
-
   /**
    * Decreases the speed of the car by the specified amount, down to a minimum of
    * 0.
@@ -197,28 +196,85 @@ public abstract class Car implements Moveable {
     }
   }
 
+  /**
+   * Move the car in the direction it is facing.
+   */
+  public void move() {
+    switch (this.direction) {
+      case NORTH:
+        setY(getY() + currentSpeed);
+        break;
+      case EAST:
+        setX(getX() + currentSpeed);
+        break;
+      case SOUTH:
+        setY(getY() - currentSpeed);
+        break;
+      case WEST:
+        setX(getX() - currentSpeed);
+        break;
+    }
+  }
 
-public double speedFactor() {
-	return 0;
-}
+  /**
+   * Turns the car to the left, cases signify the direction the car is facing.
+   */
+  public void turnLeft() {
+    switch (this.direction) {
+      case NORTH:
+        setDirection(Dir.WEST);
+        break;
+      case EAST:
+        setDirection(Dir.NORTH);
+        break;
+      case SOUTH:
+        setDirection(Dir.EAST);
+        break;
+      case WEST:
+        setDirection(Dir.SOUTH);
+        break;
+    }
+  }
 
-/**
- * Increments the current speed of the car by the specified amount, up to the maximum engine power.
- *
- * @param amount the amount to increase the speed of the car
- */
-public void incrementSpeed(double amount) {
-	double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
-}
+  /**
+   * Turns the car to the right, cases signify the direction the car is facing.
+   */
+  public void turnRight() {
+    switch (getDirection()) {
+      case NORTH:
+        setDirection(Dir.EAST);
+        break;
+      case EAST:
+        setDirection(Dir.SOUTH);
+        break;
+      case SOUTH:
+        setDirection(Dir.WEST);
+        break;
+      case WEST:
+        setDirection(Dir.NORTH);
+        break;
+    }
+  }
 
-/**
-* Decrements the current speed of the car by the specified amount, down to a minimum of 0.
-*
-* @param amount the amount to decrease the speed of the car
-*/
-public void decrementSpeed(double amount) {
-	double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
-}
+  /**
+   * Increments the current speed of the car by the specified amount, up to the
+   * maximum engine power.
+   *
+   * @param amount the amount to increase the speed of the car
+   */
+  public void incrementSpeed(double amount) {
+    this.currentSpeed = Math.min(getCurrentSpeed() + speedFactor * amount, enginePower);
+  }
+
+  /**
+   * Decrements the current speed of the car by the specified amount, down to a
+   * minimum of 0.
+   *
+   * @param amount the amount to decrease the speed of the car
+   */
+  public void decrementSpeed(double amount) {
+    this.currentSpeed = Math.max(getCurrentSpeed() - speedFactor * amount, 0);
+  }
 
   public void setSpeedFactor(double speedFactor) {
     this.speedFactor = speedFactor;

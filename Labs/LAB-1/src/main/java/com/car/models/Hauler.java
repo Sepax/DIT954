@@ -18,7 +18,7 @@ public class Hauler extends Car {
 	/**
 	 * Enum representing the state of the ramp. Can be RAISED or LOWERED.
 	 */
-	enum RampState {
+	public enum RampState {
 		RAISED, LOWERED
 	}
 
@@ -31,14 +31,11 @@ public class Hauler extends Car {
 	}
 
 	@Override
-	public void gas(double amount) {
-		if (amount > 0 && amount <= 1 && ramp == RampState.RAISED) {
-			incrementSpeed(amount);
-		}
-  	}
-
-	@Override
 	public void move() {
+		if (ramp == RampState.LOWERED) {
+			toggleRamp();
+		}
+
 		switch (this.direction) {
 			case NORTH:
 			  setY(getY() + currentSpeed);
@@ -70,6 +67,15 @@ public class Hauler extends Car {
 	}
 
 	/**
+	 * Returns the cars loaded on the ramp.
+	 *
+	 * @return the cars loaded on the ramp.
+	 */
+	public Deque<Car> getLoadedCars() {
+		return cars;
+	}
+
+	/**
 	 * Toggles the state of the ramp.
 	 */
 	public void toggleRamp() {
@@ -94,6 +100,8 @@ public class Hauler extends Car {
 		if (ramp == RampState.RAISED || !car.haulable || !insideVicinity(car)) {
 			return;
 		}
+		car.setX(x);
+		car.setY(x);
 		cars.push(car);
 	}
 
@@ -105,16 +113,14 @@ public class Hauler extends Car {
 		if (ramp == RampState.RAISED || cars.isEmpty()) {
 			return;
 		}
-		cars.peek().setX(getX() + 5);
-		cars.peek().setY(getY() + 5);
+		cars.peek().setX(x + 5);
+		cars.peek().setY(y + 5);
 		cars.pop();
 	}
 
 	private boolean insideVicinity(Car car) {
 		return car.x >= x - 5 && car.x <= x + 5 && car.y >= y - 5 && car.y <= y + 5;
 	}
-
-
 }
 
 

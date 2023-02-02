@@ -5,7 +5,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * Hauler is a class that represents a hauler truck and extends the Car class.
+ * Hauler is a class that represents a haulertruck and extends the Car class.
  * The class has the same properties and methods as the Car class, with the
  * addition of a ramp which can transport cars.
  *
@@ -26,18 +26,27 @@ public class Hauler extends Car {
 	/**
 	 * Constructs a new Hauler object with the specified number of doors, color,
 	 * engine power, model name, direction and if it's haulable.
+	 * 
+	 * @param dir    the direction
+	 * @param haul   if it's haulable
+	 * @param ramp   the state of the ramp
+	 * 
 	 */
 	public Hauler() {
 		super(2, Color.ORANGE, 500, "Hauler", Dir.NORTH, false);
 		ramp = RampState.RAISED;
 	}
-
+	/**
+	 * Moves the hauler in the current direction.
+	 * 
+	 * If the ramp is lowered, it will be raised before moving.
+	 */
 	@Override
 	public void move() {
 		if (ramp.toString().equals(RampState.LOWERED.toString())) {
 			raiseRamp();
 		}
-
+		// switch for different directions
 		switch (this.direction) {
 			case NORTH:
 				setY(getY() + currentSpeed);
@@ -52,7 +61,7 @@ public class Hauler extends Car {
 				setX(getX() - currentSpeed);
 				break;
 		}
-
+		// Updates the position of the cars on the ramp.
 		for (Car car : cars) {
 			car.setX(x);
 			car.setY(y);
@@ -79,6 +88,8 @@ public class Hauler extends Car {
 
 	/**
 	 * Raises the ramp
+	 * 
+	 * @param ramp the state of the ramp
 	 */
 	public void lowerRamp() {
 		if (currentSpeed == 0) {
@@ -88,6 +99,8 @@ public class Hauler extends Car {
 
 	/**
 	 * Lowers the ramp
+	 * 
+	 * @param ramp the state of the ramp
 	 */
 	public void raiseRamp() {
 		ramp = RampState.RAISED;
@@ -109,6 +122,8 @@ public class Hauler extends Car {
 
 	/**
 	 * Unloads a car from the ramp.
+	 * 
+	 * @param car the car to be unloaded.
 	 */
 	public void unloadCar() {
 		if (ramp == RampState.RAISED || cars.isEmpty()) {
@@ -118,7 +133,13 @@ public class Hauler extends Car {
 		cars.peek().setY(y + 5);
 		cars.pop();
 	}
-
+	
+	/**
+	 * Checks if the car is inside the vicinity of the hauler.
+	 * 
+	 * @param car the car to be checked.
+	 * @return true if the car is inside the vicinity, false otherwise.
+	 */
 	private boolean insideVicinity(Car car) {
 		return car.x >= x - 5 && car.x <= x + 5 && car.y >= y - 5 && car.y <= y + 5;
 	}

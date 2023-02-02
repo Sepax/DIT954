@@ -11,7 +11,7 @@ import java.awt.Color;
  */
 public class Scania extends Car {
 	private double flatbedTilt; // The tilt of the flatbed in degrees
-
+	
 	/**
 	 * Constructs a new Scania object with the specified number of doors, color, engine power, and model name.
 	 */
@@ -19,7 +19,6 @@ public class Scania extends Car {
         super(2, Color.ORANGE, 500, "Scania", Dir.NORTH,  false);
         flatbedTilt = 0;
 	}
-
 
     /**
 	 * Returns the tilt of the flatbed in degrees.
@@ -40,7 +39,6 @@ public class Scania extends Car {
 			flatbedTilt = tilt;
 		}
     }
-
 
 	/**
 	 * Raises the flatbed (degrees) if the truck is not moving.
@@ -63,6 +61,20 @@ public class Scania extends Car {
 			flatbedTilt = Math.max(flatbedTilt - degrees, 0);
 		}
 	}
+
+	/**
+	 * If the flatbed is raised, stop the engine, lower the flatbed and start the engine again to move the truck.
+	 */
+	@Override
+	public void move() {
+		if (flatbedTilt > 0) {
+			super.stopEngine();
+			lowerFlatbed(flatbedTilt);
+		}
+		super.startEngine(); 
+		super.move();
+	}
+
 }
 
 

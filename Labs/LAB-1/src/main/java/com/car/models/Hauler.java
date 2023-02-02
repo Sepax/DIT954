@@ -76,19 +76,22 @@ public class Hauler extends Car {
 	}
 
 	/**
-	 * Toggles the state of the ramp.
+	 * Raises the ramp
 	 */
-	public void toggleRamp() {
-		if (currentSpeed > 0) {
-			return;
-		}
-		if (ramp == RampState.RAISED) {
+	public void lowerRamp() {
+		if (currentSpeed == 0) {
 			ramp = RampState.LOWERED;
 		}
-		if (ramp == RampState.LOWERED) {
+	}
+
+	/**
+	 * Lowers the ramp
+	 */
+	public void raiseRamp() {
+		if (currentSpeed == 0) {
 			ramp = RampState.RAISED;
 		}
-    }
+	}
 
 
 	/**
@@ -97,7 +100,7 @@ public class Hauler extends Car {
 	 * @param car the car to be loaded.
 	 */
 	public void loadCar(Car car) {
-		if (ramp == RampState.RAISED || !car.haulable || !insideVicinity(car)) {
+		if (ramp.toString().equals(RampState.RAISED.toString()) || !car.haulable || !insideVicinity(car)) {
 			return;
 		}
 		car.setX(x);

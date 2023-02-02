@@ -97,7 +97,7 @@ public class HaulerTest {
     public void shouldToggleRampIfStopped() {
         RampState stateBefore = mockHauler.getRampState();
         mockHauler.brake(1);
-        mockHauler.toggleRamp();
+        mockHauler.lowerRamp();
         assertNotSame(stateBefore, mockHauler.getRampState());
     }
 
@@ -106,13 +106,13 @@ public class HaulerTest {
         RampState stateBefore = mockHauler.getRampState();
         mockHauler.startEngine();
         mockHauler.gas(1);
-        mockHauler.toggleRamp();
+        mockHauler.lowerRamp();
         assertEquals(stateBefore, mockHauler.getRampState());
     }
 
     @Test
     public void shouldRaiseRampIfMoving() {
-        mockHauler.toggleRamp();
+        mockHauler.lowerRamp();
         mockHauler.startEngine();
         mockHauler.gas(1);
         mockHauler.move();
@@ -135,15 +135,17 @@ public class HaulerTest {
     @Test
     public void shouldLoadCar() {
         mockHauler.brake(1);
-        mockHauler.toggleRamp();
+        mockHauler.lowerRamp();
+        System.out.println(mockHauler.getRampState().toString());
         mockHauler.loadCar(new Volvo240());
+        assertTrue(mockHauler.getCurrentSpeed() == 0);
         assertEquals(1, mockHauler.getLoadedCars().size());
     }
 
     @Test
     public void shouldUnloadCar() {
         mockHauler.brake(1);
-        mockHauler.toggleRamp();
+        mockHauler.lowerRamp();
         mockHauler.loadCar(new Volvo240());
         mockHauler.unloadCar();
         assertEquals(0, mockHauler.getLoadedCars().size());
@@ -152,7 +154,7 @@ public class HaulerTest {
     @Test
     public void shouldOnlyLoadHaulableCars() {
         mockHauler.brake(1);
-        mockHauler.toggleRamp();
+        mockHauler.lowerRamp();
         mockHauler.loadCar(new Volvo240());
         mockHauler.loadCar(new Scania());
         assertEquals(1, mockHauler.getLoadedCars().size());

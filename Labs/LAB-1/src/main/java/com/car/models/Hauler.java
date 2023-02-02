@@ -79,7 +79,7 @@ public class Hauler extends Car {
 	 * Toggles the state of the ramp.
 	 */
 	public void toggleRamp() {
-		if (currentSpeed != 0) {
+		if (currentSpeed > 0) {
 			return;
 		}
 		if (ramp == RampState.RAISED) {

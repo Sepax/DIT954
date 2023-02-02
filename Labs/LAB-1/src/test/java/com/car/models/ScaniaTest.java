@@ -51,7 +51,7 @@ public class ScaniaTest {
         double xBefore = mockScania.getX();
         double yBefore = mockScania.getY();
         mockScania.move();
-        assertTrue(xBefore == mockScania.getX() && yBefore == mockScania.getY());
+        assertTrue(xBefore != mockScania.getX() || yBefore != mockScania.getY());
     }
 
     @Test

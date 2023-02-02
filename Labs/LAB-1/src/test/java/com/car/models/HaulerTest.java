@@ -1,5 +1,3 @@
-
-
 package com.car.models;
 
 import com.car.models.Car.Dir;

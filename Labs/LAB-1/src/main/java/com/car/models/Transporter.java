@@ -3,14 +3,32 @@ package com.car.models;
 import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.Deque;
-
 import com.car.interfaces.CarTransporter;
 
+/**
+ * The class `Transporter` represents a transporter.
+ * 
+ * @author Kiril Curlinov, Sebastian Pålsson, Gabriele Frattini
+ * @since 2023-02-01
+ * 
+ * @param ramp The ramp state of the transporter.
+ * @param cars The cars loaded on the transporter.
+ */
 abstract public class Transporter extends Car implements CarTransporter {
 
   protected RampState ramp;
   protected Deque<Car> cars = new ArrayDeque<>();
 
+  /**
+   * Constructs a new `Transporter` object.
+   * 
+   * @param nrDoors The number of doors of the transporter.
+   * @param color The color of the transporter.
+   * @param enginePower The engine power of the transporter.
+   * @param modelName The model name of the transporter.
+   * @param direction The direction of the transporter.
+   * @param haulable The haulable state of the transporter.
+   */
   protected Transporter(int nrDoors, Color color, double enginePower, String modelName, Dir direction,
       boolean haulable) {
     super(
@@ -44,7 +62,7 @@ abstract public class Transporter extends Car implements CarTransporter {
   }
 
   /**
-   * Raises the ramp
+   * Lowers the ramp
    */
   public void lowerRamp() {
     if (currentSpeed == 0) {
@@ -53,7 +71,7 @@ abstract public class Transporter extends Car implements CarTransporter {
   }
 
   /**
-   * Lowers the ramp
+   * Raises the ramp
    */
   public void raiseRamp() {
     ramp = RampState.RAISED;
@@ -71,13 +89,18 @@ abstract public class Transporter extends Car implements CarTransporter {
     car.setX(x);
     car.setY(x);
     cars.push(car);
-
   }
 
+  /**
+   * Boolean method to check if the car is inside the vicinity of the transporter.
+   */
   private boolean insideVicinity(Car car) {
     return car.x >= x - 5 && car.x <= x + 5 && car.y >= y - 5 && car.y <= y + 5;
   }
 
+  /**
+   * Overides move to check if the ramp is lowered and if so, raise it before moving.
+   */
   @Override
   public void move() {
     if (ramp.toString().equals(RampState.LOWERED.toString())) {
@@ -104,5 +127,6 @@ abstract public class Transporter extends Car implements CarTransporter {
       car.setY(y);
     }
   }
-
 }
+
+

@@ -4,26 +4,30 @@ import java.awt.*;
 import com.car.interfaces.*;
 
 /**
- * Car is an abstract class that represents a car object with properties such as
- * number of doors,
- * engine power, current speed, color, model name, direction with X and Y
- * coordinates.
- * The class implements the Moveable interface, which requires the move() method
- * to be implemented.
- * The class also has methods to start and stop the engine, set and get various
- * properties and drive the car forward or backward.
+ * Car is an abstract class that represents a car. It implements the Moveable interface.
  *
  * @author Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @version 1.0
  * @since 2023-01-25
+ * 
+ * @param nrDoors     the number of doors on the car
+ * @param enginePower the engine power of the car
+ * @param currentSpeed the current speed of the car
+ * @param color       the color of the car
+ * @param modelName   the model name of the car
+ * @param direction   the direction the car is facing
+ * @param x           the x coordinate of the car
+ * @param y           the y coordinate of the car
+ * @param speedFactor the speed factor of the car
+ * @param haulable    if the car is haulable
  */
 public abstract class Car implements Moveable {
-  protected static int nrDoors; // Number of doors on the car
-  protected static double enginePower; // Engine power of the car
-  protected double currentSpeed; // The current speed of the car
-  protected static Color color; // Color of the car
-  protected static String modelName; // The car model name
-  protected Dir direction; // Direction of the car
+  protected static int nrDoors; 
+  protected static double enginePower; 
+  protected double currentSpeed; 
+  protected static Color color; 
+  protected static String modelName; 
+  protected Dir direction; 
   protected double x;
   protected double y;
   protected double speedFactor;
@@ -38,14 +42,8 @@ public abstract class Car implements Moveable {
   }
 
   /**
-   * Constructs a new Car object with the specified number of doors, color, engine
-   * power, and model name.
-   * The car is initially facing north and has its engine stopped.
-   *
-   * @param nrDoors     the number of doors on the car
-   * @param color       the color of the car
-   * @param enginePower the engine power of the car
-   * @param modelName   the car model name
+   * Constructs a new Car object with specified number of doors, color, engine power, model name, direction, and if it's haulable.
+   * starts with engine off.
    */
   protected Car(int nrDoors, Color color, double enginePower, String modelName, Dir direction, boolean haulable) {
     this.nrDoors = nrDoors;
@@ -96,7 +94,7 @@ public abstract class Car implements Moveable {
   /**
    * Sets the color of the car.
    *
-   * @param clr the new color of the car
+   * @param color the new color of the car
    */
 
   public void setColor(Color clr) {
@@ -185,8 +183,7 @@ public abstract class Car implements Moveable {
   }
 
   /**
-   * Decreases the speed of the car by the specified amount, down to a minimum of
-   * 0.
+   * Decreases the speed of the car by the specified amount, down to a minimum of 0.
    *
    * @param amount the amount to decrease the speed of the car
    */
@@ -276,12 +273,20 @@ public abstract class Car implements Moveable {
     this.currentSpeed = Math.max(getCurrentSpeed() - speedFactor * amount, 0);
   }
 
+  /**
+   * Sets the speed factor of the car.
+   * 
+   * @param speedFactor
+   */
   public void setSpeedFactor(double speedFactor) {
     this.speedFactor = speedFactor;
   }
-
+  /**
+   * Gets the speed factor of the car.
+   * 
+   * @return the speed factor of the car
+   */
   public double getSpeedFactor() {
     return speedFactor;
   }
-
 }

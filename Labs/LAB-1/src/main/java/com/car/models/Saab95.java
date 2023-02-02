@@ -2,6 +2,8 @@ package com.car.models;
 
 import java.awt.*;
 
+import com.car.models.Car.Dir;
+
 /**
  * Saab95 is a concrete implementation of the abstract Car class, representing
  * the model Saab95.
@@ -20,7 +22,7 @@ public class Saab95 extends Car {
    * The turbo feature is initially off.
    */
   public Saab95() {
-    super(2, Color.red, 125, "Saab95");
+    super(2, Color.red, 125, "Saab95", Dir.NORTH, true);
     turboOn = false;
   }
 

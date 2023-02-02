@@ -27,6 +27,7 @@ public abstract class Car implements Moveable {
   protected double x;
   protected double y;
   protected double speedFactor;
+  protected boolean haulable;
 
   /**
    * Enum representing the direction of the car. Can be NORTH, EAST, SOUTH, or
@@ -46,12 +47,13 @@ public abstract class Car implements Moveable {
    * @param enginePower the engine power of the car
    * @param modelName   the car model name
    */
-  protected Car(int nrDoors, Color color, double enginePower, String modelName) {
+  protected Car(int nrDoors, Color color, double enginePower, String modelName, Dir direction, boolean haulable) {
     this.nrDoors = nrDoors;
     this.enginePower = enginePower;
     this.color = color;
     this.modelName = modelName;
-    this.direction = Dir.NORTH;
+    this.direction = direction;
+    this.haulable = haulable; 
     stopEngine();
   }
 

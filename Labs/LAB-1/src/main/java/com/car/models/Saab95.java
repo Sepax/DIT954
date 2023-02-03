@@ -1,4 +1,4 @@
-package com.car.models.Transportables;
+package com.car.models;
 
 import java.awt.*;
 

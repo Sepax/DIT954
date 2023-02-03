@@ -1,11 +1,8 @@
-package com.car.models.Transporters;
+package com.car.models;
 
 import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.Deque;
-
-import com.car.models.Vehicle;
-import com.car.models.Transportables.Transportable;
 
 public abstract class Transporter extends Vehicle {
 	protected Deque<Vehicle> vehicles;
@@ -68,8 +65,7 @@ public abstract class Transporter extends Vehicle {
 	 * @param car the car to be loaded.
 	 */
 	public void loadCar(Transportable vehicle) {
-		if (ramp.toString().equals(RampState.RAISED.toString()) || !insideVicinity(vehicle)
-				|| vehicle.getSize() <= sizeCapacity) {
+		if (ramp.toString().equals(RampState.RAISED.toString()) || !insideVicinity(vehicle) || vehicle.getSize() > sizeCapacity) {
 			return;
 		}
 		vehicle.setX(x);

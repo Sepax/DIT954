@@ -1,8 +1,6 @@
-package com.car.models.Transporters;
+package com.car.models;
 
 import java.awt.Color;
-
-import com.car.models.Transporter;
 
 /**
  * Carferry class

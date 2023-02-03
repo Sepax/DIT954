@@ -136,9 +136,8 @@ public class HaulerTest {
     public void shouldLoadCar() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        System.out.println(mockHauler.getRampState().toString());
         mockHauler.loadCar(new Volvo240());
-        assertTrue(mockHauler.getCurrentSpeed() == 0);
+        assertEquals(0, mockHauler.getCurrentSpeed());
         assertEquals(1, mockHauler.getLoadedVehicles().size());
     }
 

@@ -3,8 +3,8 @@ package com.car.models;
 import java.awt.*;
 
 /**
- * Volvo240 is a concrete implementation of the abstract Car class, representing
- * the car model Volvo240.
+ * Volvo240 is a concrete implementation of the abstract vehicle class, representing
+ * the vehicle model Volvo240.
  * It has a trim factor of 1.25 and implements the speedFactor, incrementSpeed
  * and decrementSpeed methods.
  */

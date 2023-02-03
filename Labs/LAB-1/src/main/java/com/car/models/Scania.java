@@ -3,8 +3,8 @@ package com.car.models;
 import java.awt.Color;
 
 /**
- * Scania is a class that represents a Scania truck and extends the Car class.
- * The class has the same properties and methods as the Car class, with the addition of a flatbed tilt property.
+ * Scania is a class that represents a Scania truck and extends the vehicle class.
+ * The class has the same properties and methods as the vehicle class, with the addition of a flatbed tilt property.
  *
  * @authors Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @since 2023-01-31

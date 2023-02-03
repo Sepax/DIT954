@@ -127,9 +127,9 @@ public class HaulerTest {
         mockHauler.startEngine();
         mockHauler.gas(1);
         mockHauler.move();
-        for (Vehicle car : mockHauler.getLoadable().getLoadedVehicles()) {
-            assertEquals(mockHauler.getX(), car.getX());
-            assertEquals(mockHauler.getY(), car.getY());
+        for (Vehicle vehicle : mockHauler.getLoadedVehicles()) {
+            assertEquals(mockHauler.getX(), vehicle.getX());
+            assertEquals(mockHauler.getY(), vehicle.getY());
         }
     }
 

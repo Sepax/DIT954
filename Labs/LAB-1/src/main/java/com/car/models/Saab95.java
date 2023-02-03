@@ -3,7 +3,7 @@ package com.car.models;
 import java.awt.*;
 
 /**
- * Saab95 is a concrete implementation of the abstract Car class, representing
+ * Saab95 is a concrete implementation of the abstract vehicle class, representing
  * the model Saab95.
  * It has a turbo feature that can be turned on or off, which affects the speed
  * factor.

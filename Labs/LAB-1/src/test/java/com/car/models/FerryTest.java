@@ -127,9 +127,9 @@ public class FerryTest {
         mockFerry.startEngine();
         mockFerry.gas(1);
         mockFerry.move();
-        for (Vehicle car : mockFerry.getLoadable().getLoadedVehicles()) {
-            assertEquals(mockFerry.getX(), car.getX());
-            assertEquals(mockFerry.getY(), car.getY());
+        for (Vehicle vehicle : mockFerry.getLoadedVehicles()) {
+            assertEquals(mockFerry.getX(), vehicle.getX());
+            assertEquals(mockFerry.getY(), vehicle.getY());
         }
     }
 

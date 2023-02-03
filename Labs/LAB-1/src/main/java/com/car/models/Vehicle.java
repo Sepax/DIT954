@@ -4,7 +4,7 @@ import java.awt.*;
 import com.car.interfaces.*;
 
 /**
- * Car is an abstract class that represents a car. It implements the Moveable interface.
+ * vehicle is an abstract class that represents a car. It implements the Moveable interface.
  *
  * @author Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @version 1.0
@@ -15,11 +15,11 @@ import com.car.interfaces.*;
  * @param currentSpeed the current speed of the car
  * @param color       the color of the car
  * @param modelName   the model name of the car
- * @param direction   the direction the car is facing
+ * @param direction   the direction the vehicle is facing
  * @param x           the x coordinate of the car
  * @param y           the y coordinate of the car
  * @param speedFactor the speed factor of the car
- * @param haulable    if the car is haulable
+ * @param haulable    if the vehicle is haulable
  */
 public abstract class Vehicle implements Moveable {
   protected static int nrDoors; 
@@ -41,7 +41,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Constructs a new Car object with the specified number of doors, color, engine
+   * Constructs a new vehicle object with the specified number of doors, color, engine
    * power, and model name.
    */
   protected Vehicle(int nrDoors, Color color, double enginePower, String modelName, Dir direction) {
@@ -170,7 +170,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Increases the speed of the car by the specified amount, up to a maximum of 1.
+   * Increases the speed of the vehicle by the specified amount, up to a maximum of 1.
    *
    * @param amount the amount to increase the speed of the car
    */
@@ -181,7 +181,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Decreases the speed of the car by the specified amount, down to a minimum of
+   * Decreases the speed of the vehicle by the specified amount, down to a minimum of
    * 0.
    *
    * @param amount the amount to decrease the speed of the car
@@ -193,7 +193,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Move the car in the direction it is facing.
+   * Move the vehicle in the direction it is facing.
    */
   public void move() {
     switch (this.direction) {
@@ -213,7 +213,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Turns the car to the left, cases signify the direction the car is facing.
+   * Turns the vehicle to the left, cases signify the direction the vehicle is facing.
    */
   public void turnLeft() {
     switch (this.direction) {
@@ -233,7 +233,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Turns the car to the right, cases signify the direction the car is facing.
+   * Turns the vehicle to the right, cases signify the direction the vehicle is facing.
    */
   public void turnRight() {
     switch (getDirection()) {
@@ -253,7 +253,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Increments the current speed of the car by the specified amount, up to the
+   * Increments the current speed of the vehicle by the specified amount, up to the
    * maximum engine power.
    *
    * @param amount the amount to increase the speed of the car
@@ -263,7 +263,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Decrements the current speed of the car by the specified amount, down to a
+   * Decrements the current speed of the vehicle by the specified amount, down to a
    * minimum of 0.
    *
    * @param amount the amount to decrease the speed of the car

@@ -8,18 +8,20 @@ import java.awt.Color;
  *
  * @authors Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @since 2023-01-31
+ * 
+ * @param flatbedTilt the tilt of the flatbed in degrees
  */
 public class Scania extends Transportable {
 	private double flatbedTilt; // The tilt of the flatbed in degrees
-
+	
 	/**
-	 * Constructs a new Scania object with the specified number of doors, color, engine power, and model name.
+	 * Constructs a new Scania object.
+	 * Sets the flatbed tilt to 0.
 	 */
 	public Scania() {
         super(2, Color.ORANGE, 500, "Scania", Dir.NORTH, 3);
         flatbedTilt = 0;
 	}
-
 
     /**
 	 * Returns the tilt of the flatbed in degrees.
@@ -41,7 +43,6 @@ public class Scania extends Transportable {
 		}
     }
 
-
 	/**
 	 * Raises the flatbed (degrees) if the truck is not moving.
 	 * 
@@ -62,6 +63,20 @@ public class Scania extends Transportable {
 		if (getCurrentSpeed() == 0) {
 			flatbedTilt = Math.max(flatbedTilt - degrees, 0);
 		}
+	}
+
+	/**
+	 * If the flatbed is raised, stop the engine, lower the flatbed and start the engine again to move the truck.
+	 */
+	@Override
+	public void move() {
+		if (flatbedTilt > 0) {
+			super.stopEngine();
+			lowerFlatbed(flatbedTilt);
+
+		}
+		super.startEngine(); 
+		super.move();
 	}
 }
 

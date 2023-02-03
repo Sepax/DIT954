@@ -51,6 +51,7 @@ public class HaulerTest {
     public void shouldNotMove() {
         double xBefore = mockHauler.getX();
         double yBefore = mockHauler.getY();
+        mockHauler.stopEngine();
         mockHauler.move();
         assertTrue(xBefore == mockHauler.getX() && yBefore == mockHauler.getY());
     }

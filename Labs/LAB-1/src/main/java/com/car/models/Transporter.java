@@ -56,7 +56,9 @@ public abstract class Transporter extends Vehicle {
 	 * Lowers the ramp
 	 */
 	public void raiseRamp() {
-		ramp = RampState.RAISED;
+		if (currentSpeed == 0) {
+			ramp = RampState.RAISED;
+		}
 	}
 
 	/**
@@ -93,23 +95,12 @@ public abstract class Transporter extends Vehicle {
 	@Override
 	public void move() {
 		if (ramp.toString().equals(RampState.LOWERED.toString())) {
+			stopEngine();
 			raiseRamp();
+			startEngine();
 		}
 
-		switch (this.direction) {
-			case NORTH:
-				setY(getY() + currentSpeed);
-				break;
-			case EAST:
-				setX(getX() + currentSpeed);
-				break;
-			case SOUTH:
-				setY(getY() - currentSpeed);
-				break;
-			case WEST:
-				setX(getX() - currentSpeed);
-				break;
-		}
+		super.move();
 
 		for (Vehicle car : vehicles) {
 			car.setX(x);

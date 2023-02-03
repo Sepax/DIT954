@@ -51,6 +51,7 @@ public class FerryTest {
     public void shouldNotMove() {
         double xBefore = mockFerry.getX();
         double yBefore = mockFerry.getY();
+        mockFerry.stopEngine();
         mockFerry.move();
         assertTrue(xBefore == mockFerry.getX() && yBefore == mockFerry.getY());
     }

@@ -71,11 +71,12 @@ public class Scania extends Transportable {
 	@Override
 	public void move() {
 		if (flatbedTilt > 0) {
-			super.stopEngine();
+			stopEngine();
 			lowerFlatbed(flatbedTilt);
+			startEngine();
 
 		}
-		super.startEngine(); 
+		
 		super.move();
 	}
 }

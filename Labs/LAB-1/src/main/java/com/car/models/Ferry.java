@@ -13,23 +13,18 @@ public class Ferry extends Transporter {
   /**
    * Creates a new `Ferry` object with default values.
    * 
-   * @param ramp The ramp state of the car ferry.
    */
+
+  private static int capacity = 3;
+
   public Ferry() {
-    super(2, Color.ORANGE, 500, "CarFerry", Dir.NORTH, 3);
-    ramp = RampState.RAISED;
+    super(2, Color.ORANGE, 500, "CarFerry", Dir.NORTH, capacity);
   }
 
   /**
-   * Unloads a car from the car ferry.
+   * Unloads a car.
    */
   public void unloadCar() {
-    if (ramp == RampState.RAISED || vehicles.isEmpty()) {
-      return;
-    }
-    vehicles.peek().setX(x + 5);
-    vehicles.peek().setY(y + 5);
-    vehicles.removeLast();
+    getLoadable().getLoadedVehicles().removeLast();
   }
-
 }

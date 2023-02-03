@@ -2,6 +2,9 @@ package com.car.models;
 
 
 import org.junit.jupiter.api.*;
+
+import com.car.models.Vehicle.Dir;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 

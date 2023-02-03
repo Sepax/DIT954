@@ -32,7 +32,7 @@ public abstract class Transporter extends Vehicle {
   }
 
   /**
-   * Raises the ramp
+   * Lowers the ramp
    */
   public void lowerRamp() {
     if (currentSpeed == 0) {
@@ -41,10 +41,12 @@ public abstract class Transporter extends Vehicle {
   }
 
   /**
-   * Lowers the ramp
+   * Raises the ramp
    */
   public void raiseRamp() {
-    ramp = RampState.RAISED;
+    if (currentSpeed == 0) {
+      ramp = RampState.RAISED;
+    }
   }
 
   @Override

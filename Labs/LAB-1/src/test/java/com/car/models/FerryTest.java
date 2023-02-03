@@ -51,6 +51,7 @@ public class FerryTest {
     public void shouldNotMove() {
         double xBefore = mockFerry.getX();
         double yBefore = mockFerry.getY();
+        mockFerry.stopEngine();
         mockFerry.move();
         assertTrue(xBefore == mockFerry.getX() && yBefore == mockFerry.getY());
     }
@@ -111,12 +112,12 @@ public class FerryTest {
     }
 
     @Test
-    public void shouldRaiseRampIfMoving() {
+    public void shouldNotRaiseRampIfMoving() {
         mockFerry.lowerRamp();
         mockFerry.startEngine();
         mockFerry.gas(1);
         mockFerry.move();
-        assertEquals(RampState.RAISED.toString(), mockFerry.getRampState().toString());
+        assertEquals(RampState.LOWERED.toString(), mockFerry.getRampState().toString());
     }
 
     @Test

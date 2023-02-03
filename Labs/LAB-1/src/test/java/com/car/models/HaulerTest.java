@@ -51,6 +51,7 @@ public class HaulerTest {
     public void shouldNotMove() {
         double xBefore = mockHauler.getX();
         double yBefore = mockHauler.getY();
+        mockHauler.stopEngine();
         mockHauler.move();
         assertTrue(xBefore == mockHauler.getX() && yBefore == mockHauler.getY());
     }
@@ -111,12 +112,12 @@ public class HaulerTest {
     }
 
     @Test
-    public void shouldRaiseRampIfMoving() {
+    public void shouldNotRaiseRampIfMoving() {
         mockHauler.lowerRamp();
         mockHauler.startEngine();
         mockHauler.gas(1);
         mockHauler.move();
-        assertEquals(RampState.RAISED.toString(), mockHauler.getRampState().toString());
+        assertEquals(RampState.LOWERED.toString(), mockHauler.getRampState().toString());
     }
 
     @Test

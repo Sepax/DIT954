@@ -7,26 +7,26 @@ import java.util.List;
  * Garage class
  */
 
-public class Garage<TCar extends Car> {
-  private List<TCar> cars;
+public class Garage<TCar extends Vehicle> {
+  private List<TCar> vehicles;
   private int capacity;
 
   public Garage(int capacity) {
     this.capacity = capacity;
-    this.cars = new ArrayList<>(capacity);
+    this.vehicles = new ArrayList<>(capacity);
   }
 
-  public void loadCars(List<TCar> cars) {
+  public void loadCars(List<TCar> vehicles) {
 
-    cars.subList(0, capacity - this.cars.size()).forEach(car -> this.cars.add(car));
+    vehicles.subList(0, capacity - this.vehicles.size()).forEach(car -> this.vehicles.add(car));
   }
 
   public void submitCar(TCar car) throws IllegalArgumentException {
 
-    if (this.cars.size() == capacity) {
+    if (this.vehicles.size() == capacity) {
       throw new IllegalArgumentException("Garage is full");
     }
-    this.cars.add(car);
+    this.vehicles.add(car);
   }
 
   public TCar getBackCar(TCar car) {
@@ -35,11 +35,11 @@ public class Garage<TCar extends Car> {
   }
 
   public void removeCar(TCar car) {
-    this.cars.remove(car);
+    this.vehicles.remove(car);
   }
 
   public int getNumberOfCars() {
-    return this.cars.size();
+    return this.vehicles.size();
   }
 
 }

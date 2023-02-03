@@ -1,22 +1,23 @@
 package com.car.models;
 
-import com.car.models.Car.Dir;
+import com.car.models.Vehicle.Dir;
 import com.car.models.Transporter.RampState;
+import com.car.models.Transporters.Ferry;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for Scania cars.
+ * Unit tests for Scania vehicles.
  *
  */
 
 public class CarferryTest {
-    private CarFerry mockCarrferry;
+    private Ferry mockCarrferry;
 
     @BeforeEach
     void setup() {
-        mockCarrferry = new CarFerry();
+        mockCarrferry = new Ferry();
     }
 
     @Test
@@ -126,7 +127,7 @@ public class CarferryTest {
         mockCarrferry.startEngine();
         mockCarrferry.gas(1);
         mockCarrferry.move();
-        for (Car car : mockCarrferry.getLoadedCars()) {
+        for (Vehicle car : mockCarrferry.getLoadedVehicles()) {
             assertEquals(mockCarrferry.getX(), car.getX());
             assertEquals(mockCarrferry.getY(), car.getY());
         }
@@ -139,7 +140,7 @@ public class CarferryTest {
         System.out.println(mockCarrferry.getRampState().toString());
         mockCarrferry.loadCar(new Volvo240());
         assertTrue(mockCarrferry.getCurrentSpeed() == 0);
-        assertEquals(1, mockCarrferry.getLoadedCars().size());
+        assertEquals(1, mockCarrferry.getLoadedVehicles().size());
     }
 
     @Test
@@ -148,7 +149,7 @@ public class CarferryTest {
         mockCarrferry.lowerRamp();
         mockCarrferry.loadCar(new Volvo240());
         mockCarrferry.unloadCar();
-        assertEquals(0, mockCarrferry.getLoadedCars().size());
+        assertEquals(0, mockCarrferry.getLoadedVehicles().size());
     }
 
     @Test
@@ -157,7 +158,7 @@ public class CarferryTest {
         mockCarrferry.lowerRamp();
         mockCarrferry.loadCar(new Volvo240());
         mockCarrferry.loadCar(new Scania());
-        assertEquals(1, mockCarrferry.getLoadedCars().size());
+        assertEquals(1, mockCarrferry.getLoadedVehicles().size());
     }
 
 
@@ -168,6 +169,6 @@ public class CarferryTest {
         mockCarrferry.loadCar(new Volvo240());
         mockCarrferry.loadCar(new Saab95());
         mockCarrferry.unloadCar();
-        assertEquals(mockCarrferry.getLoadedCars().peek().getClass(), Saab95.class);
+        assertEquals(mockCarrferry.getLoadedVehicles().peek().getClass(), Saab95.class);
     }
 }

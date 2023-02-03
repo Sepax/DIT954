@@ -121,12 +121,12 @@ public class HaulerTest {
 
     @Test
     public void loadedCarsShouldHaveSameCoordinatesAsHauler() {
-        mockHauler.loadCar(new Volvo240());
-        mockHauler.loadCar(new Saab95());
+        mockHauler.getLoadable().loadCar(new Volvo240());
+        mockHauler.getLoadable().loadCar(new Saab95());
         mockHauler.startEngine();
         mockHauler.gas(1);
         mockHauler.move();
-        for (Vehicle car : mockHauler.getLoadedVehicles()) {
+        for (Vehicle car : mockHauler.getLoadable().getLoadedVehicles()) {
             assertEquals(mockHauler.getX(), car.getX());
             assertEquals(mockHauler.getY(), car.getY());
         }
@@ -136,26 +136,26 @@ public class HaulerTest {
     public void shouldLoadCar() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        mockHauler.loadCar(new Volvo240());
+        mockHauler.getLoadable().loadCar(new Volvo240());
         assertEquals(0, mockHauler.getCurrentSpeed());
-        assertEquals(1, mockHauler.getLoadedVehicles().size());
+        assertEquals(1, mockHauler.getLoadable().getLoadedVehicles().size());
     }
 
     @Test
     public void shouldUnloadCar() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        mockHauler.loadCar(new Volvo240());
-        mockHauler.unloadCar();
-        assertEquals(0, mockHauler.getLoadedVehicles().size());
+        mockHauler.getLoadable().loadCar(new Volvo240());
+        mockHauler.getLoadable().unloadCar();
+        assertEquals(0, mockHauler.getLoadable().getLoadedVehicles().size());
     }
 
     @Test
     public void shouldOnlyLoadHaulableCars() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        mockHauler.loadCar(new Volvo240());
-        mockHauler.loadCar(new Scania());
-        assertEquals(1, mockHauler.getLoadedVehicles().size());
+        mockHauler.getLoadable().loadCar(new Volvo240());
+        mockHauler.getLoadable().loadCar(new Scania());
+        assertEquals(2, mockHauler.getLoadable().getNumberOfCars());
     }
 }

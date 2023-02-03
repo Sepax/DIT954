@@ -13,13 +13,14 @@ import java.awt.Color;
  */
 public class Scania extends Transportable {
 	private double flatbedTilt; // The tilt of the flatbed in degrees
+  private static int capacity = 3;
 	
 	/**
 	 * Constructs a new Scania object.
 	 * Sets the flatbed tilt to 0.
 	 */
 	public Scania() {
-        super(2, Color.ORANGE, 500, "Scania", Dir.NORTH, 3);
+        super(2, Color.ORANGE, 500, "Scania", Dir.NORTH, capacity);
         flatbedTilt = 0;
 	}
 

@@ -2,8 +2,9 @@ package com.car.models;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Unit tests for the Garage class.
@@ -13,76 +14,71 @@ import java.util.List;
 public class GarageTest {
   private Garage<Saab95> mockSaabGarage;
   private Garage<Volvo240> mockVolvoGarage;
-  private Garage<Vehicle> mockAnyGarage;
+  private Garage<Transportable> mockAnyGarage;
   private Saab95 mockSaab;
   private Volvo240 mockVolvo;
+  private Deque<Transportable> vehicles;
 
   @BeforeEach
   void setup() {
+    this.vehicles = new ArrayDeque<>();
     mockSaabGarage = new Garage<Saab95>(10);
     mockVolvoGarage = new Garage<Volvo240>(10);
-    mockAnyGarage = new Garage<Vehicle>(10);
+    mockAnyGarage = new Garage<Transportable>(10);
     mockSaab = new Saab95();
     mockVolvo = new Volvo240();
   }
 
+  @AfterEach
+  void tearDown() {
+    vehicles.clear();
+  }
+
   @Test
   public void shouldSubmitRightCarType() {
-    mockSaabGarage.submitCar(mockSaab);
-    mockVolvoGarage.submitCar(mockVolvo);
-
-    assertEquals(1, mockSaabGarage.getNumberOfCars());
-    assertEquals(1, mockVolvoGarage.getNumberOfCars());
-    assertEquals(mockSaab, mockSaabGarage.getBackCar(mockSaab));
-    assertEquals(mockVolvo, mockVolvoGarage.getBackCar(mockVolvo));
+    mockSaabGarage.getLoadable().loadCar(mockSaab);
+    mockVolvoGarage.getLoadable().loadCar(mockVolvo);
+    assertEquals(1, mockSaabGarage.getLoadable().getNumberOfCars());
+    assertEquals(1, mockVolvoGarage.getLoadable().getNumberOfCars());
+    mockSaabGarage.getLoadable().unloadCar();
+    mockVolvoGarage.getLoadable().unloadCar();
+    assertEquals(0, mockSaabGarage.getLoadable().getNumberOfCars());
+    assertEquals(0, mockVolvoGarage.getLoadable().getNumberOfCars());
   }
 
   @Test
   public void shouldSubmitAnyCarType() {
 
-    mockAnyGarage.submitCar(mockSaab);
-    mockAnyGarage.submitCar(mockVolvo);
+    mockAnyGarage.getLoadable().loadCar(mockSaab);
+    mockAnyGarage.getLoadable().loadCar(mockVolvo);
 
-    assertEquals(2, mockAnyGarage.getNumberOfCars());
-    assertEquals(mockSaab, mockAnyGarage.getBackCar(mockSaab));
-    assertEquals(mockVolvo, mockAnyGarage.getBackCar(mockVolvo));
+    assertEquals(2, mockAnyGarage.getLoadable().getNumberOfCars());
   }
 
   @Test
   public void shouldNotAddCarsWhenGarageIsFull() {
 
-    List<Vehicle> vehicles = new ArrayList<>(10);
     for (int i = 0; i < 10; i++) {
       if (i % 2 == 0) {
-        vehicles.add(mockSaab);
+        vehicles.push(mockSaab);
       } else {
-        vehicles.add(mockVolvo);
+        vehicles.push(mockVolvo);
       }
     }
-    mockAnyGarage.loadCars(vehicles);
-    assertEquals(10, mockAnyGarage.getNumberOfCars());
-    mockAnyGarage.loadCars(vehicles);
-    assertEquals(10, mockAnyGarage.getNumberOfCars());
+    mockAnyGarage.getLoadable().loadCars(vehicles);
+    assertEquals(10, mockAnyGarage.getLoadable().getNumberOfCars());
+    mockAnyGarage.getLoadable().loadCars(vehicles);
+    assertEquals(10, mockAnyGarage.getLoadable().getNumberOfCars());
   }
 
   @Test
-  public void shouldRemoveCar() {
-    mockAnyGarage.submitCar(mockSaab);
-    mockAnyGarage.submitCar(mockVolvo);
-    assertEquals(2, mockAnyGarage.getNumberOfCars());
-    mockAnyGarage.removeCar(mockSaab);
-    mockAnyGarage.removeCar(mockVolvo);
-    assertEquals(0, mockAnyGarage.getNumberOfCars());
-  }
-
-  @Test
-  public void shouldGetBackCar() {
-    mockAnyGarage.submitCar(mockSaab);
-    mockAnyGarage.submitCar(mockVolvo);
-    assertEquals(2, mockAnyGarage.getNumberOfCars());
-    assertEquals(mockVolvo, mockAnyGarage.getBackCar(mockVolvo));
-    assertEquals(mockSaab, mockAnyGarage.getBackCar(mockSaab));
-    assertEquals(0, mockAnyGarage.getNumberOfCars());
+  public void shouldUnloadCar() {
+    mockAnyGarage.getLoadable().loadCar(mockSaab);
+    mockAnyGarage.getLoadable().loadCar(mockVolvo);
+    assertEquals(2, mockAnyGarage.getLoadable().getNumberOfCars());
+    mockAnyGarage.getLoadable().unloadCar();
+    mockAnyGarage.getLoadable().unloadCar();
+    assertEquals(0, mockAnyGarage.getLoadable().getNumberOfCars());
   }
 
 }

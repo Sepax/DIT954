@@ -47,9 +47,9 @@ public class Garage<TVehicle extends Vehicle> {
     this.vehicles.add(car);
   }
   /**
-   * Gets the cars stored in the garage.
+   * Gets the car stored in the garage.
    * 
-   * @return The cars stored in the garage.
+   * @return The car stored in the garage.
    */
   public TVehicle getBackCar(TVehicle car) {
     this.removeCar(car);

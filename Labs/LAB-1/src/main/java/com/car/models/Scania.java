@@ -9,14 +9,14 @@ import java.awt.Color;
  * @authors Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @since 2023-01-31
  */
-public class Scania extends Car {
+public class Scania extends Transportable {
 	private double flatbedTilt; // The tilt of the flatbed in degrees
 
 	/**
 	 * Constructs a new Scania object with the specified number of doors, color, engine power, and model name.
 	 */
 	public Scania() {
-        super(2, Color.ORANGE, 500, "Scania", Dir.NORTH,  false);
+        super(2, Color.ORANGE, 500, "Scania", Dir.NORTH, 3);
         flatbedTilt = 0;
 	}
 

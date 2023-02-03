@@ -2,7 +2,6 @@ package com.car.models;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
 public class GarageTest {
   private Garage<Saab95> mockSaabGarage;
   private Garage<Volvo240> mockVolvoGarage;
-  private Garage<Car> mockAnyGarage;
+  private Garage<Vehicle> mockAnyGarage;
   private Saab95 mockSaab;
   private Volvo240 mockVolvo;
 
@@ -22,7 +21,7 @@ public class GarageTest {
   void setup() {
     mockSaabGarage = new Garage<Saab95>(10);
     mockVolvoGarage = new Garage<Volvo240>(10);
-    mockAnyGarage = new Garage<Car>(10);
+    mockAnyGarage = new Garage<Vehicle>(10);
     mockSaab = new Saab95();
     mockVolvo = new Volvo240();
   }
@@ -52,17 +51,17 @@ public class GarageTest {
   @Test
   public void shouldNotAddCarsWhenGarageIsFull() {
 
-    List<Car> cars = new ArrayList<>(10);
+    List<Vehicle> vehicles = new ArrayList<>(10);
     for (int i = 0; i < 10; i++) {
       if (i % 2 == 0) {
-        cars.add(mockSaab);
+        vehicles.add(mockSaab);
       } else {
-        cars.add(mockVolvo);
+        vehicles.add(mockVolvo);
       }
     }
-    mockAnyGarage.loadCars(cars);
+    mockAnyGarage.loadCars(vehicles);
     assertEquals(10, mockAnyGarage.getNumberOfCars());
-    mockAnyGarage.loadCars(cars);
+    mockAnyGarage.loadCars(vehicles);
     assertEquals(10, mockAnyGarage.getNumberOfCars());
   }
 

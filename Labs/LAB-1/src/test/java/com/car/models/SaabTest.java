@@ -1,11 +1,11 @@
 package com.car.models;
 
-import com.car.models.Car.Dir;
+import com.car.models.Vehicle.Dir;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for Saab cars.
+ * Unit tests for Saab vehicles.
  *
  */
 

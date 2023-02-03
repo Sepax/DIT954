@@ -17,9 +17,9 @@ import com.car.interfaces.*;
  * @version 1.0
  * @since 2023-01-25
  */
-public abstract class Car implements Moveable {
+public abstract class Vehicle implements Moveable {
   protected static int nrDoors; // Number of doors on the car
-  protected static double enginePower; // Engine power of the car
+  protected double enginePower; // Engine power of the car
   protected double currentSpeed; // The current speed of the car
   protected static Color color; // Color of the car
   protected static String modelName; // The car model name
@@ -27,13 +27,12 @@ public abstract class Car implements Moveable {
   protected double x;
   protected double y;
   protected double speedFactor;
-  protected boolean haulable;
 
   /**
    * Enum representing the direction of the car. Can be NORTH, EAST, SOUTH, or
    * WEST.
    */
-  enum Dir {
+  public enum Dir {
     NORTH, EAST, SOUTH, WEST
   }
 
@@ -47,13 +46,12 @@ public abstract class Car implements Moveable {
    * @param enginePower the engine power of the car
    * @param modelName   the car model name
    */
-  protected Car(int nrDoors, Color color, double enginePower, String modelName, Dir direction, boolean haulable) {
+  protected Vehicle(int nrDoors, Color color, double enginePower, String modelName, Dir direction) {
     this.nrDoors = nrDoors;
     this.enginePower = enginePower;
     this.color = color;
     this.modelName = modelName;
     this.direction = direction;
-    this.haulable = haulable; 
     stopEngine();
   }
 

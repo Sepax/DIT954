@@ -8,7 +8,7 @@ import java.awt.*;
  * It has a trim factor of 1.25 and implements the speedFactor, incrementSpeed
  * and decrementSpeed methods.
  */
-public class Volvo240 extends Car {
+public class Volvo240 extends Transportable {
 
   /**
    * The trim factor of the car(constant), which is used to calculate the speed
@@ -21,7 +21,7 @@ public class Volvo240 extends Car {
    * 100, and model name of "Volvo240".
    */
   public Volvo240() {
-    super(4, Color.black, 100, "Volvo240", Dir.NORTH, true);
+    super(4, Color.black, 100, "Volvo240", Dir.NORTH, 2);
   }
 
   /**

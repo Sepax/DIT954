@@ -9,13 +9,13 @@ import java.util.List;
  * @author Kiril Curlinov, Sebastian Pålsson, Gabriele Frattini
  * @since 2023-02-01
  * 
- * @param <TCar> The type of car that can be stored in the garage.
+ * @param <TVehicle> The type of car that can be stored in the garage.
  * @param cars The cars stored in the garage.
  * @param capacity The capacity of the garage.
  */
 
-public class Garage<TCar extends Vehicle> {
-  private List<TCar> vehicles;
+public class Garage<TVehicle extends Vehicle> {
+  private List<TVehicle> vehicles;
   private int capacity;
 
   /**
@@ -26,7 +26,7 @@ public class Garage<TCar extends Vehicle> {
     this.vehicles = new ArrayList<>(capacity);
   }
 
-  public void loadCars(List<TCar> vehicles) {
+  public void loadCars(List<TVehicle> vehicles) {
 
     vehicles.subList(0, capacity - this.vehicles.size()).forEach(car -> this.vehicles.add(car));
   }
@@ -39,7 +39,7 @@ public class Garage<TCar extends Vehicle> {
    * @throws IllegalArgumentException If the garage is full.
    */
 
-  public void submitCar(TCar car) throws IllegalArgumentException {
+  public void submitCar(TVehicle car) throws IllegalArgumentException {
 
     if (this.vehicles.size() == capacity) {
       throw new IllegalArgumentException("Garage is full");
@@ -51,7 +51,7 @@ public class Garage<TCar extends Vehicle> {
    * 
    * @return The cars stored in the garage.
    */
-  public TCar getBackCar(TCar car) {
+  public TVehicle getBackCar(TVehicle car) {
     this.removeCar(car);
     return car;
   }
@@ -60,7 +60,7 @@ public class Garage<TCar extends Vehicle> {
    * 
    * @param car The car to remove from the garage.
    */
-  public void removeCar(TCar car) {
+  public void removeCar(TVehicle car) {
     this.vehicles.remove(car);
   }
   /**

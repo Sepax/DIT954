@@ -13,8 +13,9 @@ import java.util.List;
  * @param cars The cars stored in the garage.
  * @param capacity The capacity of the garage.
  */
-public class Garage<TCar extends Car> {
-  private List<TCar> cars;
+
+public class Garage<TCar extends Vehicle> {
+  private List<TCar> vehicles;
   private int capacity;
 
   /**
@@ -22,16 +23,12 @@ public class Garage<TCar extends Car> {
    */
   public Garage(int capacity) {
     this.capacity = capacity;
-    this.cars = new ArrayList<>(capacity);
+    this.vehicles = new ArrayList<>(capacity);
   }
-  /**
-   * Loads cars into the garage.
-   * 
-   * @param cars The cars to load into the garage.
-   */
-  public void loadCars(List<TCar> cars) {
 
-    cars.subList(0, capacity - this.cars.size()).forEach(car -> this.cars.add(car));
+  public void loadCars(List<TCar> vehicles) {
+
+    vehicles.subList(0, capacity - this.vehicles.size()).forEach(car -> this.vehicles.add(car));
   }
 
   /**
@@ -44,10 +41,10 @@ public class Garage<TCar extends Car> {
 
   public void submitCar(TCar car) throws IllegalArgumentException {
 
-    if (this.cars.size() == capacity) {
+    if (this.vehicles.size() == capacity) {
       throw new IllegalArgumentException("Garage is full");
     }
-    this.cars.add(car);
+    this.vehicles.add(car);
   }
   /**
    * Gets the cars stored in the garage.
@@ -64,7 +61,7 @@ public class Garage<TCar extends Car> {
    * @param car The car to remove from the garage.
    */
   public void removeCar(TCar car) {
-    this.cars.remove(car);
+    this.vehicles.remove(car);
   }
   /**
    * Gets the number cars stored in the garage.
@@ -72,7 +69,7 @@ public class Garage<TCar extends Car> {
    * @return The number cars stored in the garage.
    */
   public int getNumberOfCars() {
-    return this.cars.size();
+    return this.vehicles.size();
   }
 
 }

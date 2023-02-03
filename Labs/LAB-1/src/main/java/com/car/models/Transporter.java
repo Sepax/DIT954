@@ -3,130 +3,117 @@ package com.car.models;
 import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import com.car.interfaces.CarTransporter;
 
-/**
- * The class `Transporter` represents a transporter.
- * 
- * @author Kiril Curlinov, Sebastian Pålsson, Gabriele Frattini
- * @since 2023-02-01
- * 
- * @param ramp The ramp state of the transporter.
- * @param cars The cars loaded on the transporter.
- */
-abstract public class Transporter extends Car implements CarTransporter {
+public abstract class Transporter extends Vehicle {
+	protected Deque<Vehicle> vehicles;
+	protected int sizeCapacity;
+	protected RampState ramp;
 
-  protected RampState ramp;
-  protected Deque<Car> cars = new ArrayDeque<>();
+	/**
+	 * Enum representing the state of the ramp. Can be RAISED or LOWERED.
+	 */
+	public enum RampState {
+		RAISED, LOWERED
+	}
 
-  /**
-   * Constructs a new `Transporter` object.
-   * 
-   * @param nrDoors The number of doors of the transporter.
-   * @param color The color of the transporter.
-   * @param enginePower The engine power of the transporter.
-   * @param modelName The model name of the transporter.
-   * @param direction The direction of the transporter.
-   * @param haulable The haulable state of the transporter.
-   */
-  protected Transporter(int nrDoors, Color color, double enginePower, String modelName, Dir direction,
-      boolean haulable) {
-    super(
-        nrDoors, color, enginePower, modelName, direction, haulable);
-  }
+	protected Transporter(int nrDoors, Color color, double enginePower, String modelName, Dir direction,
+			int sizeCapacity) {
+		super(nrDoors, color, enginePower, modelName, direction);
+		this.vehicles = new ArrayDeque<>();
+		this.sizeCapacity = sizeCapacity;
+		this.ramp = RampState.RAISED;
+	}
 
-  /**
-   * Enum representing the state of the ramp. Can be RAISED or LOWERED.
-   */
-  public enum RampState {
-    RAISED, LOWERED
-  }
+	/**
+	 * Returns the state of the ramp.
+	 *
+	 * @return the state of the ramp.
+	 */
 
-  /**
-   * Returns the state of the ramp.
-   *
-   * @return the state of the ramp.
-   */
+	public RampState getRampState() {
+		return ramp;
+	}
 
-  public RampState getRampState() {
-    return ramp;
-  }
+	/**
+	 * Returns the vehicles loaded on the ramp.
+	 *
+	 * @return the vehicles loaded on the ramp.
+	 */
+	public Deque<Vehicle> getLoadedVehicles() {
+		return vehicles;
+	}
 
-  /**
-   * Returns the cars loaded on the ramp.
-   *
-   * @return the cars loaded on the ramp.
-   */
-  public Deque<Car> getLoadedCars() {
-    return cars;
-  }
+	/**
+	 * Raises the ramp
+	 */
+	public void lowerRamp() {
+		if (currentSpeed == 0) {
+			ramp = RampState.LOWERED;
+		}
+	}
 
-  /**
-   * Lowers the ramp
-   */
-  public void lowerRamp() {
-    if (currentSpeed == 0) {
-      ramp = RampState.LOWERED;
-    }
-  }
+	/**
+	 * Lowers the ramp
+	 */
+	public void raiseRamp() {
+		ramp = RampState.RAISED;
+	}
 
-  /**
-   * Raises the ramp
-   */
-  public void raiseRamp() {
-    ramp = RampState.RAISED;
-  }
+	/**
+	 * Loads a car onto the ramp.
+	 * 
+	 * @param car the car to be loaded.
+	 */
+	public void loadCar(Transportable vehicle) {
+		if (ramp.toString().equals(RampState.RAISED.toString()) || !insideVicinity(vehicle) || vehicle.getSize() > sizeCapacity) {
+			return;
+		}
+		vehicle.setX(x);
+		vehicle.setY(x);
+		vehicles.push(vehicle);
 
-  /**
-   * Loads a car onto the ramp.
-   * 
-   * @param car the car to be loaded.
-   */
-  public void loadCar(Car car) {
-    if (ramp.toString().equals(RampState.RAISED.toString()) || !car.haulable || !insideVicinity(car)) {
-      return;
-    }
-    car.setX(x);
-    car.setY(x);
-    cars.push(car);
-  }
+	}
 
-  /**
-   * Boolean method to check if the car is inside the vicinity of the transporter.
-   */
-  private boolean insideVicinity(Car car) {
-    return car.x >= x - 5 && car.x <= x + 5 && car.y >= y - 5 && car.y <= y + 5;
-  }
+	/**
+	 * Unloads a car from the ramp.
+	 */
+	public void unloadCar() {
+		if (ramp == RampState.RAISED || vehicles.isEmpty()) {
+			return;
+		}
+		vehicles.peek().setX(x + 5);
+		vehicles.peek().setY(y + 5);
+		vehicles.pop();
+	}
 
-  /**
-   * Overides move to check if the ramp is lowered and if so, raise it before moving.
-   */
-  @Override
-  public void move() {
-    if (ramp.toString().equals(RampState.LOWERED.toString())) {
-      raiseRamp();
-    }
+	private boolean insideVicinity(Transportable vehicle) {
+		return vehicle.getX() >= x - 5 && vehicle.getX() <= x + 5 && vehicle.getY() >= y - 5 && vehicle.getY() <= y + 5;
+	}
 
-    switch (this.direction) {
-      case NORTH:
-        setY(getY() + currentSpeed);
-        break;
-      case EAST:
-        setX(getX() + currentSpeed);
-        break;
-      case SOUTH:
-        setY(getY() - currentSpeed);
-        break;
-      case WEST:
-        setX(getX() - currentSpeed);
-        break;
-    }
+	@Override
+	public void move() {
+		if (ramp.toString().equals(RampState.LOWERED.toString())) {
+			raiseRamp();
+		}
 
-    for (Car car : cars) {
-      car.setX(x);
-      car.setY(y);
-    }
-  }
+		switch (this.direction) {
+			case NORTH:
+				setY(getY() + currentSpeed);
+				break;
+			case EAST:
+				setX(getX() + currentSpeed);
+				break;
+			case SOUTH:
+				setY(getY() - currentSpeed);
+				break;
+			case WEST:
+				setX(getX() - currentSpeed);
+				break;
+		}
+
+		for (Vehicle car : vehicles) {
+			car.setX(x);
+			car.setY(y);
+		}
+	}
 }
-
-

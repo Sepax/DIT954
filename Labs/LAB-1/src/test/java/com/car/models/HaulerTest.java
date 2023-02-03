@@ -1,13 +1,13 @@
 package com.car.models;
 
-import com.car.models.Car.Dir;
+import com.car.models.Vehicle.Dir;
 import com.car.models.Transporter.RampState;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for Scania cars.
+ * Unit tests for Scania vehicles.
  *
  */
 
@@ -126,7 +126,7 @@ public class HaulerTest {
         mockHauler.startEngine();
         mockHauler.gas(1);
         mockHauler.move();
-        for (Car car : mockHauler.getLoadedCars()) {
+        for (Vehicle car : mockHauler.getLoadedVehicles()) {
             assertEquals(mockHauler.getX(), car.getX());
             assertEquals(mockHauler.getY(), car.getY());
         }
@@ -136,10 +136,9 @@ public class HaulerTest {
     public void shouldLoadCar() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        System.out.println(mockHauler.getRampState().toString());
         mockHauler.loadCar(new Volvo240());
-        assertTrue(mockHauler.getCurrentSpeed() == 0);
-        assertEquals(1, mockHauler.getLoadedCars().size());
+        assertEquals(0, mockHauler.getCurrentSpeed());
+        assertEquals(1, mockHauler.getLoadedVehicles().size());
     }
 
     @Test
@@ -148,7 +147,7 @@ public class HaulerTest {
         mockHauler.lowerRamp();
         mockHauler.loadCar(new Volvo240());
         mockHauler.unloadCar();
-        assertEquals(0, mockHauler.getLoadedCars().size());
+        assertEquals(0, mockHauler.getLoadedVehicles().size());
     }
 
     @Test
@@ -157,6 +156,6 @@ public class HaulerTest {
         mockHauler.lowerRamp();
         mockHauler.loadCar(new Volvo240());
         mockHauler.loadCar(new Scania());
-        assertEquals(1, mockHauler.getLoadedCars().size());
+        assertEquals(1, mockHauler.getLoadedVehicles().size());
     }
 }

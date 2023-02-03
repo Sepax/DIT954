@@ -11,7 +11,7 @@ import java.awt.Color;
  * 
  * @param flatbedTilt the tilt of the flatbed in degrees
  */
-public class Scania extends Car {
+public class Scania extends Transportable {
 	private double flatbedTilt; // The tilt of the flatbed in degrees
 	
 	/**
@@ -19,7 +19,7 @@ public class Scania extends Car {
 	 * Sets the flatbed tilt to 0.
 	 */
 	public Scania() {
-        super(2, Color.ORANGE, 500, "Scania", Dir.NORTH,  false);
+        super(2, Color.ORANGE, 500, "Scania", Dir.NORTH, 3);
         flatbedTilt = 0;
 	}
 

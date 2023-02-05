@@ -1,123 +1,90 @@
 package com.car.models;
 
 import java.awt.Color;
-import java.util.ArrayDeque;
-import java.util.Deque;
+
 /**
- * This is a transporter class that extends the vehicle class.
- * It has a ramp that can be lowered and raised.
- * It can load and unload cars.
- * 
+ * The abstract class `Transporter` that extends 'Vehicle' wich represents transporters.
  * 
  * @author Kiril Curlinov, Sebastian Pålsson, Gabriele Frattini
- * @since 2023-02-02
+ * @since 2023-02-04
  * 
- * @param vehicles the vehicles loaded on the ramp.
- * @param sizeCapacity the size capacity of the transporter.
- * @param ramp the state of the ramp.
+ * @param size The size of the vehicle.
+ * @param ramp The state of the ramp.
  * 
-/*/ 
+ */
 public abstract class Transporter extends Vehicle {
-	protected Deque<Vehicle> vehicles;
-	protected int sizeCapacity;
-	protected RampState ramp;
+  protected RampState ramp;
 
-	/**
-	 * Enum representing the state of the ramp. Can be RAISED or LOWERED.
-	 */
-	public enum RampState {
-		RAISED, LOWERED
-	}
+  private Loadable<Transportable> loadable;
 
-	protected Transporter(int nrDoors, Color color, double enginePower, String modelName, Dir direction,
-			int sizeCapacity) {
-		super(nrDoors, color, enginePower, modelName, direction);
-		this.vehicles = new ArrayDeque<>();
-		this.sizeCapacity = sizeCapacity;
-		this.ramp = RampState.RAISED;
-	}
+  /**
+   * Enum representing the state of the ramp. Can be RAISED or LOWERED.
+   */
+  public enum RampState {
+    RAISED, LOWERED
+  }
 
-	/**
-	 * Returns the state of the ramp.
-	 *
-	 * @return the state of the ramp.
-	 */
+  /**
+   * Creates a new `Transporter` object with default values.
+   */
+  protected Transporter(int nrDoors, Color color, double enginePower, String modelName, Dir direction,
+      int sizeCapacity) {
+    super(nrDoors, color, enginePower, modelName, direction);
+    this.ramp = RampState.RAISED;
+    this.loadable = new Loadable<Transportable>(sizeCapacity);
+  }
 
-	public RampState getRampState() {
-		return ramp;
-	}
+  /**
+   * Returns the state of the ramp.
+   *
+   * @return the state of the ramp.
+   */
 
-	/**
-	 * Returns the vehicles loaded on the ramp.
-	 *
-	 * @return the vehicles loaded on the ramp.
-	 */
-	public Deque<Vehicle> getLoadedVehicles() {
-		return vehicles;
-	}
+  public RampState getRampState() {
+    return ramp;
+  }
 
-	/**
-	 * Lowers the ramp
-	 */
-	public void lowerRamp() {
-		if (currentSpeed == 0) {
-			ramp = RampState.LOWERED;
-		}
-	}
+  /**
+   * Lowers the ramp
+   */
+  public void lowerRamp() {
+    if (currentSpeed == 0) {
+      ramp = RampState.LOWERED;
+    }
+  }
 
-	/**
-	 * Raises the ramp
-	 */
-	public void raiseRamp() {
-		if (currentSpeed == 0) {
-			ramp = RampState.RAISED;
-		}
-	}
+  /**
+   * Raises the ramp
+   */
+  public void raiseRamp() {
+    if (currentSpeed == 0) {
+      ramp = RampState.RAISED;
+    }
+  }
 
-	/**
-	 * Loads a vehicle onto the ramp.
-	 * 
-	 * @param vehicle the vehicle to be loaded.
-	 */
-	public void loadCar(Transportable vehicle) {
-		if (ramp.toString().equals(RampState.RAISED.toString()) || !insideVicinity(vehicle) || vehicle.getSize() > sizeCapacity) {
-			return;
-		}
-		vehicle.setX(x);
-		vehicle.setY(x);
-		vehicles.push(vehicle);
+  /** 
+   * Overrides the move method in Vehicle. To fit the properties of a transporter.
+   */
+  @Override
+  public void move() {
+    if (ramp.toString().equals(RampState.LOWERED.toString())) {
+      raiseRamp();
+    }
+	super.move();
 
-	}
+    for (Vehicle car : loadable.getLoadedVehicles()) {
+      car.setX(x);
+      car.setY(y);
+    }
+  }
 
-	/**
-	 * Unloads a vehicle from the ramp.
-	 */
-	public void unloadCar() {
-		if (ramp == RampState.RAISED || vehicles.isEmpty()) {
-			return;
-		}
-		vehicles.peek().setX(x + 5);
-		vehicles.peek().setY(y + 5);
-		vehicles.pop();
-	}
-
-	private boolean insideVicinity(Transportable vehicle) {
-		return vehicle.getX() >= x - 5 && vehicle.getX() <= x + 5 && vehicle.getY() >= y - 5 && vehicle.getY() <= y + 5;
-	}
-
-	@Override
-	public void move() {
-		if (ramp.toString().equals(RampState.LOWERED.toString())) {
-			stopEngine();
-			raiseRamp();
-			startEngine();
-		}
-
-		super.move();
-
-		for (Vehicle vehicle : vehicles) {
-			vehicle.setX(x);
-			vehicle.setY(y);
-		}
-	}
+  /**
+   * Gets the loadable object of the traporter.
+   * 
+   * @param vehicle The vehicle to be loaded.
+   * @param loadable The loadable object.
+   */
+  public Loadable<Transportable> getLoadable() {
+    return loadable;
+  }
 }

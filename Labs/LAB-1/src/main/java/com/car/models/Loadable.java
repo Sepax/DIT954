@@ -3,10 +3,19 @@ package com.car.models;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+/**
+ * The class `Loadable` represents a ramp.
+ * 
+ * @author Kiril Curlinov, Sebastian Pålsson, Gabriele Frattini
+ * @since 2023-02-04
+ * 
+ * @param <TT>      The type of the transportables stored in the ramp.
+ * @param vehicles  The vehicles stored in the ramp.
+ * @param capacity  The capacity of the ramp.
+ */
 public class Loadable<TT extends Transportable> {
 
   Deque<TT> vehicles;
-
   int capacity;
 
   public Loadable(int capacity) {
@@ -32,6 +41,11 @@ public class Loadable<TT extends Transportable> {
     vehicles.push(vehicle);
   }
 
+  /**
+   * Loads cars (plural) onto the ramp. 
+   * 
+   * @param cars the cars to be loaded.
+   */
   public void loadCars(Deque<TT> vehicles) {
     while (!vehicles.isEmpty() && this.vehicles.size() < capacity) {
       loadCar(vehicles.pop());

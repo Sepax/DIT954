@@ -4,21 +4,20 @@ import java.awt.*;
 import com.car.interfaces.*;
 
 /**
- * vehicle is an abstract class that represents a car. It implements the Moveable interface.
+ * Vehicle is an abstract class that represents a vehicle. It implements the Moveable interface.
  *
  * @author Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
- * @version 1.0
  * @since 2023-01-25
  * 
- * @param nrDoors     the number of doors on the car
- * @param enginePower the engine power of the car
- * @param currentSpeed the current speed of the car
- * @param color       the color of the car
- * @param modelName   the model name of the car
+ * @param nrDoors     the number of doors on the vehicle
+ * @param enginePower the engine power of the vehicle
+ * @param currentSpeed the current speed of the vehicle
+ * @param color       the color of the vehicle
+ * @param modelName   the model name of the vehicle
  * @param direction   the direction the vehicle is facing
- * @param x           the x coordinate of the car
- * @param y           the y coordinate of the car
- * @param speedFactor the speed factor of the car
+ * @param x           the x coordinate of the vehicle
+ * @param y           the y coordinate of the vehicle
+ * @param speedFactor the speed factor of the vehicle
  * @param haulable    if the vehicle is haulable
  */
 public abstract class Vehicle implements Moveable {
@@ -33,7 +32,7 @@ public abstract class Vehicle implements Moveable {
   protected double speedFactor;
 
   /**
-   * Enum representing the direction of the car. Can be NORTH, EAST, SOUTH, or
+   * Enum representing the direction of the vehicle. Can be NORTH, EAST, SOUTH, or
    * WEST.
    */
   public enum Dir {
@@ -41,8 +40,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Constructs a new vehicle object with the specified number of doors, color, engine
-   * power, and model name.
+   * Constructs a new vehicle object with default values.
    */
   protected Vehicle(int nrDoors, Color color, double enginePower, String modelName, Dir direction) {
     this.nrDoors = nrDoors;
@@ -54,45 +52,45 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Returns the number of doors on the car.
+   * Returns the number of doors on the vehicle.
    *
-   * @return the number of doors on the car
+   * @return the number of doors on the vehicle
    */
   public int getNrDoors() {
     return nrDoors;
   }
 
   /**
-   * Returns the engine power of the car.
+   * Returns the engine power of the vehicle.
    *
-   * @return the engine power of the car
+   * @return the engine power of the vehicle
    */
   public double getEnginePower() {
     return enginePower;
   }
 
   /**
-   * Returns the current speed of the car.
+   * Returns the current speed of the vehicle.
    *
-   * @return the current speed of the car
+   * @return the current speed of the vehicle
    */
   public double getCurrentSpeed() {
     return currentSpeed;
   }
 
   /**
-   * Returns the color of the car.
+   * Returns the color of the vehicle.
    *
-   * @return the color of the car
+   * @return the color of the vehicle
    */
   public Color getColor() {
     return color;
   }
 
   /**
-   * Sets the color of the car.
+   * Sets the color of the vehicle.
    *
-   * @param clr the new color of the car
+   * @param clr the new color of the vehicle
    */
 
   public void setColor(Color clr) {
@@ -100,9 +98,9 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Returns the direction of the car.
+   * Returns the direction of the vehicle.
    *
-   * @return the direction of the car
+   * @return the direction of the vehicle
    */
 
   public Dir getDirection() {
@@ -110,9 +108,9 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Returns the X coordinate of the car.
+   * Returns the X coordinate of the vehicle.
    *
-   * @return the X coordinate of the car
+   * @return the X coordinate of the vehicle
    */
 
   public double getX() {
@@ -120,59 +118,59 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Returns the Y coordinate of the car.
+   * Returns the Y coordinate of the vehicle.
    *
-   * @return the Y coordinate of the car
+   * @return the Y coordinate of the vehicle
    */
   public double getY() {
     return y;
   }
 
   /**
-   * Sets the direction of the car.
+   * Sets the direction of the vehicle.
    *
-   * @param direction the new direction of the car
+   * @param direction the new direction of the vehicle
    */
   public void setDirection(Dir direction) {
     this.direction = direction;
   }
 
   /**
-   * Sets the X coordinate of the car.
+   * Sets the X coordinate of the vehicle.
    *
-   * @param x the new X coordinate of the car
+   * @param x the new X coordinate of the vehicle
    */
   public void setX(double x) {
     this.x = x;
   }
 
   /**
-   * Sets the Y coordinate of the car.
+   * Sets the Y coordinate of the vehicle.
    *
-   * @param y the new Y coordinate of the car
+   * @param y the new Y coordinate of the vehicle
    */
   public void setY(double y) {
     this.y = y;
   }
 
   /**
-   * Starts the engine of the car, setting the current speed to 0.1.
+   * Starts the engine of the vehicle, setting the current speed to 0.1.
    */
   public void startEngine() {
     currentSpeed = 0.1;
   }
 
   /**
-   * Stops the engine of the car, setting the current speed to 0.
+   * Stops the engine of the vehicle, setting the current speed to 0.
    */
   public void stopEngine() {
     currentSpeed = 0;
   }
 
   /**
-   * Increases the speed of the vehicle by the specified amount, up to a maximum of 1.
+   * Increases the speed of the vehicle (gas).
    *
-   * @param amount the amount to increase the speed of the car
+   * @param amount the amount to increase the speed of the vehicle
    */
   public void gas(double amount) {
     if (amount > 0 && amount <= 1) {
@@ -181,10 +179,9 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Decreases the speed of the vehicle by the specified amount, down to a minimum of
-   * 0.
+   * Decrements the speed of the vehicle (brakes)
    *
-   * @param amount the amount to decrease the speed of the car
+   * @param amount the amoumt of speed to decrement
    */
   public void brake(double amount) {
     if (amount > 0 && amount <= 1) {
@@ -213,7 +210,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Turns the vehicle to the left, cases signify the direction the vehicle is facing.
+   * Turns the car to the left, cases signify the direction the vehicle is facing.
    */
   public void turnLeft() {
     switch (this.direction) {
@@ -253,8 +250,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Increments the current speed of the vehicle by the specified amount, up to the
-   * maximum engine power.
+   * Increments the current speed of the vehicle by the specified amount, up to the maximum engine power.
    *
    * @param amount the amount to increase the speed of the car
    */
@@ -263,8 +259,7 @@ public abstract class Vehicle implements Moveable {
   }
 
   /**
-   * Decrements the current speed of the vehicle by the specified amount, down to a
-   * minimum of 0.
+   * Decrements the current speed of the car by the specified amount, down to a minimum of 0.
    *
    * @param amount the amount to decrease the speed of the car
    */
@@ -289,5 +284,4 @@ public abstract class Vehicle implements Moveable {
   public double getSpeedFactor() {
     return speedFactor;
   }
-
 }

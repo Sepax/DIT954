@@ -3,7 +3,7 @@ package com.car.models;
 import java.awt.*;
 
 /**
- * Saab95 is a concrete implementation of the abstract Car class, representing
+ * Saab95 is a concrete implementation of the abstract vehicle class, representing
  * the model Saab95.
  * It has a turbo feature that can be turned on or off, which affects the speed
  * factor.
@@ -15,8 +15,7 @@ public class Saab95 extends Transportable {
   private boolean turboOn;
 
   /**
-   * Constructs a new Saab95 object with 2 doors, red color, engine power of 125,
-   * and model name of "Saab95".
+   * Constructs a new Saab95 object with 2 doors, red color, engine power of 125, and model name of "Saab95".
    * The turbo feature is initially off.
    */
   public Saab95() {
@@ -48,8 +47,7 @@ public class Saab95 extends Transportable {
   }
 
   /**
-   * Returns the speed factor of the car, which is the engine power multiplied by
-   * 0.01 and the turbo factor.
+   * Returns the speed factor of the car.
    * 
    * @return the speed factor of the car
    */

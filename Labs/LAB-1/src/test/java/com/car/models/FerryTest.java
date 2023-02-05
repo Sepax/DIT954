@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for Scania vehicles.
- *
  */
 
 public class FerryTest {

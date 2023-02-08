@@ -1,8 +1,5 @@
 package com.car.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * The class `Garage` represents a garage. 
  * 
@@ -13,22 +10,22 @@ import java.util.List;
  * @param cars       The cars stored in the garage.
  * @param capacity   The capacity of the garage.
  */
-public class Garage<TT extends Transportable> {
+public class Garage<T extends Transportable> {
   private int capacity;
-  private Loadable<TT> loadable;
+  private Loadable<T> loadable;
 
   /**
    * Creates a new `Garage` object with specified capacity.
    */
   public Garage(int capacity) {
     this.capacity = capacity;
-    loadable = new Loadable<TT>(capacity);
+    loadable = new Loadable<>(capacity);
   }
 
   /**
    * Gets the list of loadables in the garage.
    */
-  public Loadable<TT> getLoadable() {
+  public Loadable<T> getLoadable() {
     return loadable;
   }
   /**

@@ -9,18 +9,18 @@ import java.util.Deque;
  * @author Kiril Curlinov, Sebastian Pålsson, Gabriele Frattini
  * @since 2023-02-04
  * 
- * @param <TT>      The type of the transportables stored in the ramp.
+ * @param <T>      The type of the transportables stored in the ramp.
  * @param vehicles  The vehicles stored in the ramp.
  * @param capacity  The capacity of the ramp.
  */
-public class Loadable<TT extends Transportable> {
+public class Loadable<T extends Transportable> {
 
-  Deque<TT> vehicles;
+  Deque<T> vehicles;
   int capacity;
 
   public Loadable(int capacity) {
     this.capacity = capacity;
-    this.vehicles = new ArrayDeque<TT>();
+    this.vehicles = new ArrayDeque<>();
   }
 
   /**
@@ -28,7 +28,7 @@ public class Loadable<TT extends Transportable> {
    *
    * @return the vehicles loaded on the ramp.
    */
-  public Deque<TT> getLoadedVehicles() {
+  public Deque<T> getLoadedVehicles() {
     return vehicles;
   }
 
@@ -37,7 +37,7 @@ public class Loadable<TT extends Transportable> {
    * 
    * @param car the car to be loaded.
    */
-  public void loadCar(TT vehicle) {
+  public void loadCar(T vehicle) {
     vehicles.push(vehicle);
   }
 
@@ -46,7 +46,7 @@ public class Loadable<TT extends Transportable> {
    * 
    * @param cars the cars to be loaded.
    */
-  public void loadCars(Deque<TT> vehicles) {
+  public void loadCars(Deque<T> vehicles) {
     while (!vehicles.isEmpty() && this.vehicles.size() < capacity) {
       loadCar(vehicles.pop());
     }

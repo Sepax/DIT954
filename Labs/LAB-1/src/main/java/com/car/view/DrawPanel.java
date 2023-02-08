@@ -1,3 +1,5 @@
+package com.car.view;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;

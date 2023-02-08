@@ -21,15 +21,15 @@ import com.car.interfaces.*;
  * @param haulable    if the vehicle is haulable
  */
 public abstract class Vehicle implements Moveable {
-  protected static int nrDoors; 
-  protected double enginePower; 
-  protected double currentSpeed; 
-  protected static Color color; 
-  protected static String modelName; 
-  protected Dir direction; 
-  protected double x;
-  protected double y;
-  protected double speedFactor;
+  int nrDoors; 
+  double enginePower; 
+  double currentSpeed; 
+  Color color; 
+  String modelName; 
+  Dir direction; 
+  double x;
+  double y;
+  double speedFactor;
 
   /**
    * Enum representing the direction of the vehicle. Can be NORTH, EAST, SOUTH, or

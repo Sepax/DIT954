@@ -157,7 +157,7 @@ public abstract class Vehicle implements Moveable {
    * Starts the engine of the vehicle, setting the current speed to 0.1.
    */
   public void startEngine() {
-    currentSpeed = 0.1;
+    currentSpeed = x + 0.1;
   }
 
   /**

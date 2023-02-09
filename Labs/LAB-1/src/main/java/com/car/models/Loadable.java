@@ -13,7 +13,7 @@ import java.util.Deque;
  * @param vehicles  The vehicles stored in the ramp.
  * @param capacity  The capacity of the ramp.
  */
-public class Loadable<T extends Transportable> {
+public class Loadable<T extends Vehicle> {
 
   Deque<T> vehicles;
   int capacity;

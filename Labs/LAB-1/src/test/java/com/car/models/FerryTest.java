@@ -15,7 +15,7 @@ public class FerryTest {
 
     @BeforeEach
     void setup() {
-        mockFerry = new Ferry();
+        mockFerry = new Ferry(0,0);
     }
 
     @Test
@@ -36,14 +36,46 @@ public class FerryTest {
 
     @Test
     public void shouldTurnLeft() {
+        Dir expectedDirection = null;
+        switch (mockFerry.direction) {
+            case NORTH:
+                expectedDirection = Dir.WEST;
+                break;
+            case EAST:
+                expectedDirection = Dir.NORTH;
+                break;
+            case SOUTH:
+                expectedDirection = Dir.EAST;
+                break;
+            case WEST:
+                expectedDirection = Dir.SOUTH;
+                break;
+        }
+
         mockFerry.turnLeft();
-        assertSame(Dir.WEST, mockFerry.getDirection());
+        assertSame(expectedDirection, mockFerry.getDirection());
     }
 
     @Test
     public void shouldTurnRight() {
+        Dir expectedDirection = null;
+        switch (mockFerry.direction) {
+            case NORTH:
+                expectedDirection = Dir.EAST;
+                break;
+            case EAST:
+                expectedDirection = Dir.SOUTH;
+                break;
+            case SOUTH:
+                expectedDirection = Dir.WEST;
+                break;
+            case WEST:
+                expectedDirection = Dir.NORTH;
+                break;
+        }
+
         mockFerry.turnRight();
-        assertSame(Dir.EAST, mockFerry.getDirection());
+        assertSame(expectedDirection, mockFerry.getDirection());
     }
 
     @Test
@@ -121,8 +153,8 @@ public class FerryTest {
 
     @Test
     public void loadedCarsShouldHaveSameCoordinatesAsHauler() {
-        mockFerry.getLoadable().loadCar(new Volvo240());
-        mockFerry.getLoadable().loadCar(new Saab95());
+        mockFerry.getLoadable().loadCar(new Volvo240(0,0));
+        mockFerry.getLoadable().loadCar(new Saab95(0,0));
         mockFerry.startEngine();
         mockFerry.gas(1);
         mockFerry.move();
@@ -136,7 +168,7 @@ public class FerryTest {
     public void shouldLoadCar() {
         mockFerry.brake(1);
         mockFerry.lowerRamp();
-        mockFerry.getLoadable().loadCar(new Volvo240());
+        mockFerry.getLoadable().loadCar(new Volvo240(0,0));
         assertEquals(0, mockFerry.getCurrentSpeed());
         assertEquals(1, mockFerry.getLoadable().getLoadedVehicles().size());
     }
@@ -145,7 +177,7 @@ public class FerryTest {
     public void shouldUnloadCar() {
         mockFerry.brake(1);
         mockFerry.lowerRamp();
-        mockFerry.getLoadable().loadCar(new Volvo240());
+        mockFerry.getLoadable().loadCar(new Volvo240(0,0));
         mockFerry.getLoadable().unloadCar();
         assertEquals(0, mockFerry.getLoadable().getLoadedVehicles().size());
     }
@@ -154,8 +186,8 @@ public class FerryTest {
     public void shouldOnlyLoadHaulableCars() {
         mockFerry.brake(1);
         mockFerry.lowerRamp();
-        mockFerry.getLoadable().loadCar(new Volvo240());
-        mockFerry.getLoadable().loadCar(new Scania());
+        mockFerry.getLoadable().loadCar(new Volvo240(0,0));
+        mockFerry.getLoadable().loadCar(new Scania(0,0));
         assertEquals(2, mockFerry.getLoadable().getLoadedVehicles().size());
     }
 
@@ -164,8 +196,8 @@ public class FerryTest {
     public void shouldUseFifo() {
         mockFerry.brake(1);
         mockFerry.lowerRamp();
-        mockFerry.getLoadable().loadCar(new Volvo240());
-        mockFerry.getLoadable().loadCar(new Saab95());
+        mockFerry.getLoadable().loadCar(new Volvo240(0,0));
+        mockFerry.getLoadable().loadCar(new Saab95(0,0));
         mockFerry.unloadCar();
         assertEquals(mockFerry.getLoadable().getLoadedVehicles().peek().getClass(), Saab95.class);
     }

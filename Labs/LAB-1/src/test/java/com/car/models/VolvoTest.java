@@ -14,7 +14,7 @@ public class VolvoTest {
 
   @BeforeEach
   void setup() {
-    mockVolvo = new Volvo240();
+    mockVolvo = new Volvo240(0,0);
   }
 
   @Test
@@ -34,16 +34,48 @@ public class VolvoTest {
   }
 
   @Test
-  public void shouldTurnLeft() {
-    mockVolvo.turnLeft();
-    assertSame(Dir.WEST, mockVolvo.getDirection());
-  }
+    public void shouldTurnLeft() {
+        Dir expectedDirection = null;
+        switch (mockVolvo.direction) {
+            case NORTH:
+                expectedDirection = Dir.WEST;
+                break;
+            case EAST:
+                expectedDirection = Dir.NORTH;
+                break;
+            case SOUTH:
+                expectedDirection = Dir.EAST;
+                break;
+            case WEST:
+                expectedDirection = Dir.SOUTH;
+                break;
+        }
 
-  @Test
-  public void shouldTurnRight() {
-    mockVolvo.turnRight();
-    assertSame(Dir.EAST, mockVolvo.getDirection());
-  }
+        mockVolvo.turnLeft();
+        assertSame(expectedDirection, mockVolvo.getDirection());
+    }
+
+    @Test
+    public void shouldTurnRight() {
+        Dir expectedDirection = null;
+        switch (mockVolvo.direction) {
+            case NORTH:
+                expectedDirection = Dir.EAST;
+                break;
+            case EAST:
+                expectedDirection = Dir.SOUTH;
+                break;
+            case SOUTH:
+                expectedDirection = Dir.WEST;
+                break;
+            case WEST:
+                expectedDirection = Dir.NORTH;
+                break;
+        }
+
+        mockVolvo.turnRight();
+        assertSame(expectedDirection, mockVolvo.getDirection());
+    }
 
   @Test
   public void shouldNotMove() {

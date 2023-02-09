@@ -43,14 +43,14 @@ public class DrawPanel extends JPanel{
      */
     public void moveSaab(int x, int y){
         saabPoint.x = x;
-        saabPoint.y = y + 100;
+        saabPoint.y = y;
     }
     /**
      * Moves the Scania vehicle to the specified coordinates
      */
     public void moveScania(int x, int y){
         scaniaPoint.x = x;
-        scaniaPoint.y = y + 200;
+        scaniaPoint.y = y;
     }
 
     // Initializes the panel and reads the images

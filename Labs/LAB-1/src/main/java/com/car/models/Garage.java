@@ -10,7 +10,7 @@ package com.car.models;
  * @param cars       The cars stored in the garage.
  * @param capacity   The capacity of the garage.
  */
-public class Garage<T extends Transportable> {
+public class Garage<T extends Vehicle> {
   private int capacity;
   private Loadable<T> loadable;
 

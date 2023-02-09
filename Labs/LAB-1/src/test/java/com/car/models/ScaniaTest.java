@@ -18,7 +18,7 @@ public class ScaniaTest {
 
 	@BeforeEach
 	void setup() {
-		mockScania = new Scania();
+		mockScania = new Scania(0,0);
 	}
 
     @Test
@@ -39,14 +39,46 @@ public class ScaniaTest {
 
     @Test
     public void shouldTurnLeft() {
+        Dir expectedDirection = null;
+        switch (mockScania.direction) {
+            case NORTH:
+                expectedDirection = Dir.WEST;
+                break;
+            case EAST:
+                expectedDirection = Dir.NORTH;
+                break;
+            case SOUTH:
+                expectedDirection = Dir.EAST;
+                break;
+            case WEST:
+                expectedDirection = Dir.SOUTH;
+                break;
+        }
+
         mockScania.turnLeft();
-        assertSame(Dir.WEST, mockScania.getDirection());
+        assertSame(expectedDirection, mockScania.getDirection());
     }
 
     @Test
     public void shouldTurnRight() {
+        Dir expectedDirection = null;
+        switch (mockScania.direction) {
+            case NORTH:
+                expectedDirection = Dir.EAST;
+                break;
+            case EAST:
+                expectedDirection = Dir.SOUTH;
+                break;
+            case SOUTH:
+                expectedDirection = Dir.WEST;
+                break;
+            case WEST:
+                expectedDirection = Dir.NORTH;
+                break;
+        }
+
         mockScania.turnRight();
-        assertSame(Dir.EAST, mockScania.getDirection());
+        assertSame(expectedDirection, mockScania.getDirection());
     }
 
     @Test

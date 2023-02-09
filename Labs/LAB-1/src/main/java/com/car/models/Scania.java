@@ -3,25 +3,23 @@ package com.car.models;
 import java.awt.Color;
 
 /**
- * Scania is a class that represents a Scania truck and extends the Transportable class.
+ * Scania is a class that represents a Scania truck and extends the Vehicle class.
  * The class has the same properties and methods as the Transporter class, with the addition of a flatbed tilt property.
  *
  * @authors Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @since 2023-01-31
  * 
  * @param flatbedTilt the tilt of the flatbed in degrees
- * @param capacity the capacity value of the Scania truck
  */
-public class Scania extends Transportable {
+public class Scania extends Vehicle {
 	private double flatbedTilt; 
-	private static int capacity = 3;
 	
 	/**
 	 * Constructs a new Scania object.
 	 * Sets the flatbed tilt to 0.
 	 */
-	public Scania() {
-        super(2, Color.ORANGE, 500, "Scania", Dir.NORTH, capacity);
+	public Scania(double x, double y) {
+        super(2, Color.ORANGE, 100, "Scania", Dir.EAST, x, y, 2);
         flatbedTilt = 0;
 	}
 
@@ -40,7 +38,7 @@ public class Scania extends Transportable {
 	 * @param tilt the new tilt of the flatbed in degrees
 	 */
 	public void setFlatbedTilt(double tilt) {
-		if (tilt >= 0 && tilt <= 70) {
+		if (tilt >= 0 && tilt <= 70 && getCurrentSpeed() == 0) {
 			flatbedTilt = tilt;
 		}
     }
@@ -65,19 +63,6 @@ public class Scania extends Transportable {
 		if (getCurrentSpeed() == 0) {
 			flatbedTilt = Math.max(flatbedTilt - degrees, 0);
 		}
-	}
-
-	/**
-	 * Overrides the move method to fit the properties for the Scania truck.
-	 */
-	@Override
-	public void move() {
-		if (flatbedTilt > 0) {
-			stopEngine();
-			lowerFlatbed(flatbedTilt);
-			startEngine();
-		}
-		super.move();
 	}
 }
 

@@ -8,27 +8,42 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * This class represents the full view of the MVC pattern of your car simulator.
- * It initializes with being center on the screen and attaching it's controller in it's state.
- * It communicates with the Controller by calling methods of it when an action fires of in
- * each of it's components.
- * TODO: Write more actionListeners and wire the rest of the buttons
+ * This class represents the View part in the MVC pattern. It extends JFrame.
+ * 
+ * @author Kiril Curlinov, Sebastian Pålsson, Gabrielle Frattini
+ * @since 2023-02-09
+ * 
+ * @param X An int object represents the width of the frame.
+ * @param Y An int object represents the height of the frame.
+ * @param carC A CarController object represents the controller part in the MVC pattern.
+ * @param drawPanel A DrawPanel object represents the panel where the cars are drawn.
+ * @param controlPanel A JPanel object represents the panel where the buttons are placed.
+ * @param gasPanel A JPanel object represents the panel where the gaspanel is placed.
+ * @param gasSpinner A JSpinner object represents the spinner where the user can choose the amount of gas.
+ * @param gasAmount An int object represents the amount of gas.
+ * @param gasLabel A JLabel object represents the label of the gas spinner.
+ * @param gasButton A JButton object represents the button where the user can press to gas the car.
+ * @param brakeButton A JButton object represents the button where the user can press to brake the car.
+ * @param turboOnButton A JButton object represents the button where the user can press to turn the turbo on.
+ * @param turboOffButton A JButton object represents the button where the user can press to turn the turbo off.
+ * @param liftBedButton A JButton object represents the button where the user can press to lift the bed.
+ * @param lowerBedButton A JButton object represents the button where the user can press to lower the bed.
+ * @param startButton A JButton object represents the button where the user can press to start all cars.
+ * @param stopButton A JButton object represents the button where the user can press to stop all cars.
+ * 
  **/
-
 public class CarView extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
+    int gasAmount = 0;
 
-    // The controller member
     CarController carC;
 
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel controlPanel = new JPanel();
-
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
     JButton gasButton = new JButton("Gas");
@@ -37,27 +52,35 @@ public class CarView extends JFrame{
     JButton turboOffButton = new JButton("Saab Turbo off");
     JButton liftBedButton = new JButton("Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
-
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
-    // Constructor
+    /**
+     * Constructor for the CarView class.
+     * @param framename
+     * @param cc
+     */
     public CarView(String framename, CarController cc){
         this.carC = cc;
         initComponents(framename);
     }
 
-    // Sets everything in place and fits everything
+    /**
+     * This method initializes the components of the frame.
+     * 
+     * @param title
+     */
     private void initComponents(String title) {
 
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
         this.add(drawPanel);
 
 
-
+        /**
+         * This method creates a spinner where the user can choose the amount of gas.
+         */
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
                         0, //min
@@ -99,6 +122,10 @@ public class CarView extends JFrame{
         stopButton.setForeground(Color.black);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
+
+        /**
+         * Adds and actionlistener to the gas button.
+         */
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,6 +133,9 @@ public class CarView extends JFrame{
             }
         });
 
+        /**
+         * Adds an actionlistener to the brake button.
+         */
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,6 +143,9 @@ public class CarView extends JFrame{
             }
         });
 
+        /**
+         * Adds an actionlistener to the start button.
+         */
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,6 +153,9 @@ public class CarView extends JFrame{
             }
         });
 
+        /**
+         * Adds an actionlistener to the stop button.
+         */
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -127,6 +163,9 @@ public class CarView extends JFrame{
             }
         });
 
+        /**
+         * Adds an actionlistener to the turbo on button for Saab95.
+         */
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -134,20 +173,29 @@ public class CarView extends JFrame{
             }
         });
 
+        /**
+         * Adds an actionlistener to the turbo off button for Saab95.
+         */
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.disableTurbo();
             }
         });
-
+        
+        /**
+         * Adds an actionlistener to the lift bed button for Scania truck.
+         */
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.liftBed();
             }
         });
-
+        
+        /**
+         * Adds an actionlistener to the lower bed button for Scania truck.
+         */
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

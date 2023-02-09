@@ -49,22 +49,17 @@ public class CarController {
         cc.frame.setVisible(true);
         
         cc.timer.start();
-
     }
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-
-    // TODO make the cars move when pressing gas or brake buttons
-    
+    /**
+     * Implements the actions for the program to be executed when the timer is started
+     */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle car : cars) {
                 
                 car.move();
                 
-
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
 
@@ -76,27 +71,29 @@ public class CarController {
                     frame.drawPanel.moveScania(x, y);
                 }
 
-                // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
                 frame.drawPanel.revalidate();
-            }
-            
+            }   
         }
     }
 
+    /**
+     * Start all cars
+     */
     void start() {
         for (Vehicle car : cars) {
             car.startEngine();
         }
     }
 
+    /**
+     * Stop all cars
+     */
     public void stop() {
         for (Vehicle car : cars) {
             car.stopEngine();
         }
     }
-
-    // TODO is not implemented yet
     /**
      * Gas each vehicle
      * 
@@ -110,7 +107,6 @@ public class CarController {
         }
     }
     
-    // TODO is not implemented yet
     /**
      * Brake each vehicle
      * 
@@ -123,8 +119,9 @@ public class CarController {
         }
     }
 
-    
-
+    /**
+     * Enables turbo for Saab95
+     */
     public void enableTurbo() {
         for (Vehicle car : cars) {
             if (car instanceof Saab95) {
@@ -133,6 +130,9 @@ public class CarController {
         }
     }
 
+    /**
+     * Disables turbo for Saab95
+     */
     public void disableTurbo() {
         for (Vehicle car : cars) {
             if (car instanceof Saab95) {
@@ -141,6 +141,9 @@ public class CarController {
         }
     }
 
+    /**
+     * Lifts the flatbed for Scania
+     */
     public void liftBed() {
         for (Vehicle car : cars) {
             if (car instanceof Scania) {
@@ -149,6 +152,9 @@ public class CarController {
         }
     }
 
+    /**
+     * Lowers the flatbed for Scania
+     */
     public void lowerBed() {
         for (Vehicle car : cars) {
             if (car instanceof Scania) {

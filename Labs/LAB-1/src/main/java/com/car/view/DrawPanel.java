@@ -10,7 +10,7 @@ import javax.swing.*;
 /**
  * This class represents the View part in the MVC pattern. It extends JPanel.
  * 
- * @author Kiril Curlinov, Sebastian Pålsson, Gabrielle Frattini 
+ * @author Kiril Curlinov, Sebastian Pålsson, Gabriele Frattini 
  * @since 2023-02-08
  * 
  */

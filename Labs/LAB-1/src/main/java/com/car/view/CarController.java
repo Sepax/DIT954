@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * This class represents the Controller part in the MVC pattern.
  * It contains a Timer that updates the car's position.
  *  
- * @author Kiril Curlinov, Sebastian Pålsson, Gabrielle Frattini
+ * @author Kiril Curlinov, Sebastian Pålsson, Gabriele Frattini
  * @since 2023-02-08
  * 
  * @param frame The frame that represents this instance View of the MVC pattern

@@ -10,7 +10,7 @@ import java.awt.*;
  * It also implements the speedFactor, incrementSpeed and decrementSpeed
  * methods.
  */
-public class Saab95 extends Transportable {
+public class Saab95 extends Vehicle {
 
   private boolean turboOn;
 
@@ -18,8 +18,8 @@ public class Saab95 extends Transportable {
    * Constructs a new Saab95 object with 2 doors, red color, engine power of 125, and model name of "Saab95".
    * The turbo feature is initially off.
    */
-  public Saab95() {
-    super(2, Color.red, 125, "Saab95", Dir.NORTH, 1);
+  public Saab95(double x, double y) {
+    super(2, Color.red, 125, "Saab95", Dir.EAST, x, y, 1);
     turboOn = false;
   }
 
@@ -51,12 +51,12 @@ public class Saab95 extends Transportable {
    * 
    * @return the speed factor of the car
    */
+  @Override
   public double speedFactor() {
     double turbo = 1;
     if (turboOn) {
       turbo = 1.3;
     }
-    setSpeedFactor(this.enginePower * 0.01 * turbo);
-    return this.speedFactor;
+    return enginePower * 0.01 * turbo;
   }
 }

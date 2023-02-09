@@ -10,21 +10,20 @@ import java.awt.Color;
  */
 public class Ferry extends Transporter {
 
-  /**
-   * Creates a new `Ferry` object with default values.
-   * 
-   * @param capacity The capacity of the ferry.
-   * 
-   */
-  private static int capacity = 3;
-  public Ferry() {
-    super(2, Color.ORANGE, 500, "CarFerry", Dir.NORTH, capacity);
-  }
+    /**
+     * Creates a new `Ferry` object with default values.
+     * 
+     * @param capacity The capacity of the ferry.
+     * 
+     */
+    public Ferry(double x, double y) {
+        super(2, Color.ORANGE, 500, "CarFerry", Dir.EAST, x, y, 3, 2);
+    }
 
-  /**
-   * Unloads a car.
-   */
-  public void unloadCar() {
-    getLoadable().getLoadedVehicles().removeLast();
-  }
+    /**
+     * Unloads a car.
+     */
+    public void unloadCar() {
+        getLoadable().getLoadedVehicles().removeLast();
+    }
 }

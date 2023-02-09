@@ -15,9 +15,8 @@ public class Hauler extends Transporter {
    * Constructs a new Hauler object with the specified number of doors, color,
    * engine power, model name, direction and if it's haulable.
    */
-  private static int capacity = 3;
-  public Hauler() {
-    super(2, Color.ORANGE, 500, "Hauler", Dir.NORTH, capacity);
+  public Hauler(double x, double y) {
+    super(2, Color.ORANGE, 500, "Hauler", Dir.EAST, x, y, 2, 1);
   }
 
 }

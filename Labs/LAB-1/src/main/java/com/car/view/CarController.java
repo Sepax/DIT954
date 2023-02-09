@@ -40,9 +40,9 @@ public class CarController {
 
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Saab95());
-        cc.cars.add(new Scania());
+        cc.cars.add(new Volvo240(0,0));
+        cc.cars.add(new Saab95(0, 100));
+        cc.cars.add(new Scania(0, 200));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -61,10 +61,9 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle car : cars) {
-
-                // TODO implement gas, move etc so that the cars move
-                car.startEngine();
+                
                 car.move();
+                
 
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
@@ -82,6 +81,18 @@ public class CarController {
                 frame.drawPanel.revalidate();
             }
             
+        }
+    }
+
+    void start() {
+        for (Vehicle car : cars) {
+            car.startEngine();
+        }
+    }
+
+    public void stop() {
+        for (Vehicle car : cars) {
+            car.stopEngine();
         }
     }
 
@@ -111,4 +122,38 @@ public class CarController {
             car.brake(brake);
         }
     }
+
+    
+
+    public void enableTurbo() {
+        for (Vehicle car : cars) {
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+
+    public void disableTurbo() {
+        for (Vehicle car : cars) {
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOff();
+            }
+        }
+    }
+
+    public void liftBed() {
+        for (Vehicle car : cars) {
+            if (car instanceof Scania) {
+                ((Scania) car).raiseFlatbed(10);
+            }
+        }
+    }
+
+    public void lowerBed() {
+        for (Vehicle car : cars) {
+            if (car instanceof Scania) {
+                ((Scania) car).lowerFlatbed(10);
+            }
+    }
+}
 }

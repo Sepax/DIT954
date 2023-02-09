@@ -14,19 +14,19 @@ import java.util.Deque;
 public class GarageTest {
   private Garage<Saab95> mockSaabGarage;
   private Garage<Volvo240> mockVolvoGarage;
-  private Garage<Transportable> mockAnyGarage;
+  private Garage<Vehicle> mockAnyGarage;
   private Saab95 mockSaab;
   private Volvo240 mockVolvo;
-  private Deque<Transportable> vehicles;
+  private Deque<Vehicle> vehicles;
 
   @BeforeEach
   void setup() {
     this.vehicles = new ArrayDeque<>();
     mockSaabGarage = new Garage<Saab95>(10);
     mockVolvoGarage = new Garage<Volvo240>(10);
-    mockAnyGarage = new Garage<Transportable>(10);
-    mockSaab = new Saab95();
-    mockVolvo = new Volvo240();
+    mockAnyGarage = new Garage<Vehicle>(10);
+    mockSaab = new Saab95(0,0);
+    mockVolvo = new Volvo240(0,0);
   }
 
   @AfterEach

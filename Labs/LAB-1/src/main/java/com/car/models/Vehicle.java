@@ -83,6 +83,15 @@ public abstract class Vehicle implements Moveable {
     }
 
     /**
+     * Sets the speed factor of the vehicle.
+     *
+     * @return the speed factor of the vehicle
+     */
+    public void setCurrentSpeed(double currentSpeed ) {
+        this.currentSpeed = currentSpeed;
+    }
+
+    /**
      * Returns the color of the vehicle.
      *
      * @return the color of the vehicle

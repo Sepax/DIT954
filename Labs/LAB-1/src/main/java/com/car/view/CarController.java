@@ -152,9 +152,14 @@ public class CarController {
 
   public void lowerBed() {
     for (Vehicle car : cars) {
+        System.out.println("I am a little potato");
       if (car instanceof Scania) {
         ((Scania) car).lowerFlatbed(10);
+        System.out.println("Excet lista");
+
       }
+      System.out.println("Hey hey hey");
+
     }
   }
 

@@ -152,6 +152,7 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.lowerBed();
+                System.out.println("I am a potatoman");
             }
         });
 

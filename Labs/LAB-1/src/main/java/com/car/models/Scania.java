@@ -52,6 +52,11 @@ public class Scania extends Vehicle {
 		if (getCurrentSpeed() == 0) {
 			flatbedTilt = Math.min(flatbedTilt + degrees, 70);
 		}
+		else {
+			stopEngine();
+			flatbedTilt = Math.min(flatbedTilt + degrees, 70);
+		}
+		
 	}
 
 	/**
@@ -63,7 +68,13 @@ public class Scania extends Vehicle {
 		if (getCurrentSpeed() == 0) {
 			flatbedTilt = Math.max(flatbedTilt - degrees, 0);
 		}
+		else {
+			stopEngine();
+			flatbedTilt = Math.max(flatbedTilt - degrees, 0);			
+			}
+		}
 	}
-}
+
+
 
 

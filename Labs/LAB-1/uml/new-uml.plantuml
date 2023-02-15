@@ -1,0 +1,180 @@
+@startuml new-uml
+skinparam nodesep 80
+skinparam ranksep 80
+skinparam Linetype ortho
+
+    
+
+    package model {
+        Movable             <.. Vehicle
+        Vehicle             <|-- Saab95
+        Vehicle             <|-- Volvo240
+        Vehicle             <|-- Scania
+        Vehicle             <|-- Hauler
+        Vehicle             <|-- Ferry
+
+        Vehicle             *-- Position
+        Vehicle             *-- Facing
+
+        Volvo240            *-- Trim
+        Saab95              *-- Turbo
+        Hauler              *-- Loadable
+        Ferry               *-- Loadable
+        Loadable            *-- Ramp
+        Loadable            *-- Cargo
+        Garage              *-- Cargo
+        Scania              *-- FlatBed
+        Ramp                *-- RampState
+        
+    }
+
+    package view {
+        CarView             *-- CarController
+        CarView             *-- DrawPanel
+    }
+
+    CarController           *-- Vehicle
+
+    interface Movable {
+
+    }
+
+    /' Position, etc '/
+
+    class Position {
+        -x: double
+        -y: double
+        +setX(double x)
+        +setY(double y)
+        +getX()
+        +getY()
+    }
+
+    /' Enums '/
+
+    enum Facing {
+        NORTH
+        EAST
+        SOUTH
+        WEST
+    }
+
+    enum RampState {
+        RAISED
+        LOWERED
+    }
+
+    /' Vehicle Class '/
+    
+    abstract Vehicle {
+        -modelName: String
+        -color: Color
+        -position: Position
+        -facing: Facing
+        -speed: double
+        -weight: double
+        -enginePower: double
+
+        +startEngine()
+        +stopEngine()
+        +gas(double amount)
+        +brake(double amount)
+        +turnLeft()
+        +turnRight()
+        +move()
+
+        +setModelName(String name)
+        +setColor(Color color)
+        +setPosition(Position pos)
+        +setFacing(Facing facing)
+        +setSpeed(double speed)
+        +setWeight(double weight)
+        +setEnginePower(double power)
+
+        +getModelName()
+        +getColor()
+        +getPosition()
+        +getFacing()
+        +getSpeed()
+        +getWeight()
+        +getEnginePower()
+        +getAcceleration()
+    }
+
+    /' Vehicles '/
+
+    class Saab95 {
+        getAcceleration()
+    }
+
+    class Volvo240 {
+
+
+    }
+    class Scania {
+
+    }
+
+    class Hauler{
+        -loadable: Loadable
+        move()
+        loadVehicle()
+        unloadVehicle()
+    }
+
+    class Ferry {
+        -loadable: Loadable
+        move()
+        loadVehicle()
+        unloadVehicle()
+    }
+
+    /' Vehicle Components '/
+
+    class Loadable {
+        -ramp: Ramp
+        -cargo: Cargo
+
+        loadObject(T object)
+        unloadObject()
+        getContents()
+    }
+
+    class Cargo{
+        -objects: Deque<T>
+        -double capacity
+
+        loadObject(T object)
+        unloadObject()
+        getContents()
+    }
+
+    class Ramp {
+        -state: RampState
+        raiseRamp()
+        lowerRamp()
+        getState()
+    }
+
+    class Garage {
+
+    }
+
+    class FlatBed {
+        -tilt: double
+        setTilt(double tilt)
+        getTilt()
+    }
+
+    class Turbo {
+        on()
+        off()
+        getState()
+    }
+
+    class Trim {
+        getFactor()
+    }
+    
+
+@enduml

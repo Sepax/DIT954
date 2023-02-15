@@ -1,0 +1,187 @@
+@startuml
+
+skinparam nodesep 80
+skinparam ranksep 80
+skinparam linetype ortho
+
+class CarController {
+  - delay: int
+  - timer: Timer
+  ~ frame: CarView
+  ~ cars: ArrayList<Vehicle>
+  ~ brake(double): void
+  + stop(): void
+  + enableTurbo(): void
+  - reverseDirectionOnBump(Vehicle): void
+  + liftBed(): void
+  ~ start(): void
+  ~ gas(int): void
+  + reverseDirection(Vehicle): void
+  + disableTurbo(): void
+  + lowerBed(): void
+  + main(String[]): void
+}
+class CarView {
+  - Y: int
+  ~ carC: CarController
+  ~ drawPanel: DrawPanel
+  ~ gasAmount: int
+  ~ brakeButton: JButton
+  ~ stopButton: JButton
+  - X: int
+  ~ lowerBedButton: JButton
+  ~ controlPanel: JPanel
+  ~ turboOnButton: JButton
+  ~ startButton: JButton
+  ~ gasPanel: JPanel
+  ~ liftBedButton: JButton
+  ~ gasSpinner: JSpinner
+  ~ gasLabel: JLabel
+  ~ gasButton: JButton
+  ~ turboOffButton: JButton
+  - initComponents(String): void
+}
+enum Dir << enumeration >> {
+  + NORTH: 
+  + EAST: 
+  + SOUTH: 
+  + WEST: 
+  + valueOf(String): Dir
+  + values(): Dir[]
+}
+class DrawPanel {
+  ~ volvoImage: BufferedImage
+  ~ scaniaPoint: Point
+  ~ saabPoint: Point
+  ~ volvoPoint: Point
+  ~ saabImage: BufferedImage
+  ~ scaniaImage: BufferedImage
+  # paintComponent(Graphics): void
+  + moveSaab(int, int): void
+  + moveScania(int, int): void
+  + moveVolvo(int, int): void
+}
+class Ferry {
+  + unloadCar(): void
+}
+class Garage<T> {
+  - capacity: int
+  - loadable: Loadable<T>
+  + getLoadable(): Loadable<T>
+  + getCapacity(): int
+}
+class Hauler
+class Loadable<T> {
+  ~ vehicles: Deque<T>
+  ~ capacity: int
+  + loadCars(Deque<T>): void
+  + unloadCar(): void
+  + getLoadedVehicles(): Deque<T>
+  + loadCar(T): void
+  + getNumberOfCars(): int
+}
+interface Moveable << interface >> {
+  + turnLeft(): void
+  + turnRight(): void
+  + move(): void
+}
+enum RampState << enumeration >> {
+  + RAISED: 
+  + LOWERED: 
+  + values(): RampState[]
+  + valueOf(String): RampState
+}
+class Saab95 {
+  - turboOn: boolean
+  + speedFactor(): double
+  + setTurboOff(): void
+  + setTurboOn(): void
+  + isTurboOn(): boolean
+}
+class Scania {
+  - flatbedTilt: double
+  + getFlatbedTilt(): double
+  + raiseFlatbed(double): void
+  + setFlatbedTilt(double): void
+  + lowerFlatbed(double): void
+}
+class TimerListener {
+  + actionPerformed(ActionEvent): void
+}
+class Transporter {
+  # ramp: RampState
+  - loadable: Loadable<Vehicle>
+  + getLoadable(): Loadable<Vehicle>
+  + lowerRamp(): void
+  + move(): void
+  + getRampState(): RampState
+  + raiseRamp(): void
+}
+class Vehicle {
+  ~ y: double
+  ~ color: Color
+  ~ enginePower: double
+  ~ x: double
+  ~ nrDoors: int
+  ~ direction: Dir
+  ~ size: int
+  ~ currentSpeed: double
+  ~ modelName: String
+  + decrementSpeed(double): void
+  + incrementSpeed(double): void
+  + move(): void
+  + turnRight(): void
+  + setDirection(Dir): void
+  + stopEngine(): void
+  + gas(double): void
+  + setY(double): void
+  + getEnginePower(): double
+  + getY(): double
+  + getSize(): int
+  + startEngine(): void
+  + getCurrentSpeed(): double
+  + speedFactor(): double
+  + setColor(Color): void
+  + getColor(): Color
+  + setCurrentSpeed(double): void
+  + getDirection(): Dir
+  + getX(): double
+  + setX(double): void
+  + turnLeft(): void
+  + getNrDoors(): int
+  + brake(double): void
+}
+class Volvo240 {
+  + TRIM_FACTOR: double
+  + speedFactor(): double
+}
+
+CarController "1" *-[#595959,plain]-> "frame\n1" CarView       
+CarController  -[#595959,dashed]->  CarView       : "«create»"
+CarController  -[#595959,dashed]->  Saab95        : "«create»"
+CarController  -[#595959,dashed]->  Scania        : "«create»"
+CarController  -[#595959,dashed]->  TimerListener : "«create»"
+CarController "1" *-[#595959,plain]-> "cars\n*" Vehicle       
+CarController  -[#595959,dashed]->  Volvo240      : "«create»"
+CarView       "1" *-[#595959,plain]-> "carC\n1" CarController 
+CarView        -[#595959,dashed]->  DrawPanel     : "«create»"
+CarView       "1" *-[#595959,plain]-> "drawPanel\n1" DrawPanel     
+Dir            +-[#820000,plain]-  Vehicle       
+Ferry          -[#000082,plain]-^  Transporter   
+Garage        "1" *-[#595959,plain]-> "loadable\n1" Loadable      
+Garage         -[#595959,dashed]->  Loadable      : "«create»"
+Garage         -[#595959,dashed]->  Vehicle       
+Hauler         -[#000082,plain]-^  Transporter   
+Loadable       -[#595959,dashed]->  Vehicle       
+RampState      +-[#820000,plain]-  Transporter   
+Saab95         -[#000082,plain]-^  Vehicle       
+Scania         -[#000082,plain]-^  Vehicle       
+TimerListener  +-[#820000,plain]-  CarController 
+Transporter    -[#595959,dashed]->  Loadable      : "«create»"
+Transporter   "1" *-[#595959,plain]-> "loadable\n1" Loadable      
+Transporter   "1" *-[#595959,plain]-> "ramp\n1" RampState     
+Transporter    -[#000082,plain]-^  Vehicle       
+Vehicle       "1" *-[#595959,plain]-> "direction\n1" Dir           
+Vehicle        -[#008200,dashed]-^  Moveable      
+Volvo240       -[#000082,plain]-^  Vehicle       
+@enduml

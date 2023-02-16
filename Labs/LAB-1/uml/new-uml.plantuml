@@ -2,11 +2,7 @@
 skinparam nodesep 80
 skinparam ranksep 80
 skinparam Linetype ortho
-
-    
-
     package model {
-        Movable             <.. Vehicle
         Vehicle             <|-- Saab95
         Vehicle             <|-- Volvo240
         Vehicle             <|-- Scania
@@ -25,15 +21,41 @@ skinparam Linetype ortho
         Garage              *-- Cargo
         Scania              *-- FlatBed
         Ramp                *-- RampState
-        
     }
 
     package view {
-        CarView             *-- CarController
         CarView             *-- DrawPanel
+        CarView             *-- GUIComponents
+    }
+
+    package controller {      
+        CarController       +-- TimeListener
     }
 
     CarController           *-- Vehicle
+    Application             *-- CarView
+    Application             *-- CarController
+
+    class GUIComponents {
+        -controlPanel: JPanel
+        -gasPanel: JPanel
+        -gasSpinner: JSpinner
+        -gasLabel: JLabel
+        -gasButton: JButton
+        -brakeButton: JButton
+        -turboOnButton: JButton
+        -turboOffButton: JButton
+        -liftRampButton: JButton
+        -lowerRampButton: JButton
+        -startButton: JButton
+        -stopButton: JButton
+    }
+
+    class Application {
+        -frame: CarView
+        -cc: CarController
+        main(String[] args)
+    }
 
     interface Movable {
 
@@ -66,7 +88,7 @@ skinparam Linetype ortho
 
     /' Vehicle Class '/
     
-    abstract Vehicle {
+    abstract Vehicle implements Movable {
         -modelName: String
         -color: Color
         -position: Position
@@ -104,15 +126,17 @@ skinparam Linetype ortho
     /' Vehicles '/
 
     class Saab95 {
+        turbo: Turbo
         getAcceleration()
     }
 
     class Volvo240 {
-
-
+        trim: Trim
+        getAcceleration()
     }
-    class Scania {
 
+    class Scania {
+        -flatBed: Flatbed
     }
 
     class Hauler{
@@ -174,6 +198,52 @@ skinparam Linetype ortho
 
     class Trim {
         getFactor()
+    }
+
+    /' View '/
+
+    class DrawPanel {
+        -volvoImage BufferedImage
+        -saabImage BufferedImage
+        -ScaniaImage BufferedImage
+        -volvoPoint Point
+        -saabPoint Point
+        -scaniaPoint Point
+
+        +moveVolvo(int x, int y)
+        +moveSaab(int x, int y)
+        +moveScania(int x, int y)
+        +DrawPanel(int x, int y)
+        +paintComponent(Graphics g)
+    }
+
+    class CarView <extends JFrame> {
+        -X: int
+        -Y: int
+        -gasAmount: int
+        -drawPanel: DrawPanel
+
+        -initComponents(String title)
+    }
+
+    class CarController {
+        -delay: int
+        -timer: Timer
+        -cars: ArrayList<Vehicle>
+        +start()
+        +stop()
+        +gas(double amount)
+        +brake(double amount)
+        +enableTurbo()
+        +disableTurbo()
+        +liftBed()
+        +lowerBed()
+        +reverseDirection(Vehicle car)
+        +reverseDirectionOnBump(Vehicle car)
+    }
+
+    class TimeListener<private> {
+        actionPerformed(ActionEvent e)
     }
     
 

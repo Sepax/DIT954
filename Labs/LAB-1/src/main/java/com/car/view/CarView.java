@@ -99,6 +99,19 @@ public class CarView extends JFrame{
         stopButton.setForeground(Color.black);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
+
+
+
+        // TODO
+        // Knapp klass som har alla knappar
+        // Knapp constructorn tar in ett UserActions Interface
+        // UserActions interfacet är ett attribut i klassen 
+        // och alla addactionListeners
+        // alla actionlisteners använder sig av metoderna som finns
+        // på UserActions interfacet
+        // CarCtronlloer implementerar UserActions interfacet
+
+
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,7 +125,6 @@ public class CarView extends JFrame{
                 carC.brake(gasAmount);
             }
         });
-
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

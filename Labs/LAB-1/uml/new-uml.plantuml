@@ -29,11 +29,43 @@ skinparam Linetype ortho
     }
 
     package view {
-        CarView             *-- CarController
-        CarView             *-- DrawPanel
+        Window             *-- DrawPanel
+        Window             *-- GUIComponents
+        DrawPanel          *-- Renderable
     }
 
-    CarController           *-- Vehicle
+    package controller {      
+        VehicleController   +-- TimeListener
+        Button              *-- Action
+        Action              <|.. StartEngine
+        Action              <|.. StopEngine
+        Action              <|.. Gas
+        Action              <|.. Brake
+        Action              <|.. EnableTurbo
+        Action              <|.. DisableTurbo
+        Action              <|.. LiftBed
+        Action              <|.. LowerBed
+    }
+
+    VehicleController           *-- Vehicle
+    Application             *-- Window
+    Application             *-- VehicleController
+    GUIComponents           *-- Button
+
+    class GUIComponents {
+        -controlPanel: JPanel
+        -gasPanel: JPanel
+        -gasSpinner: JSpinner
+        -gasLabel: JLabel
+        -gasButton: Button
+        -brakeButton: Button
+        -turboOnButton: Button
+        -turboOffButton: Button
+        -liftRampButton: Button
+        -lowerRampButton: Button
+        -startButton: Button
+        -stopButton: Button
+    }
 
     interface Movable {
 
@@ -174,6 +206,65 @@ skinparam Linetype ortho
 
     class Trim {
         getFactor()
+    }
+
+    /' View '/
+
+    class DrawPanel {
+        -renderables: ArrayList<Renderable>
+
+        +DrawPanel(int x, int y)
+        +paintComponent(Graphics g)
+    }
+
+    class VehicleController {
+        -delay: int
+        -timer: Timer
+        - actions: Actions
+        -vehicles: ArrayList<Vehicle>
+        +VehicleController(Arraylist<Vehicle> vehicles)
+        +reverseDirection(Vehicle car)
+        +reverseDirectionOnBump(Vehicle car)
+        
+    }
+
+    class Window <extends JFrame> {
+        -X: int
+        -Y: int
+        -gasAmount: int
+        -drawPanel: DrawPanel
+        -components: GUIComponents
+
+        -initComponents(String title)
+        
+    }
+
+    class Renderable {
+        -point: Point
+        -image: BufferedImage
+        +Renderable(Point point, String path)
+        setPoint(Position pos)
+        setImage(String path)
+        getPoint()
+        getImage()
+    }
+
+    interface Action {
+        +perform(ArrayList<Vehicle> vehicles)
+    }
+
+    class Application {
+        -vehicles: ArrayList<Vehicle>
+        -frame: Window
+        -controller: VehicleController
+        main(String[] args)
+        update()
+    }
+
+    class Button <extends JButton>{
+        -test: String
+        -onClick: Action
+        +Button(String text, Action onClick)
     }
     
 

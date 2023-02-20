@@ -3,15 +3,9 @@ package com.car.models;
 import java.awt.*;
 
 /**
- * Volvo240 is a concrete implementation of the abstract vehicle class, representing the vehicle model Volvo240.
- * It has a trim factor of 1.25 and implements the speedFactor, incrementSpeed and decrementSpeed methods.
+ * Volvo240 represents a Volvo240 car and extends the Vehicle class.
  */
 public class Volvo240 extends Vehicle {
-
-  /**
-   * The trim factor of the car(constant), which is used to calculate the speed factor.
-   */
-  public static final double TRIM_FACTOR = 1.25;
 
   /**
    * Constructs a new Volvo240 object with default values.
@@ -22,11 +16,12 @@ public class Volvo240 extends Vehicle {
 
   /**
    * Returns the speed factor of the car.
+   * Uses the Trim class to get the trim factor of the car wich is 1.25.
    *
    * @return the speed factor of the car
    */
   @Override
   public double speedFactor() {
-    return enginePower * 0.01 * TRIM_FACTOR;
+    return enginePower * 0.01 * Trim.trimFactor;
   }
 }

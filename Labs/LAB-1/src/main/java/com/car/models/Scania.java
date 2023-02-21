@@ -41,6 +41,9 @@ public class Scania extends Vehicle {
 		if (tilt >= 0 && tilt <= 70 && getCurrentSpeed() == 0) {
 			flatbedTilt = tilt;
 		}
+		if (tilt >= 0 && tilt <= 70 && getCurrentSpeed() == 0) {
+			flatbedTilt = tilt;
+		}
     }
 
 	/**

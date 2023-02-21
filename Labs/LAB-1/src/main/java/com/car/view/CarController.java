@@ -5,6 +5,7 @@ import javax.swing.*;
 import com.car.models.Saab95;
 import com.car.models.Scania;
 import com.car.models.Vehicle;
+import com.car.models.VehicleService;
 import com.car.models.Volvo240;
 import com.car.models.Vehicle.Dir;
 
@@ -12,6 +13,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents the Controller part in the MVC pattern.
@@ -28,157 +30,54 @@ import java.util.ArrayList;
  * @param cc    A object of the CarController class
  * 
  */
+
 public class CarController {
 
-  private final int delay = 50;
-  private Timer timer = new Timer(delay, new TimerListener());
-  CarView frame;
-  ArrayList<Vehicle> cars = new ArrayList<>();
+    private final int delay = 50;
+    private Timer timer = new Timer(delay, new TimerListener());
+    CarView frame;
+    List<Vehicle> cars = new ArrayList<>();
+    private EventHandler eventHandler;
+    private VehicleService vehicleService;
 
-  /**
-   * Main method that starts the program
-   */
-  public static void main(String[] args) {
+    public CarController(CarView frame, List<Vehicle> cars) {
+        this.cars = cars;
+        this.frame = frame;
+        EventHandler eventHandler = new EventHandler(frame, cars);
+        this.vehicleService = new VehicleService(cars);
+    }
 
-    CarController cc = new CarController();
+    public void startController() {
+        this.timer.start();
+    }
 
-    cc.cars.add(new Volvo240(0, 0));
-    cc.cars.add(new Saab95(0, 100));
-    cc.cars.add(new Scania(0, 200));
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            for (Vehicle car : cars) {
+                if (vehicleService.hasBumpedInWall(
+                        car.getX(),
+                        frame.drawPanel.volvoImage.getWidth(),
+                        frame.getWidth())) {
+                    vehicleService.reverseDirection(car);
+                }
+                car.move();
 
-    // Start a new view and send a reference of self
-    cc.frame = new CarView("CarSim 1.0", cc);
-    cc.frame.setVisible(true);
+                int x = (int) Math.round(car.getX());
+                int y = (int) Math.round(car.getY());
 
-    cc.timer.start();
+                if (car instanceof Volvo240) {
+                    frame.drawPanel.moveVolvo(x, y);
+                } else if (car instanceof Saab95) {
+                    frame.drawPanel.moveSaab(x, y);
+                } else if (car instanceof Scania) {
+                    frame.drawPanel.moveScania(x, y);
+                }
 
-  }
-
-  /*
-   * Each step the TimerListener moves all the cars in the list and tells the
-   * view to update its images. Change this method to your needs.
-   */
-
-  // TODO make the cars move when pressing gas or brake buttons
-
-  private class TimerListener implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
-      for (Vehicle car : cars) {
-
-        reverseDirectionOnBump(car);
-        car.move();
-
-        int x = (int) Math.round(car.getX());
-        int y = (int) Math.round(car.getY());
-
-        if (car instanceof Volvo240) {
-          frame.drawPanel.moveVolvo(x, y);
-        } else if (car instanceof Saab95) {
-          frame.drawPanel.moveSaab(x, y);
-        } else if (car instanceof Scania) {
-          frame.drawPanel.moveScania(x, y);
+                // repaint() calls the paintComponent method of the panel
+                frame.drawPanel.repaint();
+                frame.drawPanel.revalidate();
+            }
         }
-
-        // repaint() calls the paintComponent method of the panel
-        frame.drawPanel.repaint();
-        frame.drawPanel.revalidate();
-      }
-
     }
-  }
 
-  void start() {
-    for (Vehicle car : cars) {
-      car.startEngine();
-    }
-  }
-
-  public void stop() {
-    for (Vehicle car : cars) {
-      car.stopEngine();
-    }
-  }
-
-  // TODO is not implemented yet
-  /**
-   * Gas each vehicle
-   * 
-   * @param amount
-   */
-
-  void gas(int amount) {
-    double gas = ((double) amount) / 100;
-    for (Vehicle car : cars) {
-      car.gas(gas);
-    }
-  }
-
-  // TODO is not implemented yet
-  /**
-   * Brake each vehicle
-   * 
-   * @param amount
-   */
-  void brake(double amount) {
-    double brake = ((double) amount) / 100;
-    for (Vehicle car : cars) {
-      car.brake(brake);
-    }
-  }
-
-  public void enableTurbo() {
-    for (Vehicle car : cars) {
-      if (car instanceof Saab95) {
-        ((Saab95) car).setTurboOn();
-      }
-    }
-  }
-
-  public void disableTurbo() {
-    for (Vehicle car : cars) {
-      if (car instanceof Saab95) {
-        ((Saab95) car).setTurboOff();
-      }
-    }
-  }
-
-  public void liftBed() {
-    for (Vehicle car : cars) {
-      if (car instanceof Scania) {
-        ((Scania) car).raiseFlatbed(10);
-      }
-    }
-  }
-
-  public void lowerBed() {
-    for (Vehicle car : cars) {
-      if (car instanceof Scania) {
-        ((Scania) car).lowerFlatbed(10);
-      }
-    }
-  }
-
-  public void reverseDirection(Vehicle car) {
-
-    switch (car.getDirection()) {
-      case EAST:
-        car.setDirection(Dir.WEST);
-        break;
-      case WEST:
-        car.setDirection(Dir.EAST);
-        break;
-      default:
-        break;
-    }
-  }
-
-  private void reverseDirectionOnBump(Vehicle car) {
-    int imageWidth = frame.drawPanel.volvoImage.getWidth();
-    int rightBorder = frame.getWidth();
-
-    if (car.getX() <= 0 || car.getX() + imageWidth >= rightBorder) {
-      reverseDirection(car);
-      car.move();
-    }
-  }
 }

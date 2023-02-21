@@ -17,6 +17,7 @@ public class Garage<T extends Vehicle> {
   /**
    * Creates a new `Garage` object with specified capacity.
    */
+
   public Garage(int capacity) {
     this.capacity = capacity;
     loadable = new Loadable<>(capacity);

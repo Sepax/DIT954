@@ -7,7 +7,7 @@ import com.car.models.Saab95;
 import com.car.models.Scania;
 import com.car.models.Vehicle;
 import com.car.models.Volvo240;
-import com.car.models.Vehicle.Dir;
+import com.car.models.Vehicle.Facing;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -65,7 +65,7 @@ public class CarController {
     public void actionPerformed(ActionEvent e) {
       for (Vehicle car : cars) {
 
-        reverseDirectionOnBump(car);
+        reverseFacingectionOnBump(car);
         car.move();
 
         int x = (int) Math.round(car.getX());
@@ -171,14 +171,14 @@ public class CarController {
   /**
    * Reverses direction of the vehicles
    */
-  public void reverseDirection(Vehicle car) {
+  public void reverseFacingection(Vehicle car) {
 
-    switch (car.getDirection()) {
+    switch (car.getFacing()) {
       case EAST:
-        car.setDirection(Dir.WEST);
+        car.setFacing(Facing.WEST);
         break;
       case WEST:
-        car.setDirection(Dir.EAST);
+        car.setFacing(Facing.EAST);
         break;
       default:
         break;
@@ -188,12 +188,12 @@ public class CarController {
   /**
    * Reverses direction of the vehicles when they bump into the border
    */
-  private void reverseDirectionOnBump(Vehicle car) {
+  private void reverseFacingectionOnBump(Vehicle car) {
     int imageWidth = frame.drawPanel.volvoImage.getWidth();
     int rightBorder = frame.getWidth();
 
     if (car.getX() <= 0 || car.getX() + imageWidth >= rightBorder) {
-      reverseDirection(car);
+      reverseFacingection(car);
       car.move();
     }
   }

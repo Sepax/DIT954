@@ -17,7 +17,7 @@ public class Saab95 extends Vehicle {
      * The turbo feature is initially off.
      */
     public Saab95(Position position) {
-        super(2, Color.red, 125, "Saab95", Dir.EAST, position, 1);
+        super(2, Color.red, 125, "Saab95", Facing.EAST, position, 1);
         turbo = new Turbo();
         setTurboOff();
     }

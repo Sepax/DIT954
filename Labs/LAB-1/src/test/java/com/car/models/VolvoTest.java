@@ -1,6 +1,6 @@
 package com.car.models;
 
-import com.car.models.Vehicle.Dir;
+import com.car.models.Vehicle.Facing;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,46 +35,46 @@ public class VolvoTest {
 
   @Test
     public void shouldTurnLeft() {
-        Dir expectedDirection = null;
-        switch (mockVolvo.direction) {
+        Facing expectedFacing = null;
+        switch (mockVolvo.getFacing()) {
             case NORTH:
-                expectedDirection = Dir.WEST;
+                expectedFacing = Facing.WEST;
                 break;
             case EAST:
-                expectedDirection = Dir.NORTH;
+                expectedFacing = Facing.NORTH;
                 break;
             case SOUTH:
-                expectedDirection = Dir.EAST;
+                expectedFacing = Facing.EAST;
                 break;
             case WEST:
-                expectedDirection = Dir.SOUTH;
+                expectedFacing = Facing.SOUTH;
                 break;
         }
 
         mockVolvo.turnLeft();
-        assertSame(expectedDirection, mockVolvo.getDirection());
+        assertSame(expectedFacing, mockVolvo.getFacing());
     }
 
     @Test
     public void shouldTurnRight() {
-        Dir expectedDirection = null;
-        switch (mockVolvo.direction) {
+        Facing expectedFacing = null;
+        switch (mockVolvo.getFacing()) {
             case NORTH:
-                expectedDirection = Dir.EAST;
+                expectedFacing = Facing.EAST;
                 break;
             case EAST:
-                expectedDirection = Dir.SOUTH;
+                expectedFacing = Facing.SOUTH;
                 break;
             case SOUTH:
-                expectedDirection = Dir.WEST;
+                expectedFacing = Facing.WEST;
                 break;
             case WEST:
-                expectedDirection = Dir.NORTH;
+                expectedFacing = Facing.NORTH;
                 break;
         }
 
         mockVolvo.turnRight();
-        assertSame(expectedDirection, mockVolvo.getDirection());
+        assertSame(expectedFacing, mockVolvo.getFacing());
     }
 
   @Test

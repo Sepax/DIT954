@@ -1,6 +1,6 @@
 package com.car.models;
 
-import com.car.models.Vehicle.Dir;
+import com.car.models.Vehicle.Facing;
 import com.car.models.Transporter.RampState;
 
 import org.junit.jupiter.api.*;
@@ -36,46 +36,46 @@ public class FerryTest {
 
     @Test
     public void shouldTurnLeft() {
-        Dir expectedDirection = null;
-        switch (mockFerry.direction) {
+        Facing expectedFacing = null;
+        switch (mockFerry.getFacing()) {
             case NORTH:
-                expectedDirection = Dir.WEST;
+                expectedFacing = Facing.WEST;
                 break;
             case EAST:
-                expectedDirection = Dir.NORTH;
+                expectedFacing = Facing.NORTH;
                 break;
             case SOUTH:
-                expectedDirection = Dir.EAST;
+                expectedFacing = Facing.EAST;
                 break;
             case WEST:
-                expectedDirection = Dir.SOUTH;
+                expectedFacing = Facing.SOUTH;
                 break;
         }
 
         mockFerry.turnLeft();
-        assertSame(expectedDirection, mockFerry.getDirection());
+        assertSame(expectedFacing, mockFerry.getFacing());
     }
 
     @Test
     public void shouldTurnRight() {
-        Dir expectedDirection = null;
-        switch (mockFerry.direction) {
+        Facing expectedFacing = null;
+        switch (mockFerry.getFacing()) {
             case NORTH:
-                expectedDirection = Dir.EAST;
+                expectedFacing = Facing.EAST;
                 break;
             case EAST:
-                expectedDirection = Dir.SOUTH;
+                expectedFacing = Facing.SOUTH;
                 break;
             case SOUTH:
-                expectedDirection = Dir.WEST;
+                expectedFacing = Facing.WEST;
                 break;
             case WEST:
-                expectedDirection = Dir.NORTH;
+                expectedFacing = Facing.NORTH;
                 break;
         }
 
         mockFerry.turnRight();
-        assertSame(expectedDirection, mockFerry.getDirection());
+        assertSame(expectedFacing, mockFerry.getFacing());
     }
 
     @Test

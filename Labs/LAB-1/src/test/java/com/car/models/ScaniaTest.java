@@ -3,7 +3,7 @@ package com.car.models;
 
 import org.junit.jupiter.api.*;
 
-import com.car.models.Vehicle.Dir;
+import com.car.models.Vehicle.Facing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,46 +39,46 @@ public class ScaniaTest {
 
     @Test
     public void shouldTurnLeft() {
-        Dir expectedDirection = null;
-        switch (mockScania.direction) {
+        Facing expectedFacing = null;
+        switch (mockScania.getFacing()) {
             case NORTH:
-                expectedDirection = Dir.WEST;
+                expectedFacing = Facing.WEST;
                 break;
             case EAST:
-                expectedDirection = Dir.NORTH;
+                expectedFacing = Facing.NORTH;
                 break;
             case SOUTH:
-                expectedDirection = Dir.EAST;
+                expectedFacing = Facing.EAST;
                 break;
             case WEST:
-                expectedDirection = Dir.SOUTH;
+                expectedFacing = Facing.SOUTH;
                 break;
         }
 
         mockScania.turnLeft();
-        assertSame(expectedDirection, mockScania.getDirection());
+        assertSame(expectedFacing, mockScania.getFacing());
     }
 
     @Test
     public void shouldTurnRight() {
-        Dir expectedDirection = null;
-        switch (mockScania.direction) {
+        Facing expectedFacing = null;
+        switch (mockScania.getFacing()) {
             case NORTH:
-                expectedDirection = Dir.EAST;
+                expectedFacing = Facing.EAST;
                 break;
             case EAST:
-                expectedDirection = Dir.SOUTH;
+                expectedFacing = Facing.SOUTH;
                 break;
             case SOUTH:
-                expectedDirection = Dir.WEST;
+                expectedFacing = Facing.WEST;
                 break;
             case WEST:
-                expectedDirection = Dir.NORTH;
+                expectedFacing = Facing.NORTH;
                 break;
         }
 
         mockScania.turnRight();
-        assertSame(expectedDirection, mockScania.getDirection());
+        assertSame(expectedFacing, mockScania.getFacing());
     }
 
     @Test

@@ -17,7 +17,7 @@ public class Ferry extends Transporter {
      * 
      */
     public Ferry(Position position) {
-        super(2, Color.ORANGE, 500, "CarFerry", Dir.EAST, position, 3, 2);
+        super(2, Color.ORANGE, 500, "CarFerry", Facing.EAST, position, 3, 2);
     }
 
     /**

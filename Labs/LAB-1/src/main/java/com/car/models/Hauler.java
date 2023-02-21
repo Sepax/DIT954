@@ -16,7 +16,7 @@ public class Hauler extends Transporter {
    * engine power, model name, direction and if it's haulable.
    */
   public Hauler(Position position) {
-    super(2, Color.ORANGE, 500, "Hauler", Dir.EAST, position, 2, 1);
+    super(2, Color.ORANGE, 500, "Hauler", Facing.EAST, position, 2, 1);
   }
 
 }

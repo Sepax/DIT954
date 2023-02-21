@@ -19,7 +19,7 @@ import com.car.interfaces.*;
  * @param speedFactor  the speed factor of the vehicle
  * @param color        the color of the vehicle
  * @param modelName    the model name of the vehicle
- * @param direction    the direction the vehicle is facing
+ * @param facing    the facing the vehicle is facing
  */
 public abstract class Vehicle implements Moveable {
     int nrDoors;
@@ -29,24 +29,24 @@ public abstract class Vehicle implements Moveable {
     Position position;
     Color color;
     String modelName;
-    Dir direction;
+    Facing facing;
 
     /**
-     * Enum representing the direction of the vehicle.
+     * Enum representing the facing of the vehicle.
      */
-    public enum Dir {
+    public enum Facing {
         NORTH, EAST, SOUTH, WEST
     }
 
     /**
      * Constructs a new vehicle object with default values.
      */
-    protected Vehicle(int nrDoors, Color color, double enginePower, String modelName, Dir direction, Position position, int size) {
+    protected Vehicle(int nrDoors, Color color, double enginePower, String modelName, Facing facing, Position position, int size) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
-        this.direction = direction;
+        this.facing = facing;
         this.position = position;
         this.size = size;
         stopEngine();
@@ -108,13 +108,13 @@ public abstract class Vehicle implements Moveable {
     }
 
     /**
-     * Returns the direction of the vehicle.
+     * Returns the facing of the vehicle.
      *
-     * @return the direction of the vehicle
+     * @return the facing of the vehicle
      */
 
-    public Dir getDirection() {
-        return direction;
+    public Facing getFacing() {
+        return facing;
     }
 
     /**
@@ -146,12 +146,12 @@ public abstract class Vehicle implements Moveable {
     }
 
     /**
-     * Sets the direction of the vehicle.
+     * Sets the facing of the vehicle.
      *
-     * @param direction the new direction of the vehicle
+     * @param facing the new facing of the vehicle
      */
-    public void setDirection(Dir direction) {
-        this.direction = direction;
+    public void setFacing(Facing facing) {
+        this.facing = facing;
     }
 
     /**
@@ -209,10 +209,10 @@ public abstract class Vehicle implements Moveable {
     }
 
     /**
-     * Move the vehicle in the direction it is facing.
+     * Move the vehicle in the facing it is facing.
      */
     public void move() {
-        switch (this.direction) {
+        switch (this.facing) {
             case NORTH:
                 setY(getY() - currentSpeed);
                 break;
@@ -229,41 +229,41 @@ public abstract class Vehicle implements Moveable {
     }
 
     /**
-     * Turns the car to the left, cases signify the direction the vehicle is facing.
+     * Turns the car to the left, cases signify the facing the vehicle is facing.
      */
     public void turnLeft() {
-        switch (this.direction) {
+        switch (this.facing) {
             case NORTH:
-                setDirection(Dir.WEST);
+                setFacing(Facing.WEST);
                 break;
             case EAST:
-                setDirection(Dir.NORTH);
+                setFacing(Facing.NORTH);
                 break;
             case SOUTH:
-                setDirection(Dir.EAST);
+                setFacing(Facing.EAST);
                 break;
             case WEST:
-                setDirection(Dir.SOUTH);
+                setFacing(Facing.SOUTH);
                 break;
         }
     }
 
     /**
-     * Turns the vehicle to the right, cases signify the direction the vehicle is facing.
+     * Turns the vehicle to the right, cases signify the facing the vehicle is facing.
      */
     public void turnRight() {
-        switch (getDirection()) {
+        switch (getFacing()) {
             case NORTH:
-                setDirection(Dir.EAST);
+                setFacing(Facing.EAST);
                 break;
             case EAST:
-                setDirection(Dir.SOUTH);
+                setFacing(Facing.SOUTH);
                 break;
             case SOUTH:
-                setDirection(Dir.WEST);
+                setFacing(Facing.WEST);
                 break;
             case WEST:
-                setDirection(Dir.NORTH);
+                setFacing(Facing.NORTH);
                 break;
         }
     }

@@ -1,6 +1,6 @@
 package com.car.models;
 
-import com.car.models.Vehicle.Dir;
+import com.car.models.Vehicle.Facing;
 import com.car.models.Transporter.RampState;
 
 import org.junit.jupiter.api.*;
@@ -37,46 +37,46 @@ public class HaulerTest {
 
     @Test
     public void shouldTurnLeft() {
-        Dir expectedDirection = null;
-        switch (mockHauler.direction) {
+        Facing expectedFacing = null;
+        switch (mockHauler.getFacing()) {
             case NORTH:
-                expectedDirection = Dir.WEST;
+                expectedFacing = Facing.WEST;
                 break;
             case EAST:
-                expectedDirection = Dir.NORTH;
+                expectedFacing = Facing.NORTH;
                 break;
             case SOUTH:
-                expectedDirection = Dir.EAST;
+                expectedFacing = Facing.EAST;
                 break;
             case WEST:
-                expectedDirection = Dir.SOUTH;
+                expectedFacing = Facing.SOUTH;
                 break;
         }
 
         mockHauler.turnLeft();
-        assertSame(expectedDirection, mockHauler.getDirection());
+        assertSame(expectedFacing, mockHauler.getFacing());
     }
 
     @Test
     public void shouldTurnRight() {
-        Dir expectedDirection = null;
-        switch (mockHauler.direction) {
+        Facing expectedFacing = null;
+        switch (mockHauler.getFacing()) {
             case NORTH:
-                expectedDirection = Dir.EAST;
+                expectedFacing = Facing.EAST;
                 break;
             case EAST:
-                expectedDirection = Dir.SOUTH;
+                expectedFacing = Facing.SOUTH;
                 break;
             case SOUTH:
-                expectedDirection = Dir.WEST;
+                expectedFacing = Facing.WEST;
                 break;
             case WEST:
-                expectedDirection = Dir.NORTH;
+                expectedFacing = Facing.NORTH;
                 break;
         }
 
         mockHauler.turnRight();
-        assertSame(expectedDirection, mockHauler.getDirection());
+        assertSame(expectedFacing, mockHauler.getFacing());
     }
 
     @Test

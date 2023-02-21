@@ -15,7 +15,7 @@ public class Scania extends Vehicle {
 	 * Constructor for the Scania class.
 	 */
     public Scania(Position position) {
-        super(2, Color.ORANGE, 100, "Scania", Dir.EAST, position, 2);
+        super(2, Color.ORANGE, 100, "Scania", Facing.EAST, position, 2);
         flatbed = new Flatbed();
     }
 

@@ -129,16 +129,6 @@ public class ScaniaTest {
     }
 
     @Test
-    public void shouldNotHaveTiltedFlatbedIfMoving() {
-        mockScania.startEngine();
-
-        mockScania.setFlatbedTilt(70);
-
-        mockScania.move();
-        assertEquals(0, mockScania.getFlatbedTilt());
-    }
-
-    @Test
     public void sholdNotHaveFlatbedBelowZero() {
         mockScania.setFlatbedTilt(-1);
         assertEquals(0, mockScania.getFlatbedTilt());

@@ -59,7 +59,6 @@ public class CarController {
    * view to update its images. Change this method to your needs.
    */
 
-  // TODO make the cars move when pressing gas or brake buttons
 
   private class TimerListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
@@ -99,7 +98,6 @@ public class CarController {
     }
   }
 
-  // TODO is not implemented yet
   /**
    * Gas each vehicle
    * 
@@ -113,7 +111,6 @@ public class CarController {
     }
   }
 
-  // TODO is not implemented yet
   /**
    * Brake each vehicle
    * 
@@ -126,6 +123,9 @@ public class CarController {
     }
   }
 
+  /**
+   * Enables turbo on Saab95
+   */
   public void enableTurbo() {
     for (Vehicle car : cars) {
       if (car instanceof Saab95) {
@@ -134,6 +134,9 @@ public class CarController {
     }
   }
 
+  /**
+   * Disables turbo on Saab95
+   */
   public void disableTurbo() {
     for (Vehicle car : cars) {
       if (car instanceof Saab95) {
@@ -142,6 +145,9 @@ public class CarController {
     }
   }
 
+  /**
+   * Lifts the flatbed on Scania
+   */
   public void liftBed() {
     for (Vehicle car : cars) {
       if (car instanceof Scania) {
@@ -150,19 +156,20 @@ public class CarController {
     }
   }
 
+  /**
+   * Lowers the flatbed on Scania
+   */
   public void lowerBed() {
     for (Vehicle car : cars) {
-        System.out.println("I am a little potato");
       if (car instanceof Scania) {
         ((Scania) car).lowerFlatbed(10);
-        System.out.println("Excet lista");
-
       }
-      System.out.println("Hey hey hey");
-
     }
   }
 
+  /**
+   * Reverses direction of the vehicles
+   */
   public void reverseDirection(Vehicle car) {
 
     switch (car.getDirection()) {
@@ -177,6 +184,9 @@ public class CarController {
     }
   }
 
+  /**
+   * Reverses direction of the vehicles when they bump into the border
+   */
   private void reverseDirectionOnBump(Vehicle car) {
     int imageWidth = frame.drawPanel.volvoImage.getWidth();
     int rightBorder = frame.getWidth();

@@ -18,7 +18,7 @@ public class ScaniaTest {
 
 	@BeforeEach
 	void setup() {
-		mockScania = new Scania(0,0);
+		mockScania = new Scania(new Position(0, 0));
 	}
 
     @Test

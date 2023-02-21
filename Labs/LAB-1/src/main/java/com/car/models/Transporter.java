@@ -29,9 +29,8 @@ public abstract class Transporter extends Vehicle {
     /**
      * Creates a new `Transporter` object with default values.
      */
-    protected Transporter(int nrDoors, Color color, double enginePower, String modelName, Dir direction, double x,
-            double y, int size, int sizeCapacity) {
-        super(nrDoors, color, enginePower, modelName, direction, x, y, size);
+    protected Transporter(int nrDoors, Color color, double enginePower, String modelName, Dir direction, Position position, int size, int sizeCapacity) {
+        super(nrDoors, color, enginePower, modelName, direction, position, size);
         this.ramp = RampState.RAISED;
         this.loadable = new Loadable<>(sizeCapacity);
     }
@@ -75,8 +74,8 @@ public abstract class Transporter extends Vehicle {
         super.move();
 
         for (Vehicle car : loadable.getLoadedVehicles()) {
-            car.setX(x);
-            car.setY(y);
+            car.setX(this.getX());
+            car.setY(this.getY());
         }
     }
 

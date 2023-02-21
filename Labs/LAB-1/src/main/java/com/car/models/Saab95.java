@@ -16,8 +16,8 @@ public class Saab95 extends Vehicle {
      * Constructs a new Saab95 object with default values.
      * The turbo feature is initially off.
      */
-    public Saab95(double x, double y) {
-        super(2, Color.red, 125, "Saab95", Dir.EAST, x, y, 1);
+    public Saab95(Position position) {
+        super(2, Color.red, 125, "Saab95", Dir.EAST, position, 1);
         turbo = new Turbo();
         setTurboOff();
     }

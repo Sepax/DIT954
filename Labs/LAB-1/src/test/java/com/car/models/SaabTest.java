@@ -14,7 +14,7 @@ public class SaabTest {
 
     @BeforeEach
     void setup() {
-        mockSaab = new Saab95(0, 0);
+        mockSaab = new Saab95(new Position(0, 0));
     }
 
     @Test

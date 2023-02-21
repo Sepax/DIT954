@@ -16,7 +16,7 @@ public class HaulerTest {
 
     @BeforeEach
     void setup() {
-        mockHauler = new Hauler(0,0);
+        mockHauler = new Hauler(new Position(0, 0));
     }
 
     @Test
@@ -154,8 +154,8 @@ public class HaulerTest {
 
     @Test
     public void loadedCarsShouldHaveSameCoordinatesAsHauler() {
-        mockHauler.getLoadable().loadCar(new Volvo240(0,0));
-        mockHauler.getLoadable().loadCar(new Saab95(0,0));
+        mockHauler.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
+        mockHauler.getLoadable().loadCar(new Saab95(new Position(0, 0)));
         mockHauler.startEngine();
         mockHauler.gas(1);
         mockHauler.move();
@@ -169,7 +169,7 @@ public class HaulerTest {
     public void shouldLoadCar() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        mockHauler.getLoadable().loadCar(new Volvo240(0,0));
+        mockHauler.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
         assertEquals(0, mockHauler.getCurrentSpeed());
         assertEquals(1, mockHauler.getLoadable().getLoadedVehicles().size());
     }
@@ -178,7 +178,7 @@ public class HaulerTest {
     public void shouldUnloadCar() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        mockHauler.getLoadable().loadCar(new Volvo240(0,0));
+        mockHauler.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
         mockHauler.getLoadable().unloadCar();
         assertEquals(0, mockHauler.getLoadable().getLoadedVehicles().size());
     }
@@ -187,8 +187,8 @@ public class HaulerTest {
     public void shouldOnlyLoadHaulableCars() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        mockHauler.getLoadable().loadCar(new Volvo240(0,0));
-        mockHauler.getLoadable().loadCar(new Scania(0,0));
+        mockHauler.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
+        mockHauler.getLoadable().loadCar(new Scania(new Position(0, 0)));
         assertEquals(2, mockHauler.getLoadable().getNumberOfCars());
     }
 }

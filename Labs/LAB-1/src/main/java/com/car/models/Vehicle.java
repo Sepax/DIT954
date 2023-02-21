@@ -26,8 +26,7 @@ public abstract class Vehicle implements Moveable {
     int size;
     double enginePower;
     double currentSpeed;
-    double x;
-    double y;
+    Position position;
     Color color;
     String modelName;
     Dir direction;
@@ -42,15 +41,13 @@ public abstract class Vehicle implements Moveable {
     /**
      * Constructs a new vehicle object with default values.
      */
-    protected Vehicle(int nrDoors, Color color, double enginePower, String modelName, Dir direction, double x,
-            double y, int size) {
+    protected Vehicle(int nrDoors, Color color, double enginePower, String modelName, Dir direction, Position position, int size) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
         this.direction = direction;
-        this.x = x;
-        this.y = y;
+        this.position = position;
         this.size = size;
         stopEngine();
     }
@@ -127,7 +124,7 @@ public abstract class Vehicle implements Moveable {
      */
 
     public double getX() {
-        return x;
+        return position.getX();
     }
 
     /**
@@ -136,7 +133,7 @@ public abstract class Vehicle implements Moveable {
      * @return the Y coordinate of the vehicle
      */
     public double getY() {
-        return y;
+        return position.getY();
     }
 
     /**
@@ -163,7 +160,7 @@ public abstract class Vehicle implements Moveable {
      * @param x the new X coordinate of the vehicle
      */
     public void setX(double x) {
-        this.x = x;
+        position.setX(x);
     }
 
     /**
@@ -172,7 +169,7 @@ public abstract class Vehicle implements Moveable {
      * @param y the new Y coordinate of the vehicle
      */
     public void setY(double y) {
-        this.y = y;
+        position.setY(y);
     }
 
     /**

@@ -2,6 +2,7 @@ package com.car.view;
 
 import javax.swing.*;
 
+import com.car.models.Position;
 import com.car.models.Saab95;
 import com.car.models.Scania;
 import com.car.models.Vehicle;
@@ -42,9 +43,9 @@ public class CarController {
 
     CarController cc = new CarController();
 
-    cc.cars.add(new Volvo240(0, 0));
-    cc.cars.add(new Saab95(0, 100));
-    cc.cars.add(new Scania(0, 200));
+    cc.cars.add(new Volvo240(new Position(0,0)));
+    cc.cars.add(new Saab95(new Position(0, 100)));
+    cc.cars.add(new Scania(new Position(0, 200)));
 
     // Start a new view and send a reference of self
     cc.frame = new CarView("CarSim 1.0", cc);

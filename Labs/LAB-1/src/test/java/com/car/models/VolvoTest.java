@@ -14,7 +14,7 @@ public class VolvoTest {
 
   @BeforeEach
   void setup() {
-    mockVolvo = new Volvo240(0,0);
+    mockVolvo = new Volvo240(new Position(0, 0));
   }
 
   @Test

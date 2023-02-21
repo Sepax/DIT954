@@ -3,8 +3,11 @@ package com.car.models;
 import java.util.List;
 
 import com.car.models.Vehicle.Facing;
+import com.car.models.VehicleFactory;
 
 public class VehicleService {
+
+    private double newCarY = 0;
 
     private final List<Vehicle> cars;
 
@@ -99,12 +102,43 @@ public class VehicleService {
         return carX <= 0 || carX + imageWidth >= borderWidth;
     }
 
-    public void addCar() {
-        return;
+    public void addRandomCar() {
+        int random = (int) (Math.random() * 3);
+        switch (random) {
+            case 0:
+                addCar(VehicleFactory.createVolvo240(0, newCarY));
+                break;
+            case 1:
+                addCar(VehicleFactory.createSaab95(0, newCarY));
+                break;
+            case 2:
+                addCar(VehicleFactory.createScania(0, newCarY));
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void addCar(Vehicle car) {
+        this.cars.add(car);
+
+        if (car.getY() > newCarY) {
+            newCarY = car.getY();
+        } else {
+            newCarY += 100;
+        }
     }
 
     public void removeCar() {
-        return;
+        if (cars.size() > 0) {
+            Vehicle first = cars.get(0);
+            cars.remove(first);
+        }
+
+    }
+
+    public List<Vehicle> getCars() {
+        return cars;
     }
 
 }

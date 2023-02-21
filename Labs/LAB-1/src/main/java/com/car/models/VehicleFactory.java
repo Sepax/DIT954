@@ -2,16 +2,16 @@ package com.car.models;
 
 public class VehicleFactory {
 
-    public Vehicle createVolvo240() {
-        return new Volvo240(null);
+    public static Vehicle createVolvo240(double x, double y) {
+        return new Volvo240(new Position(x, y));
     }
 
-    public Vehicle createSaab95() {
-        return new Saab95(null);
+    public static Vehicle createSaab95(double x, double y) {
+        return new Saab95(new Position(x, y));
     }
 
-    public Vehicle createScania() {
-        return new Scania(null);
+    public static Vehicle createScania(double x, double y) {
+        return new Scania(new Position(x, y));
     }
-    
+
 }

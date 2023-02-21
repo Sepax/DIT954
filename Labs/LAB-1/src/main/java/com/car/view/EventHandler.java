@@ -35,7 +35,7 @@ public class EventHandler {
         view.lowerBedButton.addActionListener(e -> vehicleService.lowerBed());
 
         view.lowerBedButton.addActionListener(e -> vehicleService.disableTurbo());
-        view.addCarButton.addActionListener(e -> vehicleService.addCar());
+        view.addCarButton.addActionListener(e -> vehicleService.addRandomCar());
         view.removeCarButton.addActionListener(e -> vehicleService.removeCar());
 
     }

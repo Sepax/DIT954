@@ -11,7 +11,7 @@ import com.car.interfaces.*;
  * @since 2023-01-25
  * 
  * @param nrDoors      the number of doors on the vehicle
- * @param size         the size of the vehicle 
+ * @param size         the size of the vehicle
  * @param enginePower  the engine power of the vehicle
  * @param currentSpeed the current speed of the vehicle
  * @param x            the x coordinate of the vehicle
@@ -19,13 +19,14 @@ import com.car.interfaces.*;
  * @param speedFactor  the speed factor of the vehicle
  * @param color        the color of the vehicle
  * @param modelName    the model name of the vehicle
- * @param facing    the facing the vehicle is facing
+ * @param facing       the facing the vehicle is facing
  */
 public abstract class Vehicle implements Moveable {
     int nrDoors;
     int size;
     double enginePower;
     double currentSpeed;
+    double weight;
     Position position;
     Color color;
     String modelName;
@@ -41,7 +42,8 @@ public abstract class Vehicle implements Moveable {
     /**
      * Constructs a new vehicle object with default values.
      */
-    protected Vehicle(int nrDoors, Color color, double enginePower, String modelName, Facing facing, Position position, int size) {
+    protected Vehicle(int nrDoors, Color color, double enginePower, double weight, String modelName, Facing facing,
+            Position position, int size) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -84,7 +86,7 @@ public abstract class Vehicle implements Moveable {
      *
      * @return the speed factor of the vehicle
      */
-    public void setCurrentSpeed(double currentSpeed ) {
+    public void setCurrentSpeed(double currentSpeed) {
         this.currentSpeed = currentSpeed;
     }
 
@@ -249,7 +251,8 @@ public abstract class Vehicle implements Moveable {
     }
 
     /**
-     * Turns the vehicle to the right, cases signify the facing the vehicle is facing.
+     * Turns the vehicle to the right, cases signify the facing the vehicle is
+     * facing.
      */
     public void turnRight() {
         switch (getFacing()) {
@@ -274,7 +277,7 @@ public abstract class Vehicle implements Moveable {
      * @param amount the amount to increase the speed of the car
      */
     public void incrementSpeed(double amount) {
-        this.currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        this.currentSpeed = Math.min(getCurrentSpeed() + getAcceleration() * amount, enginePower);
     }
 
     /**
@@ -283,7 +286,7 @@ public abstract class Vehicle implements Moveable {
      * @param amount the amount to decrease the speed of the car
      */
     public void decrementSpeed(double amount) {
-        this.currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
+        this.currentSpeed = Math.max(getCurrentSpeed() - getAcceleration() * amount, 0);
     }
 
     /**
@@ -291,7 +294,7 @@ public abstract class Vehicle implements Moveable {
      * 
      * @return the speed factor of the car
      */
-    public double speedFactor() {
-        return enginePower * 0.01;
+    public double getAcceleration() {
+        return enginePower / (weight / 25);
     }
 }

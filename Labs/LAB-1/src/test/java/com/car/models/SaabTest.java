@@ -79,26 +79,26 @@ public class SaabTest {
 
     @Test
     public void shouldTurnOnTurbo() {
-        mockSaab.setTurboOn();
-        assertTrue(mockSaab.isTurboOn());
+        mockSaab.enableTurbo();
+        assertTrue(mockSaab.getTurboState());
     }
 
     @Test
     public void shouldTurnOffTurbo() {
-        mockSaab.setTurboOff();
-        assertFalse(mockSaab.isTurboOn());
+        mockSaab.disableTurbo();
+        assertFalse(mockSaab.getTurboState());
     }
 
     @Test
     public void shouldNotTurnOnTurbo() {
-        mockSaab.setTurboOff();
-        assertFalse(mockSaab.isTurboOn());
+        mockSaab.disableTurbo();
+        assertFalse(mockSaab.getTurboState());
     }
 
     @Test
     public void shouldNotTurnOffTurbo() {
-        mockSaab.setTurboOn();
-        assertTrue(mockSaab.isTurboOn());
+        mockSaab.enableTurbo();
+        assertTrue(mockSaab.getTurboState());
     }
 
     @Test

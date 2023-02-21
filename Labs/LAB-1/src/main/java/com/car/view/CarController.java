@@ -43,7 +43,7 @@ public class CarController {
 
     CarController cc = new CarController();
 
-    cc.cars.add(new Volvo240(new Position(0,0)));
+    cc.cars.add(new Volvo240(new Position(0, 0)));
     cc.cars.add(new Saab95(new Position(0, 100)));
     cc.cars.add(new Scania(new Position(0, 200)));
 
@@ -59,7 +59,6 @@ public class CarController {
    * Each step the TimerListener moves all the cars in the list and tells the
    * view to update its images. Change this method to your needs.
    */
-
 
   private class TimerListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
@@ -130,7 +129,7 @@ public class CarController {
   public void enableTurbo() {
     for (Vehicle car : cars) {
       if (car instanceof Saab95) {
-        ((Saab95) car).setTurboOn();
+        ((Saab95) car).enableTurbo();
       }
     }
   }
@@ -141,7 +140,7 @@ public class CarController {
   public void disableTurbo() {
     for (Vehicle car : cars) {
       if (car instanceof Saab95) {
-        ((Saab95) car).setTurboOff();
+        ((Saab95) car).disableTurbo();
       }
     }
   }

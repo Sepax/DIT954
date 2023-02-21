@@ -1,32 +1,34 @@
 package com.car.models;
 
 /**
- * Turbo is a class that represents a turbo feature, which can be turned on or off.
+ * Turbo is a class that represents a turbo feature, which can be turned on or
+ * off.
  * 
  * @author Kiril Curlinov, Gabriele Frattini, Sebastian Pålsson
  */
 public class Turbo {
-    private boolean on;
+    private boolean state;
+    private double factor = 1.3;
 
     /**
      * Constructs a new Turbo object with the turbo feature initially off.
      */
     public Turbo() {
-        on = false;
+        this.state = false;
     }
 
     /**
      * Turns the turbo feature on.
      */
-    public void setOn() {
-        on = true;
+    public void enable() {
+        state = true;
     }
 
     /**
      * Turns the turbo feature off.
      */
-    public void setOff() {
-        on = false;
+    public void disable() {
+        state = false;
     }
 
     /**
@@ -34,22 +36,11 @@ public class Turbo {
      *
      * @return true if the turbo feature is on, false otherwise
      */
-    public boolean isOn() {
-        return on;
+    public boolean getState() {
+        return state;
     }
 
-    /**
-     * Returns the speed factor with the turbo feature applied.
-     *
-     * @param enginePower the engine power of the vehicle
-     * @return the speed factor with the turbo feature applied
-     */
-    public double speedFactor(double enginePower) {
-        double turbo = 1;
-        if (on) {
-            turbo = 1.3;
-        }
-        return enginePower * 0.01 * turbo;
+    public double getFactor() {
+        return state ? factor : 1;
     }
 }
-

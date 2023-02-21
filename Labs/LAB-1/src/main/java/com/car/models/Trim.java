@@ -8,5 +8,9 @@ package com.car.models;
  * 
  */
 public class Trim {
-    public static final double trimFactor = 1.25;
+    private double factor = 1.25;
+
+    public double getFactor() {
+        return factor;
+    }
 }

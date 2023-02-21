@@ -3,56 +3,58 @@ package com.car.models;
 import java.awt.Color;
 
 /**
- * Scania is a class that represents a Scania truck and extends the Vehicle class. 
- * It has a flatbed and therefore uses the Flatbed class for the implementation of the flatbed.
+ * Scania is a class that represents a Scania truck and extends the Vehicle
+ * class.
+ * It has a flatbed and therefore uses the Flatbed class for the implementation
+ * of the flatbed.
+ * 
  * @authors Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @since 2023-01-31
  */
 public class Scania extends Vehicle {
     private Flatbed flatbed;
 
-	/*
-	 * Constructor for the Scania class.
-	 */
+    /*
+     * Constructor for the Scania class.
+     */
     public Scania(Position position) {
-        super(2, Color.ORANGE, 100, "Scania", Facing.EAST, position, 2);
+        super(2, Color.ORANGE, 200, 4000, "Scania", Facing.EAST, position, 2);
         flatbed = new Flatbed();
     }
 
-	/*
-	 * Gets the current tilt of the flatbed.
-	 */
+    /*
+     * Gets the current tilt of the flatbed.
+     */
     public double getFlatbedTilt() {
         return flatbed.getTilt();
     }
 
-	/*
-	 * Sets the tilt of the flatbed.
-	 */
+    /*
+     * Sets the tilt of the flatbed.
+     */
     public void setFlatbedTilt(double tilt) {
         flatbed.setTilt(tilt);
     }
 
-	/*
-	 * Raises the flatbed if the speed of the truck is 0.
-	 */
+    /*
+     * Raises the flatbed if the speed of the truck is 0.
+     */
     public void raiseFlatbed(double degrees) {
         if (getCurrentSpeed() == 0) {
             flatbed.raise(degrees);
-        }
-        else {
+        } else {
             stopEngine();
             flatbed.raise(degrees);
         }
     }
-	/*
-	 * Lowers the flatbed if the speed of the truck is 0.
-	 */
+
+    /*
+     * Lowers the flatbed if the speed of the truck is 0.
+     */
     public void lowerFlatbed(double degrees) {
         if (getCurrentSpeed() == 0) {
             flatbed.lower(degrees);
-        }
-        else {
+        } else {
             stopEngine();
             flatbed.lower(degrees);
         }

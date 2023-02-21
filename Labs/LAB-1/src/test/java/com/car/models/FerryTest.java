@@ -1,7 +1,7 @@
 package com.car.models;
 
+import com.car.models.Ramp.RampState;
 import com.car.models.Vehicle.Facing;
-import com.car.models.Transporter.RampState;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -127,19 +127,19 @@ public class FerryTest {
 
     @Test
     public void shouldToggleRampIfStopped() {
-        RampState stateBefore = mockFerry.getRampState();
+        RampState stateBefore = mockFerry.getRamp().getState();
         mockFerry.brake(1);
         mockFerry.lowerRamp();
-        assertNotSame(stateBefore, mockFerry.getRampState());
+        assertNotSame(stateBefore, mockFerry.getRamp().getState());
     }
 
     @Test
     public void shouldNotToggleRampIfMoving() {
-        RampState stateBefore = mockFerry.getRampState();
+        RampState stateBefore = mockFerry.getRamp().getState();
         mockFerry.startEngine();
         mockFerry.gas(1);
         mockFerry.lowerRamp();
-        assertEquals(stateBefore, mockFerry.getRampState());
+        assertEquals(stateBefore, mockFerry.getRamp().getState());
     }
 
     @Test
@@ -148,17 +148,17 @@ public class FerryTest {
         mockFerry.startEngine();
         mockFerry.gas(1);
         mockFerry.move();
-        assertEquals(RampState.LOWERED.toString(), mockFerry.getRampState().toString());
+        assertEquals(RampState.LOWERED.toString(), mockFerry.getRamp().getState().toString());
     }
 
     @Test
     public void loadedCarsShouldHaveSameCoordinatesAsHauler() {
-        mockFerry.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
-        mockFerry.getLoadable().loadCar(new Saab95(new Position(0, 0)));
+        mockFerry.loadVehicle(new Volvo240(new Position(0, 0)));
+        mockFerry.loadVehicle(new Saab95(new Position(0, 0)));
         mockFerry.startEngine();
         mockFerry.gas(1);
         mockFerry.move();
-        for (Vehicle car : mockFerry.getLoadable().getLoadedVehicles()) {
+        for (Vehicle car : mockFerry.getCargo().getContent()) {
             assertEquals(mockFerry.getX(), car.getX());
             assertEquals(mockFerry.getY(), car.getY());
         }
@@ -168,37 +168,36 @@ public class FerryTest {
     public void shouldLoadCar() {
         mockFerry.brake(1);
         mockFerry.lowerRamp();
-        mockFerry.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
+        mockFerry.loadVehicle(new Volvo240(new Position(0, 0)));
         assertEquals(0, mockFerry.getCurrentSpeed());
-        assertEquals(1, mockFerry.getLoadable().getLoadedVehicles().size());
+        assertEquals(1, mockFerry.getCargo().getContent().size());
     }
 
     @Test
     public void shouldUnloadCar() {
         mockFerry.brake(1);
         mockFerry.lowerRamp();
-        mockFerry.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
-        mockFerry.getLoadable().unloadCar();
-        assertEquals(0, mockFerry.getLoadable().getLoadedVehicles().size());
+        mockFerry.loadVehicle(new Volvo240(new Position(0, 0)));
+        mockFerry.unloadVehicle();
+        assertEquals(0, mockFerry.getCargo().getContent().size());
     }
 
     @Test
     public void shouldOnlyLoadHaulableCars() {
         mockFerry.brake(1);
         mockFerry.lowerRamp();
-        mockFerry.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
-        mockFerry.getLoadable().loadCar(new Scania(new Position(0, 0)));
-        assertEquals(2, mockFerry.getLoadable().getLoadedVehicles().size());
+        mockFerry.loadVehicle(new Volvo240(new Position(0, 0)));
+        mockFerry.loadVehicle(new Scania(new Position(0, 0)));
+        assertEquals(2, mockFerry.getCargo().getContent().size());
     }
-
 
     @Test
     public void shouldUseFifo() {
         mockFerry.brake(1);
         mockFerry.lowerRamp();
-        mockFerry.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
-        mockFerry.getLoadable().loadCar(new Saab95(new Position(0, 0)));
-        mockFerry.unloadCar();
-        assertEquals(mockFerry.getLoadable().getLoadedVehicles().peek().getClass(), Saab95.class);
+        mockFerry.loadVehicle(new Volvo240(new Position(0, 0)));
+        mockFerry.loadVehicle(new Saab95(new Position(0, 0)));
+        mockFerry.unloadVehicle();
+        assertEquals(mockFerry.getCargo().getContent().peek().getClass(), Saab95.class);
     }
 }

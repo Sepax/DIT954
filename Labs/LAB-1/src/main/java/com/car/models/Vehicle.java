@@ -23,7 +23,6 @@ import com.car.interfaces.*;
  */
 public abstract class Vehicle implements Moveable {
     int nrDoors;
-    int size;
     double enginePower;
     double currentSpeed;
     double weight;
@@ -43,7 +42,7 @@ public abstract class Vehicle implements Moveable {
      * Constructs a new vehicle object with default values.
      */
     protected Vehicle(int nrDoors, Color color, double enginePower, double weight, String modelName, Facing facing,
-            Position position, int size) {
+            Position position) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.weight = weight;
@@ -51,7 +50,6 @@ public abstract class Vehicle implements Moveable {
         this.modelName = modelName;
         this.facing = facing;
         this.position = position;
-        this.size = size;
         stopEngine();
     }
 
@@ -71,6 +69,10 @@ public abstract class Vehicle implements Moveable {
      */
     public double getEnginePower() {
         return enginePower;
+    }
+
+    public double getWeight() {
+        return weight;
     }
 
     /**
@@ -137,15 +139,6 @@ public abstract class Vehicle implements Moveable {
      */
     public double getY() {
         return position.getY();
-    }
-
-    /**
-     * Gets he size of the vehicle.
-     * 
-     * @return the size of the vehicle.
-     */
-    public int getSize() {
-        return size;
     }
 
     /**
@@ -296,8 +289,6 @@ public abstract class Vehicle implements Moveable {
      * @return the speed factor of the car
      */
     public double getAcceleration() {
-        System.out.println(enginePower / weight);
-        System.out.println(weight);
         return enginePower / weight * 50;
     }
 }

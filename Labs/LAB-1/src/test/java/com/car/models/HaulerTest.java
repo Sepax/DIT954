@@ -1,7 +1,7 @@
 package com.car.models;
 
+import com.car.models.Ramp.RampState;
 import com.car.models.Vehicle.Facing;
-import com.car.models.Transporter.RampState;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -128,19 +128,19 @@ public class HaulerTest {
 
     @Test
     public void shouldToggleRampIfStopped() {
-        RampState stateBefore = mockHauler.getRampState();
+        RampState stateBefore = mockHauler.getRamp().getState();
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        assertNotSame(stateBefore, mockHauler.getRampState());
+        assertNotSame(stateBefore, mockHauler.getRamp().getState());
     }
 
     @Test
     public void shouldNotToggleRampIfMoving() {
-        RampState stateBefore = mockHauler.getRampState();
+        RampState stateBefore = mockHauler.getRamp().getState();
         mockHauler.startEngine();
         mockHauler.gas(1);
         mockHauler.lowerRamp();
-        assertEquals(stateBefore, mockHauler.getRampState());
+        assertEquals(stateBefore, mockHauler.getRamp().getState());
     }
 
     @Test
@@ -149,17 +149,17 @@ public class HaulerTest {
         mockHauler.startEngine();
         mockHauler.gas(1);
         mockHauler.move();
-        assertEquals(RampState.LOWERED.toString(), mockHauler.getRampState().toString());
+        assertEquals(RampState.LOWERED.toString(), mockHauler.getRamp().getState().toString());
     }
 
     @Test
     public void loadedCarsShouldHaveSameCoordinatesAsHauler() {
-        mockHauler.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
-        mockHauler.getLoadable().loadCar(new Saab95(new Position(0, 0)));
+        mockHauler.loadVehicle(new Volvo240(new Position(0, 0)));
+        mockHauler.loadVehicle(new Saab95(new Position(0, 0)));
         mockHauler.startEngine();
         mockHauler.gas(1);
         mockHauler.move();
-        for (Vehicle car : mockHauler.getLoadable().getLoadedVehicles()) {
+        for (Vehicle car : mockHauler.getCargo().getContent()) {
             assertEquals(mockHauler.getX(), car.getX());
             assertEquals(mockHauler.getY(), car.getY());
         }
@@ -169,26 +169,26 @@ public class HaulerTest {
     public void shouldLoadCar() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        mockHauler.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
+        mockHauler.loadVehicle(new Volvo240(new Position(0, 0)));
         assertEquals(0, mockHauler.getCurrentSpeed());
-        assertEquals(1, mockHauler.getLoadable().getLoadedVehicles().size());
+        assertEquals(1, mockHauler.getCargo().getContent().size());
     }
 
     @Test
     public void shouldUnloadCar() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        mockHauler.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
-        mockHauler.getLoadable().unloadCar();
-        assertEquals(0, mockHauler.getLoadable().getLoadedVehicles().size());
+        mockHauler.loadVehicle(new Volvo240(new Position(0, 0)));
+        mockHauler.unloadVehicle();
+        assertEquals(0, mockHauler.getCargo().getContent().size());
     }
 
     @Test
     public void shouldOnlyLoadHaulableCars() {
         mockHauler.brake(1);
         mockHauler.lowerRamp();
-        mockHauler.getLoadable().loadCar(new Volvo240(new Position(0, 0)));
-        mockHauler.getLoadable().loadCar(new Scania(new Position(0, 0)));
-        assertEquals(2, mockHauler.getLoadable().getNumberOfCars());
+        mockHauler.loadVehicle(new Volvo240(new Position(0, 0)));
+        mockHauler.loadVehicle(new Scania(new Position(0, 0)));
+        assertEquals(1, mockHauler.getCargo().getContent().size());
     }
 }

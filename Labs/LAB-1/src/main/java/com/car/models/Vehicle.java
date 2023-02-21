@@ -46,6 +46,7 @@ public abstract class Vehicle implements Moveable {
             Position position, int size) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
+        this.weight = weight;
         this.color = color;
         this.modelName = modelName;
         this.facing = facing;
@@ -295,6 +296,8 @@ public abstract class Vehicle implements Moveable {
      * @return the speed factor of the car
      */
     public double getAcceleration() {
-        return enginePower / (weight / 25);
+        System.out.println(enginePower / weight);
+        System.out.println(weight);
+        return enginePower / weight * 50;
     }
 }

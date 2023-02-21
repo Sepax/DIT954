@@ -67,7 +67,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>assets/</classpathPrefix>
-                            <mainClass>com.car.view.CarController</mainClass>
+                            <mainClass>com.car.view.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

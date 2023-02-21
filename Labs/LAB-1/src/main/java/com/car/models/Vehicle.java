@@ -296,8 +296,6 @@ public abstract class Vehicle implements Moveable {
      * @return the speed factor of the car
      */
     public double getAcceleration() {
-        System.out.println(enginePower / weight);
-        System.out.println(weight);
         return enginePower / weight * 50;
     }
 }

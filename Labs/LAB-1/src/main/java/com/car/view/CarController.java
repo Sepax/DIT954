@@ -2,11 +2,12 @@ package com.car.view;
 
 import javax.swing.*;
 
+import com.car.models.Position;
 import com.car.models.Saab95;
 import com.car.models.Scania;
 import com.car.models.Vehicle;
 import com.car.models.Volvo240;
-import com.car.models.Vehicle.Dir;
+import com.car.models.Vehicle.Facing;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -42,9 +43,9 @@ public class CarController {
 
     CarController cc = new CarController();
 
-    cc.cars.add(new Volvo240(0, 0));
-    cc.cars.add(new Saab95(0, 100));
-    cc.cars.add(new Scania(0, 200));
+    cc.cars.add(new Volvo240(new Position(0, 0)));
+    cc.cars.add(new Saab95(new Position(0, 100)));
+    cc.cars.add(new Scania(new Position(0, 200)));
 
     // Start a new view and send a reference of self
     cc.frame = new CarView("CarSim 1.0", cc);
@@ -59,12 +60,11 @@ public class CarController {
    * view to update its images. Change this method to your needs.
    */
 
-
   private class TimerListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       for (Vehicle car : cars) {
 
-        reverseDirectionOnBump(car);
+        reverseFacingectionOnBump(car);
         car.move();
 
         int x = (int) Math.round(car.getX());
@@ -129,7 +129,7 @@ public class CarController {
   public void enableTurbo() {
     for (Vehicle car : cars) {
       if (car instanceof Saab95) {
-        ((Saab95) car).setTurboOn();
+        ((Saab95) car).enableTurbo();
       }
     }
   }
@@ -140,7 +140,7 @@ public class CarController {
   public void disableTurbo() {
     for (Vehicle car : cars) {
       if (car instanceof Saab95) {
-        ((Saab95) car).setTurboOff();
+        ((Saab95) car).disableTurbo();
       }
     }
   }
@@ -170,14 +170,14 @@ public class CarController {
   /**
    * Reverses direction of the vehicles
    */
-  public void reverseDirection(Vehicle car) {
+  public void reverseFacingection(Vehicle car) {
 
-    switch (car.getDirection()) {
+    switch (car.getFacing()) {
       case EAST:
-        car.setDirection(Dir.WEST);
+        car.setFacing(Facing.WEST);
         break;
       case WEST:
-        car.setDirection(Dir.EAST);
+        car.setFacing(Facing.EAST);
         break;
       default:
         break;
@@ -187,12 +187,12 @@ public class CarController {
   /**
    * Reverses direction of the vehicles when they bump into the border
    */
-  private void reverseDirectionOnBump(Vehicle car) {
+  private void reverseFacingectionOnBump(Vehicle car) {
     int imageWidth = frame.drawPanel.volvoImage.getWidth();
     int rightBorder = frame.getWidth();
 
     if (car.getX() <= 0 || car.getX() + imageWidth >= rightBorder) {
-      reverseDirection(car);
+      reverseFacingection(car);
       car.move();
     }
   }

@@ -25,8 +25,8 @@ public class GarageTest {
     mockSaabGarage = new Garage<Saab95>(10);
     mockVolvoGarage = new Garage<Volvo240>(10);
     mockAnyGarage = new Garage<Vehicle>(10);
-    mockSaab = new Saab95(0,0);
-    mockVolvo = new Volvo240(0,0);
+    mockSaab = new Saab95(new Position(0, 0));
+    mockVolvo = new Volvo240(new Position(0, 0));
   }
 
   @AfterEach

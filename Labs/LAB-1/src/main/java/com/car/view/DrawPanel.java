@@ -63,10 +63,10 @@ public class DrawPanel extends JPanel {
     this.setBackground(Color.orange);
     // Print an error message in case file is not found with a try/catch block
     try {
-      String assetsDir = System.getProperty("user.dir") + "/assets/";
-      volvoImage = ImageIO.read(new FileInputStream(assetsDir + "Volvo240.jpg"));
-      saabImage = ImageIO.read(new FileInputStream(assetsDir + "Saab95.jpg"));
-      scaniaImage = ImageIO.read(new FileInputStream(assetsDir + "Scania.jpg"));
+      String assetsFacing = System.getProperty("user.dir") + "/assets/";
+      volvoImage = ImageIO.read(new FileInputStream(assetsFacing + "Volvo240.jpg"));
+      saabImage = ImageIO.read(new FileInputStream(assetsFacing + "Saab95.jpg"));
+      scaniaImage = ImageIO.read(new FileInputStream(assetsFacing + "Scania.jpg"));
 
     } catch (IOException ex) {
       System.err.println("Image not found");

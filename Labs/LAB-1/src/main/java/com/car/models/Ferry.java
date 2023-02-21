@@ -16,8 +16,8 @@ public class Ferry extends Transporter {
      * @param capacity The capacity of the ferry.
      * 
      */
-    public Ferry(double x, double y) {
-        super(2, Color.ORANGE, 500, "CarFerry", Dir.EAST, x, y, 3, 2);
+    public Ferry(Position position) {
+        super(2, Color.ORANGE, 1300, 30000, "CarFerry", Facing.EAST, position, 3, 2);
     }
 
     /**

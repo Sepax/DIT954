@@ -4,7 +4,8 @@ import java.awt.Color;
 
 /**
  * Saab95 is a class that represents a Saab95 car and extends the Vehicle class.
- * It has a turbo feature that can be turned on or off, which affects the speedfactor.
+ * It has a turbo feature that can be turned on or off, which affects the
+ * speedfactor.
  * 
  * @author Kiril Curlinov, Gabriele Frattini, Sebastian Pålsson
  * @param turbo the turbo feature of the car
@@ -16,33 +17,21 @@ public class Saab95 extends Vehicle {
      * Constructs a new Saab95 object with default values.
      * The turbo feature is initially off.
      */
-    public Saab95(double x, double y) {
-        super(2, Color.red, 125, "Saab95", Dir.EAST, x, y, 1);
+    public Saab95(Position position) {
+        super(2, Color.red, 135, 1800, "Saab95", Facing.EAST, position, 1);
         turbo = new Turbo();
-        setTurboOff();
     }
 
-    /**
-     * Turns the turbo feature on.
-     */
-    public void setTurboOn() {
-        turbo.setOn();
+    public void enableTurbo() {
+        turbo.enable();
     }
 
-    /**
-     * Turns the turbo feature off.
-     */
-    public void setTurboOff() {
-        turbo.setOff();
+    public void disableTurbo() {
+        turbo.disable();
     }
 
-    /**
-     * Returns whether the turbo feature is on or off.
-     *
-     * @return true if the turbo feature is on, false otherwise
-     */
-    public boolean isTurboOn() {
-        return turbo.isOn();
+    public boolean getTurboState() {
+        return turbo.getState();
     }
 
     /**
@@ -51,7 +40,7 @@ public class Saab95 extends Vehicle {
      * @return the speed factor of the car
      */
     @Override
-    public double speedFactor() {
-        return turbo.speedFactor(getEnginePower());
+    public double getAcceleration() {
+        return super.getAcceleration() * turbo.getFactor();
     }
 }

@@ -99,4 +99,12 @@ public class VehicleService {
         return carX <= 0 || carX + imageWidth >= borderWidth;
     }
 
+    public void addCar() {
+        return;
+    }
+
+    public void removeCar() {
+        return;
+    }
+
 }

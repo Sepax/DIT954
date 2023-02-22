@@ -3,7 +3,11 @@ package com.car.view;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import com.car.models.Vehicle;
+
 import java.awt.*;
+import java.util.List;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -19,7 +23,7 @@ public class CarView extends JFrame {
     private static final int X = 800;
     private static final int Y = 800;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y - 240);
+    DrawPanel drawPanel;
 
     JPanel controlPanel = new JPanel();
 
@@ -41,7 +45,8 @@ public class CarView extends JFrame {
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename) {
+    public CarView(String framename, List<Vehicle> vehicles) {
+        this.drawPanel = new DrawPanel(vehicles, X, Y - 240);
         initComponents(framename);
     }
 

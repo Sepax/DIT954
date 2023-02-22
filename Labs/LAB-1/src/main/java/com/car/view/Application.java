@@ -20,15 +20,15 @@ public class Application {
     public static void main(String[] args) {
 
         VehicleService vehicleService = new VehicleService(new ArrayList<Vehicle>());
-        CarView view = new CarView("CarSim 1.0");
 
-        vehicleService.addCar(new Volvo240(new Position(0, 0)));
-        vehicleService.addCar(new Saab95(new Position(0, 100)));
-        vehicleService.addCar(new Scania(new Position(0, 200)));
+        vehicleService.addCar(VehicleFactory.createVolvo240(0, 200));
+        vehicleService.addCar(VehicleFactory.createSaab95(0, 300));
+        vehicleService.addCar(VehicleFactory.createScania(0, 400));
+
+        CarView view = new CarView("CarSim 1.0", vehicleService.getCars());
 
         CarController cc = new CarController(view, vehicleService.getCars());
 
-        // Start a new view and send a reference of self
         cc.frame.setVisible(true);
 
         cc.startController();

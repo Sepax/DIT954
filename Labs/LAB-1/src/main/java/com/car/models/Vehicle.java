@@ -1,6 +1,14 @@
 package com.car.models;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import com.car.interfaces.*;
 
 /**
@@ -27,9 +35,11 @@ public abstract class Vehicle implements Moveable {
     double currentSpeed;
     double weight;
     Position position;
+    Point point;
     Color color;
     String modelName;
     Facing facing;
+    private BufferedImage vehicleImage;
 
     /**
      * Enum representing the facing of the vehicle.
@@ -42,7 +52,7 @@ public abstract class Vehicle implements Moveable {
      * Constructs a new vehicle object with default values.
      */
     protected Vehicle(int nrDoors, Color color, double enginePower, double weight, String modelName, Facing facing,
-            Position position) {
+            Position position, String imagePath) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.weight = weight;
@@ -51,6 +61,8 @@ public abstract class Vehicle implements Moveable {
         this.facing = facing;
         this.position = position;
         stopEngine();
+        assignImageToVehicle(imagePath);
+        this.point = new Point((int) position.getX(), (int) position.getY());
     }
 
     /**
@@ -290,5 +302,36 @@ public abstract class Vehicle implements Moveable {
      */
     public double getAcceleration() {
         return enginePower / weight * 50;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public BufferedImage getVehicleImage() {
+        ColorModel cm = vehicleImage.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = vehicleImage.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+    }
+
+    private void assignImageToVehicle(String imagePath) {
+        try {
+            // vehicleImage = ImageIO.read(imageFile);
+            String assetsFacing = System.getProperty("user.dir");
+            // + "/assets/";
+            this.vehicleImage = ImageIO.read(new FileInputStream(assetsFacing + "/" + imagePath));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void moveGay(int x, int y) {
+        this.point.x = x;
+        this.point.y = y;
     }
 }

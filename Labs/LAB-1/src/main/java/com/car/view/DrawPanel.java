@@ -2,11 +2,11 @@ package com.car.view;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.util.List;
+
 import javax.swing.*;
+
+import com.car.models.Vehicle;
 
 /**
  * This class represents the View part in the MVC pattern. It extends JPanel.
@@ -18,60 +18,22 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel {
 
-    /**
-     * A BufferedImage object represents an image of a Vehicle.
-     */
-    BufferedImage volvoImage;
-    BufferedImage saabImage;
-    BufferedImage scaniaImage;
-
-    /**
-     * A Point object represents a pair of (x,y) coordinates for a Vehicle.
-     */
-    Point volvoPoint = new Point();
-    Point saabPoint = new Point();
-    Point scaniaPoint = new Point();
-
-    /**
-     * Moves the Volvo vehicle to the specified coordinates
-     */
-    public void moveVolvo(int x, int y) {
-        volvoPoint.x = x;
-        volvoPoint.y = y;
-    }
-
-    /**
-     * Moves the Saab vehicle to the specified coordinates
-     */
-    public void moveSaab(int x, int y) {
-        saabPoint.x = x;
-        saabPoint.y = y;
-    }
-
-    /**
-     * Moves the Scania vehicle to the specified coordinates
-     */
-    public void moveScania(int x, int y) {
-        scaniaPoint.x = x;
-        scaniaPoint.y = y;
-    }
+    public List<Vehicle> vehicles;
+    private BufferedImage vehicleImage;
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public DrawPanel(List<Vehicle> cars, int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.orange);
-        // Print an error message in case file is not found with a try/catch block
-        try {
-            String assetsFacing = System.getProperty("user.dir") + "/assets/";
-            volvoImage = ImageIO.read(new FileInputStream(assetsFacing + "Volvo240.jpg"));
-            saabImage = ImageIO.read(new FileInputStream(assetsFacing + "Saab95.jpg"));
-            scaniaImage = ImageIO.read(new FileInputStream(assetsFacing + "Scania.jpg"));
+        this.vehicles = cars;
 
-        } catch (IOException ex) {
-            System.err.println("Image not found");
-        }
     }
+
+    private void updateVehicleImage(Vehicle vehicle) {
+        vehicleImage = vehicle.getVehicleImage();
+    }
+
 
     /**
      * This method is called each time the panel updates/refreshes/repaints itself
@@ -80,8 +42,9 @@ public class DrawPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null);
-        g.drawImage(saabImage, saabPoint.x, saabPoint.y, null);
-        g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null);
+        for (Vehicle vehicle : vehicles) {
+            updateVehicleImage(vehicle);
+            g.drawImage(vehicleImage, (int) vehicle.getX(), (int) vehicle.getY(), null);
+        }
     }
 }

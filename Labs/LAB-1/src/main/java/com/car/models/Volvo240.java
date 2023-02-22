@@ -12,7 +12,7 @@ public class Volvo240 extends Vehicle {
 	 * Constructs a new Volvo240 object with default values.
 	 */
 	public Volvo240(Position position) {
-		super(4, Color.black, 100, 1400, "Volvo240", Facing.EAST, position);
+		super(4, Color.black, 100, 1400, "Volvo240", Facing.EAST, position, "assets/Volvo240.jpg");
 	}
 
 	/**

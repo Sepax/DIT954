@@ -55,22 +55,18 @@ public class CarController {
             for (Vehicle car : cars) {
                 if (vehicleService.hasBumpedInWall(
                         car.getX(),
-                        frame.drawPanel.volvoImage.getWidth(),
+                        frame.drawPanel.vehicles.get(0).getVehicleImage().getWidth(),
                         frame.getWidth())) {
                     vehicleService.reverseDirection(car);
                 }
-                car.move();
 
+                car.move();
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
 
-                if (car instanceof Volvo240) {
-                    frame.drawPanel.moveVolvo(x, y);
-                } else if (car instanceof Saab95) {
-                    frame.drawPanel.moveSaab(x, y);
-                } else if (car instanceof Scania) {
-                    frame.drawPanel.moveScania(x, y);
-                }
+                frame.drawPanel.vehicles.forEach(gameObj -> {
+                    gameObj.moveGay(x, y);
+                });
 
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();

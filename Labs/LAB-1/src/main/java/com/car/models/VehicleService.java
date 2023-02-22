@@ -127,6 +127,7 @@ public class VehicleService {
         } else {
             newCarY += 100;
         }
+
     }
 
     public void removeCar() {

@@ -21,7 +21,7 @@ public class Ferry extends Vehicle {
      * 
      */
     public Ferry(Position position) {
-        super(2, Color.ORANGE, 1300, 30000, "CarFerry", Facing.EAST, position);
+        super(2, Color.ORANGE, 1300, 30000, "CarFerry", Facing.EAST, position,"");
         this.cargo = new Cargo<>(5000, 30);
         this.ramp = new Ramp();
     }

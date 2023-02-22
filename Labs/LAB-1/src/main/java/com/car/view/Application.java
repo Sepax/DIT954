@@ -13,14 +13,17 @@ import com.car.models.Vehicle;
 import com.car.models.Volvo240;
 
 public class Application {
+    private static ArrayList<Vehicle> vehicles;
+    private static VehicleService vehicleService;
+    private static CarView view;
 
     /**
      * Main method that starts the program
      */
     public static void main(String[] args) {
-
-        VehicleService vehicleService = new VehicleService(new ArrayList<Vehicle>());
-        CarView view = new CarView("CarSim 1.0");
+        vehicles = new ArrayList<Vehicle>();
+        vehicleService = new VehicleService(vehicles);
+        view = new CarView("CarSim 1.0");
 
         vehicleService.addCar(new Volvo240(new Position(0, 0)));
         vehicleService.addCar(new Saab95(new Position(0, 100)));
@@ -30,8 +33,6 @@ public class Application {
 
         // Start a new view and send a reference of self
         cc.frame.setVisible(true);
-
         cc.startController();
-
     }
 }

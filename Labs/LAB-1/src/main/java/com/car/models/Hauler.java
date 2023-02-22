@@ -21,7 +21,7 @@ public class Hauler extends Vehicle {
 	 * engine power, model name, direction and if it's haulable.
 	 */
 	public Hauler(Position position) {
-		super(2, Color.ORANGE, 200, 5000, "Hauler", Facing.EAST, position);
+		super(2, Color.ORANGE, 200, 5000, "Hauler", Facing.EAST, position,"Hauler.jpg");
 		this.cargo = new Cargo<>(2000, 6);
 		this.ramp = new Ramp();
 	}

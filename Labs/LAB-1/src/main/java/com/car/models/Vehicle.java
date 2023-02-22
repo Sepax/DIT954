@@ -30,6 +30,7 @@ public abstract class Vehicle implements Moveable {
     Color color;
     String modelName;
     Facing facing;
+    String image;
 
     /**
      * Enum representing the facing of the vehicle.
@@ -42,7 +43,7 @@ public abstract class Vehicle implements Moveable {
      * Constructs a new vehicle object with default values.
      */
     protected Vehicle(int nrDoors, Color color, double enginePower, double weight, String modelName, Facing facing,
-            Position position) {
+            Position position, String image) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.weight = weight;
@@ -50,6 +51,7 @@ public abstract class Vehicle implements Moveable {
         this.modelName = modelName;
         this.facing = facing;
         this.position = position;
+        this.image = image;
         stopEngine();
     }
 
@@ -139,6 +141,10 @@ public abstract class Vehicle implements Moveable {
      */
     public double getY() {
         return position.getY();
+    }
+
+    public String getImage() {
+        return image;
     }
 
     /**

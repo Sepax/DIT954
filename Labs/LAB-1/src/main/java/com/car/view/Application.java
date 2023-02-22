@@ -21,9 +21,9 @@ public class Application {
 
         VehicleService vehicleService = new VehicleService(new ArrayList<Vehicle>());
 
-        vehicleService.addCar(VehicleFactory.createVolvo240(0, 200));
-        vehicleService.addCar(VehicleFactory.createSaab95(0, 300));
-        vehicleService.addCar(VehicleFactory.createScania(0, 400));
+        vehicleService.addCar(VehicleFactory.createVolvo240(0, 100));
+        vehicleService.addCar(VehicleFactory.createSaab95(0, 200));
+        vehicleService.addCar(VehicleFactory.createScania(0, 300));
 
         CarView view = new CarView("CarSim 1.0", vehicleService.getCars());
 

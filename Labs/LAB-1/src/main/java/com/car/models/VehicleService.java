@@ -120,18 +120,23 @@ public class VehicleService {
     }
 
     public void addCar(Vehicle car) {
-        this.cars.add(car);
 
-        if (car.getY() > newCarY) {
-            newCarY = car.getY();
-        } else {
-            newCarY += 100;
+        if (this.cars.size() < 10) {
+            this.cars.add(car);
+            if (car.getY() > newCarY) {
+                newCarY = car.getY();
+            }
+            else {
+                newCarY += 70;}
         }
-
+        if (newCarY > 600) {
+            newCarY = 0;
+        }
     }
 
+
     public void removeCar() {
-        if (cars.size() > 0) {
+        if (cars.size() > 1) {
             Vehicle first = cars.get(0);
             cars.remove(first);
         }

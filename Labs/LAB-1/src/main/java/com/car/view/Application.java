@@ -6,11 +6,7 @@ import com.car.models.VehicleService;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.car.models.Position;
-import com.car.models.Saab95;
-import com.car.models.Scania;
 import com.car.models.Vehicle;
-import com.car.models.Volvo240;
 
 public class Application {
 
@@ -19,15 +15,15 @@ public class Application {
      */
     public static void main(String[] args) {
 
-        VehicleService vehicleService = new VehicleService(new ArrayList<Vehicle>());
+        List<Vehicle> vehicles = new ArrayList<Vehicle>();
 
-        vehicleService.addCar(VehicleFactory.createVolvo240(0, 100));
-        vehicleService.addCar(VehicleFactory.createSaab95(0, 200));
-        vehicleService.addCar(VehicleFactory.createScania(0, 300));
+        vehicles.add(VehicleFactory.createVolvo240(0, 100));
+        vehicles.add(VehicleFactory.createSaab95(0, 200));
+        vehicles.add(VehicleFactory.createScania(0, 300));
 
-        CarView view = new CarView("CarSim 1.0", vehicleService.getCars());
+        CarView view = new CarView("CarSim 1.0", vehicles);
 
-        CarController cc = new CarController(view, vehicleService.getCars());
+        CarController cc = new CarController(view, vehicles);
 
         cc.frame.setVisible(true);
 

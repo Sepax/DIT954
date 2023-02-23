@@ -326,11 +326,10 @@ public abstract class Vehicle implements Moveable {
             // + "/assets/";
             this.vehicleImage = ImageIO.read(new FileInputStream(assetsFacing + "/" + imagePath));
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 
-    public void moveGay(int x, int y) {
+    public void moveCar(int x, int y) {
         this.point.x = x;
         this.point.y = y;
     }

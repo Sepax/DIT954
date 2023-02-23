@@ -2,13 +2,9 @@ package com.car.view;
 
 import javax.swing.*;
 
-import com.car.models.Saab95;
-import com.car.models.Scania;
 import com.car.models.Vehicle;
 import com.car.models.VehicleService;
-import com.car.models.Volvo240;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -65,7 +61,7 @@ public class CarController {
                 int y = (int) Math.round(car.getY());
 
                 frame.drawPanel.vehicles.forEach(gameObj -> {
-                    gameObj.moveGay(x, y);
+                    gameObj.moveCar(x, y);
                 });
 
                 // repaint() calls the paintComponent method of the panel

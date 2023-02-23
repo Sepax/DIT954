@@ -1,4 +1,4 @@
-package com.car.view;
+package com.car.controller;
 
 import javax.swing.*;
 
@@ -7,6 +7,7 @@ import com.car.models.Scania;
 import com.car.models.Vehicle;
 import com.car.models.VehicleService;
 import com.car.models.Volvo240;
+import com.car.view.VehicleView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -38,19 +39,21 @@ public class VehicleController {
     VehicleView frame;
     List<Vehicle> cars = new ArrayList<>();
     private EventHandler eventHandler;
-    private VehicleService vehicleService;
-    private ActionPublisher actionPublisher;
+    private TimeListener actionPublisher;
 
     public VehicleController(VehicleView frame, List<Vehicle> cars) {
         this.cars = cars;
         this.frame = frame;
         EventHandler eventHandler = new EventHandler(frame, cars);
-        this.vehicleService = new VehicleService(cars);
-        this.timer = new Timer(delay, new ActionPublisher(cars, frame));
+        this.timer = new Timer(delay, new TimeListener(cars, frame));
     }
 
     public void startController() {
         this.timer.start();
+    }
+
+    public VehicleView getVehicleView() {
+        return this.frame;
     }
 
 }

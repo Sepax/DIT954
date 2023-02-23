@@ -6,6 +6,7 @@ import com.car.models.VehicleService;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.car.controller.VehicleController;
 import com.car.models.Vehicle;
 
 public class Application {
@@ -21,10 +22,10 @@ public class Application {
         vehicles.add(VehicleFactory.createSaab95(0, 200));
         vehicles.add(VehicleFactory.createScania(0, 300));
 
-        VehicleView view = new VehicleView("CarSim 1.0", vehicles);
+        VehicleView view = new VehicleView("Grabbarna Grus <3", vehicles);
         VehicleController cc = new VehicleController(view, vehicles);
 
-        cc.frame.setVisible(true);
+        cc.getVehicleView().setVisible(true);
         cc.startController();
 
     }

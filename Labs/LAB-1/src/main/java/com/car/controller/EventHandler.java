@@ -1,9 +1,10 @@
-package com.car.view;
+package com.car.controller;
 
 import java.util.List;
 
 import com.car.models.Vehicle;
 import com.car.models.VehicleService;
+import com.car.view.VehicleView;
 
 public class EventHandler {
 
@@ -18,9 +19,9 @@ public class EventHandler {
 
     private void initActionListeners() {
 
-        view.gasButton.addActionListener(e -> vehicleService.gas(view.gasAmount));
+        view.gasButton.addActionListener(e -> vehicleService.gas(view.getGasAmount()));
 
-        view.brakeButton.addActionListener(e -> vehicleService.brake(view.gasAmount));
+        view.brakeButton.addActionListener(e -> vehicleService.brake(view.getGasAmount()));
 
         view.startButton.addActionListener(e -> vehicleService.start());
 

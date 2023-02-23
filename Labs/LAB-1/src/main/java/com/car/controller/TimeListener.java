@@ -1,4 +1,4 @@
-package com.car.view;
+package com.car.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,14 +7,17 @@ import java.util.List;
 
 import com.car.models.Vehicle;
 import com.car.models.VehicleService;
+import com.car.view.ImageHandler;
+import com.car.view.VehicleView;
+import com.car.view.DrawPanel;
 
-public class ActionPublisher implements ActionListener {
+public class TimeListener implements ActionListener {
 
     private List<Vehicle> cars;
     private VehicleService vehicleService;
     private VehicleView frame;
 
-    public ActionPublisher(List<Vehicle> cars, VehicleView frame) {
+    public TimeListener(List<Vehicle> cars, VehicleView frame) {
         this.cars = cars;
         vehicleService = new VehicleService(cars);
         this.frame = frame;
@@ -25,7 +28,7 @@ public class ActionPublisher implements ActionListener {
             try {
                 if (vehicleService.hasBumpedInWall(
                         car.getX(),
-                        ImageHandler.getImage(frame.drawPanel.vehicles.get(0)).getWidth(),
+                        ImageHandler.getImage(frame.getDrawPanel().vehicles.get(0)).getWidth(),
                         frame.getWidth())) {
                     vehicleService.reverseDirection(car);
                 }
@@ -35,13 +38,13 @@ public class ActionPublisher implements ActionListener {
 
             car.move();
 
-            frame.drawPanel.vehicles.forEach(gameObj -> {
+            frame.getDrawPanel().vehicles.forEach(gameObj -> {
                 ImageHandler.getPoint(gameObj);
             });
 
             // repaint() calls the paintComponent method of the panel
-            frame.drawPanel.repaint();
-            frame.drawPanel.revalidate();
+            frame.getDrawPanel().repaint();
+            frame.getDrawPanel().revalidate();
         }
     }
 }

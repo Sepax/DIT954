@@ -1,7 +1,7 @@
 @startuml new-uml
-skinparam nodesep 80
-skinparam ranksep 80
-skinparam Linetype ortho
+skinparam nodesep 120
+skinparam ranksep 120
+skinparam Linetype polyline
 
     
 
@@ -18,54 +18,33 @@ skinparam Linetype ortho
 
         Volvo240            *-- Trim
         Saab95              *-- Turbo
-        Hauler              *-- Loadable
-        Ferry               *-- Loadable
-        Loadable            *-- Ramp
-        Loadable            *-- Cargo
+        Hauler              *-- Cargo
+        Ferry               *-- Cargo
+        Hauler              *-- Ramp
+        Ferry               *-- Ramp
         Garage              *-- Cargo
         Scania              *-- FlatBed
         Ramp                *-- RampState
-        
+        VehicleService      *.. Vehicle
+        VehicleFactory      <.. Vehicle 
     }
 
     package view {
-        Window             *-- DrawPanel
-        Window             *-- GUIComponents
-        DrawPanel          *-- Renderable
+        VehicleView         *-- DrawPanel
+        DrawPanel           <.. ImageHandler
     }
 
-    package controller {      
-        VehicleController   +-- TimeListener
-        Button              *-- Action
-        Action              <|.. StartEngine
-        Action              <|.. StopEngine
-        Action              <|.. Gas
-        Action              <|.. Brake
-        Action              <|.. EnableTurbo
-        Action              <|.. DisableTurbo
-        Action              <|.. LiftBed
-        Action              <|.. LowerBed
+    package controller {     
+        VehicleController   *-- TimeListener
+        VehicleController   *-- VehicleView
+        VehicleController   *-- EventHandler
     }
 
-    VehicleController           *-- Vehicle
-    Application             *-- Window
+    Application             *-- VehicleService
+    VehicleController       *-- Vehicle
     Application             *-- VehicleController
-    GUIComponents           *-- Button
-
-    class GUIComponents {
-        -controlPanel: JPanel
-        -gasPanel: JPanel
-        -gasSpinner: JSpinner
-        -gasLabel: JLabel
-        -gasButton: Button
-        -brakeButton: Button
-        -turboOnButton: Button
-        -turboOffButton: Button
-        -liftRampButton: Button
-        -lowerRampButton: Button
-        -startButton: Button
-        -stopButton: Button
-    }
+    Application             <.. VehicleFactory
+    EventHandler            *-- VehicleService
 
     interface Movable {
 
@@ -106,6 +85,7 @@ skinparam Linetype ortho
         -speed: double
         -weight: double
         -enginePower: double
+        -imagePath: String
 
         +startEngine()
         +stopEngine()
@@ -174,12 +154,15 @@ skinparam Linetype ortho
     /' Vehicle Components '/
 
     class Cargo{
-        -objects: Deque<T>
-        -double capacity
+        -vehicles: Deque<T>
+        -double: weightCap
+        -int: slots
 
-        loadObject(T object)
-        unloadObject()
-        getContents()
+        +peek()
+        +push(T object)
+        +pop()
+        +removeLast()
+        +getContent()
     }
 
     class Ramp {
@@ -212,7 +195,7 @@ skinparam Linetype ortho
     /' View '/
 
     class DrawPanel {
-        -renderables: ArrayList<Renderable>
+
 
         +DrawPanel(int x, int y)
         +paintComponent(Graphics g)
@@ -221,52 +204,78 @@ skinparam Linetype ortho
     class VehicleController {
         -delay: int
         -timer: Timer
-        - actions: Actions
-        -vehicles: ArrayList<Vehicle>
-        +VehicleController(Arraylist<Vehicle> vehicles)
-        +reverseDirection(Vehicle car)
-        +reverseDirectionOnBump(Vehicle car)
+        -CarView: frame;
+        -ArrayList<Vehicle> vehicles;
+        -EventHandler: eventHandler;
+        -VehicleService service;
         
+        +startController()
     }
 
-    class Window <extends JFrame> {
+    class VehicleView <extends JFrame> {
         -X: int
         -Y: int
-        -gasAmount: int
-        -drawPanel: DrawPanel
-        -components: GUIComponents
-
-        -initComponents(String title)
+        -DrawPanel: drawPanel;
         
-    }
-
-    class Renderable {
-        -point: Point
-        -image: BufferedImage
-        +Renderable(Point point, String path)
-        setPoint(Position pos)
-        setImage(String path)
-        getPoint()
-        getImage()
-    }
-
-    interface Action {
-        +perform(ArrayList<Vehicle> vehicles)
+        -initComponents(String title)
     }
 
     class Application {
         -vehicles: ArrayList<Vehicle>
-        -frame: Window
-        -controller: VehicleController
+        -view: VehicleView
+        -cc: VehicleController
         main(String[] args)
         update()
     }
 
-    class Button <extends JButton>{
-        -test: String
-        -onClick: Action
-        +Button(String text, Action onClick)
+    class VehicleService {
+        -vehicles: ArrayList<Vehicle>
+        -double: newCarY
+
+        +start()
+        +stop()
+        +gas()
+        +brake()
+        +EnableTurbo()
+        +disableTurbo()
+        +liftBed()
+        +lowerBed()
+        +reverseDirection()
+        +hasBumpedInWall()
+        +addRandomVehicle()
+        +addVehicle(Vehicle vehicle)
+        +removeVehicle()
+        +getVehicles()
     }
+
+    class ImageHandler {
+        getPoint(Vehicle vehicle)
+        getImage(Vehicle vehicle)
+    }
+
+    class VehicleFactory {
+        createSaab95()
+        createVolvo240()
+        createScania()
+        createHauler()
+        createFerry()
+    }
+
+    class EventHandler {
+        -VehicleService: vehicleService;
+        initActionListeners()
+    }
+
+    class TimeListener {
+        -cars: List<Vehicle>
+        -vehicleService: VehicleService
+        -frame: VehicleView
+        +actionPerformed(ActionEvent e)
+    }
+
+    TimeListener *-- VehicleService
+    TimeListener *-- VehicleView
+    TimeListener *-- Vehicle
     
 
 @enduml

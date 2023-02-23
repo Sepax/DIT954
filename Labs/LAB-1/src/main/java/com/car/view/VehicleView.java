@@ -26,22 +26,29 @@ public class VehicleView extends JFrame {
     int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
-    JButton addCarButton = new JButton("Add car");
-    JButton removeCarButton = new JButton("Remove car");
-
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
+    public JButton gasButton = new JButton("Gas");
+    public JButton brakeButton = new JButton("Brake");
+    public JButton turboOnButton = new JButton("Saab Turbo on");
+    public JButton turboOffButton = new JButton("Saab Turbo off");
+    public JButton liftBedButton = new JButton("Scania Lift Bed");
+    public JButton lowerBedButton = new JButton("Lower Lift Bed");
+    public JButton addCarButton = new JButton("Add car");
+    public JButton removeCarButton = new JButton("Remove car");
+    public JButton startButton = new JButton("Start all cars");
+    public JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
     public VehicleView(String framename, List<Vehicle> vehicles) {
         this.drawPanel = new DrawPanel(vehicles, X, Y - 240);
         initComponents(framename);
+    }
+
+    public DrawPanel getDrawPanel() {
+        return drawPanel;
+    }
+
+    public int getGasAmount() {
+        return gasAmount;
     }
 
     // Sets everything in place and fits everything

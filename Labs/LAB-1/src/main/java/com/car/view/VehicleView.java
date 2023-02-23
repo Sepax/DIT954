@@ -5,9 +5,14 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.car.models.Vehicle;
+import com.car.models.VehicleService;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.car.view.SpeedView;
+
 
 /**
  * The view of the application
@@ -16,6 +21,7 @@ import java.util.List;
 public class VehicleView extends JFrame {
     private static final int X = 800;
     private static final int Y = 800;
+
 
     DrawPanel drawPanel;
 
@@ -44,8 +50,10 @@ public class VehicleView extends JFrame {
         initComponents(framename);
     }
 
+
     // Sets everything in place and fits everything
     private void initComponents(String title) {
+
 
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X, Y));
@@ -105,5 +113,6 @@ public class VehicleView extends JFrame {
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 }

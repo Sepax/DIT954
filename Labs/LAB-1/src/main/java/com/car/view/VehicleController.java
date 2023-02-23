@@ -34,48 +34,23 @@ import java.util.List;
 public class VehicleController {
 
     private final int delay = 50;
-    private Timer timer = new Timer(delay, new TimerListener());
+    private Timer timer;
     VehicleView frame;
     List<Vehicle> cars = new ArrayList<>();
     private EventHandler eventHandler;
     private VehicleService vehicleService;
+    private ActionPublisher actionPublisher;
 
     public VehicleController(VehicleView frame, List<Vehicle> cars) {
         this.cars = cars;
         this.frame = frame;
         EventHandler eventHandler = new EventHandler(frame, cars);
         this.vehicleService = new VehicleService(cars);
+        this.timer = new Timer(delay, new ActionPublisher(cars, frame));
     }
 
     public void startController() {
         this.timer.start();
-    }
-
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Vehicle car : cars) {
-                try {
-                    if (vehicleService.hasBumpedInWall(
-                            car.getX(),
-                            ImageHandler.getImage(frame.drawPanel.vehicles.get(0)).getWidth(),
-                            frame.getWidth())) {
-                        vehicleService.reverseDirection(car);
-                    }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-
-                car.move();
-
-                frame.drawPanel.vehicles.forEach(gameObj -> {
-                    ImageHandler.getPoint(gameObj);
-                });
-
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-                frame.drawPanel.revalidate();
-            }
-        }
     }
 
 }

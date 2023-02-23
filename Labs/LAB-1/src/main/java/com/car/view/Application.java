@@ -22,7 +22,11 @@ public class Application {
         vehicles.add(VehicleFactory.createSaab95(0, 200));
         vehicles.add(VehicleFactory.createScania(0, 300));
 
+<<<<<<< Updated upstream
         VehicleView view = new VehicleView("Grabbarna Grus <3", vehicles);
+=======
+        VehicleView view = new VehicleView("We <3 Martin", vehicles);
+>>>>>>> Stashed changes
         VehicleController cc = new VehicleController(view, vehicles);
 
         cc.getVehicleView().setVisible(true);

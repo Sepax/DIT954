@@ -30,7 +30,7 @@ public class DrawPanel extends JPanel {
     public DrawPanel(List<Vehicle> vehicles, int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.orange);
+        this.setBackground(Color.pink);
         this.vehicles = vehicles;
 
     }

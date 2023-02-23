@@ -329,7 +329,7 @@ public abstract class Vehicle implements Moveable {
         }
     }
 
-    public void moveCar(int x, int y) {
+    public void movePoint(int x, int y) {
         this.point.x = x;
         this.point.y = y;
     }

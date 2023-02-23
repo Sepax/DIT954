@@ -10,16 +10,10 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * This class represents the full view of the MVC pattern of your car simulator.
- * It initializes with being center on the screen and attaching it's controller
- * in it's state.
- * It communicates with the Controller by calling methods of it when an action
- * fires of in
- * each of it's components.
- * TODO: Write more actionListeners and wire the rest of the buttons
- **/
+ * The view of the application
+ */
 
-public class CarView extends JFrame {
+public class VehicleView extends JFrame {
     private static final int X = 800;
     private static final int Y = 800;
 
@@ -45,7 +39,7 @@ public class CarView extends JFrame {
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, List<Vehicle> vehicles) {
+    public VehicleView(String framename, List<Vehicle> vehicles) {
         this.drawPanel = new DrawPanel(vehicles, X, Y - 240);
         initComponents(framename);
     }

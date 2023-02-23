@@ -21,9 +21,9 @@ public class Application {
         vehicles.add(VehicleFactory.createSaab95(0, 200));
         vehicles.add(VehicleFactory.createScania(0, 300));
 
-        CarView view = new CarView("CarSim 1.0", vehicles);
+        VehicleView view = new VehicleView("CarSim 1.0", vehicleService.getCars());
 
-        CarController cc = new CarController(view, vehicles);
+        VehicleController cc = new VehicleController(view, vehicleService.getCars());
 
         cc.frame.setVisible(true);
 

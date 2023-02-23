@@ -7,10 +7,10 @@ import com.car.models.VehicleService;
 
 public class EventHandler {
 
-    CarView view;
+    VehicleView view;
     VehicleService vehicleService;
 
-    public EventHandler(CarView view, List<Vehicle> vehicles) {
+    public EventHandler(VehicleView view, List<Vehicle> vehicles) {
         this.view = view;
         this.initActionListeners();
         this.vehicleService = new VehicleService(vehicles);

@@ -2,9 +2,13 @@ package com.car.view;
 
 import javax.swing.*;
 
+import com.car.models.Saab95;
+import com.car.models.Scania;
 import com.car.models.Vehicle;
 import com.car.models.VehicleService;
+import com.car.models.Volvo240;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -26,16 +30,16 @@ import java.util.List;
  * 
  */
 
-public class CarController {
+public class VehicleController {
 
     private final int delay = 50;
     private Timer timer = new Timer(delay, new TimerListener());
-    CarView frame;
+    VehicleView frame;
     List<Vehicle> cars = new ArrayList<>();
     private EventHandler eventHandler;
     private VehicleService vehicleService;
 
-    public CarController(CarView frame, List<Vehicle> cars) {
+    public VehicleController(VehicleView frame, List<Vehicle> cars) {
         this.cars = cars;
         this.frame = frame;
         EventHandler eventHandler = new EventHandler(frame, cars);
@@ -61,7 +65,7 @@ public class CarController {
                 int y = (int) Math.round(car.getY());
 
                 frame.drawPanel.vehicles.forEach(gameObj -> {
-                    gameObj.moveCar(x, y);
+                    gameObj.movePoint(x, y);
                 });
 
                 // repaint() calls the paintComponent method of the panel

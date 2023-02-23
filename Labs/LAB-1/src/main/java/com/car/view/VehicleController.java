@@ -11,6 +11,7 @@ import com.car.models.Volvo240;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,19 +54,21 @@ public class VehicleController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle car : cars) {
-                if (vehicleService.hasBumpedInWall(
-                        car.getX(),
-                        frame.drawPanel.vehicles.get(0).getVehicleImage().getWidth(),
-                        frame.getWidth())) {
-                    vehicleService.reverseDirection(car);
+                try {
+                    if (vehicleService.hasBumpedInWall(
+                            car.getX(),
+                            ImageHandler.getImage(frame.drawPanel.vehicles.get(0)).getWidth(),
+                            frame.getWidth())) {
+                        vehicleService.reverseDirection(car);
+                    }
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
 
                 car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
 
                 frame.drawPanel.vehicles.forEach(gameObj -> {
-                    gameObj.movePoint(x, y);
+                    ImageHandler.getPoint(gameObj);
                 });
 
                 // repaint() calls the paintComponent method of the panel

@@ -35,11 +35,10 @@ public abstract class Vehicle implements Moveable {
     double currentSpeed;
     double weight;
     Position position;
-    Point point;
     Color color;
     String modelName;
     Facing facing;
-    private BufferedImage vehicleImage;
+    private String imagePath;
 
     /**
      * Enum representing the facing of the vehicle.
@@ -61,8 +60,7 @@ public abstract class Vehicle implements Moveable {
         this.facing = facing;
         this.position = position;
         stopEngine();
-        assignImageToVehicle(imagePath);
-        this.point = new Point((int) position.getX(), (int) position.getY());
+        this.imagePath = imagePath;
     }
 
     /**
@@ -85,6 +83,10 @@ public abstract class Vehicle implements Moveable {
 
     public double getWeight() {
         return weight;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 
     /**
@@ -312,25 +314,7 @@ public abstract class Vehicle implements Moveable {
         this.modelName = modelName;
     }
 
-    public BufferedImage getVehicleImage() {
-        ColorModel cm = vehicleImage.getColorModel();
-        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-        WritableRaster raster = vehicleImage.copyData(null);
-        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
-    }
-
-    private void assignImageToVehicle(String imagePath) {
-        try {
-            // vehicleImage = ImageIO.read(imageFile);
-            String assetsFacing = System.getProperty("user.dir");
-            // + "/assets/";
-            this.vehicleImage = ImageIO.read(new FileInputStream(assetsFacing + "/" + imagePath));
-        } catch (Exception ex) {
-        }
-    }
-
-    public void movePoint(int x, int y) {
-        this.point.x = x;
-        this.point.y = y;
+    public String getImagePath() {
+        return imagePath;
     }
 }

@@ -2,8 +2,14 @@ package com.car.view;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
+import java.awt.image.ColorModel;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import com.car.models.Vehicle;
@@ -19,21 +25,15 @@ import com.car.models.Vehicle;
 public class DrawPanel extends JPanel {
 
     public List<Vehicle> vehicles;
-    private BufferedImage vehicleImage;
 
     // Initializes the panel and reads the images
-    public DrawPanel(List<Vehicle> cars, int x, int y) {
+    public DrawPanel(List<Vehicle> vehicles, int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.orange);
-        this.vehicles = cars;
+        this.vehicles = vehicles;
 
     }
-
-    private void updateVehicleImage(Vehicle vehicle) {
-        vehicleImage = vehicle.getVehicleImage();
-    }
-
 
     /**
      * This method is called each time the panel updates/refreshes/repaints itself
@@ -43,8 +43,11 @@ public class DrawPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (Vehicle vehicle : vehicles) {
-            updateVehicleImage(vehicle);
-            g.drawImage(vehicleImage, (int) vehicle.getX(), (int) vehicle.getY(), null);
+            try {
+                g.drawImage(ImageHandler.getImage(vehicle), (int) vehicle.getX(), (int) vehicle.getY(), null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -2,27 +2,27 @@ package com.car.models;
 
 import java.util.List;
 
+import com.car.interfaces.IVehicle;
 import com.car.models.Vehicle.Facing;
-import com.car.models.VehicleFactory;
 
 public class VehicleService {
 
     private double newCarY = 0;
 
-    private final List<Vehicle> cars;
+    private World world;
 
-    public VehicleService(List<Vehicle> vehicles) {
-        this.cars = vehicles;
+    public VehicleService(World world) {
+        this.world = world;
     }
 
     public void start() {
-        for (Vehicle car : cars) {
+        for (IVehicle car : world.getAllVehicles()) {
             car.startEngine();
         }
     }
 
     public void stop() {
-        for (Vehicle car : cars) {
+        for (IVehicle car : world.getAllVehicles()) {
             car.stopEngine();
         }
     }
@@ -35,7 +35,7 @@ public class VehicleService {
 
     public void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle car : cars) {
+        for (IVehicle car : world.getAllVehicles()) {
             car.gas(gas);
         }
     }
@@ -47,13 +47,13 @@ public class VehicleService {
      */
     public void brake(double amount) {
         double brake = ((double) amount) / 100;
-        for (Vehicle car : cars) {
+        for (IVehicle car : world.getAllVehicles()) {
             car.brake(brake);
         }
     }
 
     public void enableTurbo() {
-        for (Vehicle car : cars) {
+        for (IVehicle car : world.getAllVehicles()) {
             if (car instanceof Saab95) {
                 ((Saab95) car).enableTurbo();
             }
@@ -61,7 +61,7 @@ public class VehicleService {
     }
 
     public void disableTurbo() {
-        for (Vehicle car : cars) {
+        for (IVehicle car : world.getAllVehicles()) {
             if (car instanceof Saab95) {
                 ((Saab95) car).disableTurbo();
             }
@@ -69,7 +69,7 @@ public class VehicleService {
     }
 
     public void liftBed() {
-        for (Vehicle car : cars) {
+        for (IVehicle car : world.getAllVehicles()) {
             if (car instanceof Scania) {
                 ((Scania) car).raiseFlatbed(10);
             }
@@ -77,14 +77,14 @@ public class VehicleService {
     }
 
     public void lowerBed() {
-        for (Vehicle car : cars) {
+        for (IVehicle car : world.getAllVehicles()) {
             if (car instanceof Scania) {
                 ((Scania) car).lowerFlatbed(10);
             }
         }
     }
 
-    public void reverseDirection(Vehicle car) {
+    public void reverseDirection(IVehicle car) {
 
         switch (car.getFacing()) {
             case EAST:
@@ -119,32 +119,31 @@ public class VehicleService {
         }
     }
 
-    public void addCar(Vehicle car) {
+    public void addCar(IVehicle car) {
 
-        if (this.cars.size() < 10) {
-            this.cars.add(car);
+        if (this.world.getAllVehicles().size() < 10) {
+            this.world.addVehicle(car);
             if (car.getY() > newCarY) {
                 newCarY = car.getY();
+            } else {
+                newCarY += 70;
             }
-            else {
-                newCarY += 70;}
         }
         if (newCarY > 600) {
             newCarY = 0;
         }
     }
 
-
     public void removeCar() {
-        if (cars.size() > 1) {
-            Vehicle first = cars.get(0);
-            cars.remove(first);
+        if (world.getAllVehicles().size() > 1) {
+            IVehicle first = world.getAllVehicles().get(0);
+            world.removeVehicle(first);
         }
 
     }
 
-    public List<Vehicle> getCars() {
-        return cars;
+    public List<IVehicle> getCars() {
+        return world.getAllVehicles();
     }
 
 }

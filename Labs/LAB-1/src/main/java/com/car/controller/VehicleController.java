@@ -2,11 +2,14 @@ package com.car.controller;
 
 import javax.swing.*;
 
+import com.car.interfaces.ITurbo;
 import com.car.models.Saab95;
 import com.car.models.Scania;
 import com.car.models.Vehicle;
+import com.car.models.VehicleFactory;
 import com.car.models.VehicleService;
 import com.car.models.Volvo240;
+import com.car.models.World;
 import com.car.view.VehicleView;
 
 import javax.swing.*;
@@ -37,15 +40,11 @@ public class VehicleController {
     private final int delay = 50;
     private Timer timer;
     VehicleView frame;
-    List<Vehicle> cars = new ArrayList<>();
-    private EventHandler eventHandler;
-    private TimeListener actionPublisher;
 
-    public VehicleController(VehicleView frame, List<Vehicle> cars) {
-        this.cars = cars;
+    public VehicleController(VehicleView frame, World world) {
         this.frame = frame;
-        EventHandler eventHandler = new EventHandler(frame, cars);
-        this.timer = new Timer(delay, new TimeListener(cars, frame));
+        new EventHandler(frame, world);
+        this.timer = new Timer(delay, new TimeListener(world, frame));
     }
 
     public void startController() {

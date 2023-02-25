@@ -3,7 +3,9 @@ package com.car.controller;
 import java.util.List;
 
 import com.car.models.Vehicle;
+import com.car.models.VehicleFactory;
 import com.car.models.VehicleService;
+import com.car.models.World;
 import com.car.view.VehicleView;
 
 public class EventHandler {
@@ -11,10 +13,10 @@ public class EventHandler {
     VehicleView view;
     VehicleService vehicleService;
 
-    public EventHandler(VehicleView view, List<Vehicle> vehicles) {
+    public EventHandler(VehicleView view, World world) {
         this.view = view;
         this.initActionListeners();
-        this.vehicleService = new VehicleService(vehicles);
+        this.vehicleService = new VehicleService(world);
     }
 
     private void initActionListeners() {

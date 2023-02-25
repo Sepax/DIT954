@@ -29,7 +29,7 @@ import com.car.interfaces.*;
  * @param modelName    the model name of the vehicle
  * @param facing       the facing the vehicle is facing
  */
-public abstract class Vehicle implements Moveable {
+public abstract class Vehicle implements IVehicle {
     int nrDoors;
     double enginePower;
     double currentSpeed;

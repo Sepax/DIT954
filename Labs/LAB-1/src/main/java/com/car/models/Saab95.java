@@ -2,6 +2,9 @@ package com.car.models;
 
 import java.awt.Color;
 
+import com.car.interfaces.ITurbo;
+import com.car.interfaces.ITurboVehicle;
+
 /**
  * Saab95 is a class that represents a Saab95 car and extends the Vehicle class.
  * It has a turbo feature that can be turned on or off, which affects the
@@ -10,7 +13,7 @@ import java.awt.Color;
  * @author Kiril Curlinov, Gabriele Frattini, Sebastian Pålsson
  * @param turbo the turbo feature of the car
  */
-public class Saab95 extends Vehicle {
+public class Saab95 extends Vehicle implements ITurboVehicle {
     private Turbo turbo;
 
     /**

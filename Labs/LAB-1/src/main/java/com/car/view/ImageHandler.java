@@ -7,23 +7,24 @@ import java.awt.image.ColorModel;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import com.car.models.Vehicle;
+
+import com.car.interfaces.IVehicle;
 
 public abstract class ImageHandler {
 
     protected ImageHandler() {
     }
 
-    public static Point getPoint(Vehicle vehicle) {
+    public static Point getPoint(IVehicle vehicle) {
         Point point = new Point();
         point.x = (int) Math.round(vehicle.getX());
         point.x = (int) Math.round(vehicle.getY());
         return point;
     }
 
-    public static BufferedImage getImage(Vehicle vehicle) throws IOException {
+    public static BufferedImage getImage(String path) throws IOException {
         String assetsFacing = System.getProperty("user.dir");
-        BufferedImage vehicleImage = ImageIO.read(new FileInputStream(assetsFacing + "/" + vehicle.getImagePath()));
+        BufferedImage vehicleImage = ImageIO.read(new FileInputStream(assetsFacing + "/" + path));
         ColorModel cm = vehicleImage.getColorModel();
         boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
         WritableRaster raster = vehicleImage.copyData(null);

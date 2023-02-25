@@ -5,6 +5,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.car.models.Vehicle;
+import com.car.models.World;
 
 import java.awt.*;
 import java.util.List;
@@ -38,8 +39,8 @@ public class VehicleView extends JFrame {
     public JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public VehicleView(String framename, List<Vehicle> vehicles) {
-        this.drawPanel = new DrawPanel(vehicles, X, Y - 240);
+    public VehicleView(String framename, World world) {
+        this.drawPanel = new DrawPanel(world, X, Y - 240);
         initComponents(framename);
     }
 

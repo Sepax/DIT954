@@ -1,4 +1,4 @@
-package com.car.models;
+package com.car.model;
 
 public class Ramp {
     RampState ramp;

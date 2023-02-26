@@ -2,8 +2,8 @@ package com.car.interfaces;
 
 import java.awt.Color;
 
-import com.car.models.Position;
-import com.car.models.Vehicle.Facing;
+import com.car.model.Position;
+import com.car.model.Vehicle.Facing;
 
 public interface IVehicle {
 

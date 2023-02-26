@@ -4,8 +4,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.car.models.Vehicle;
-import com.car.models.World;
+import com.car.model.Vehicle;
+import com.car.model.World;
 
 import java.awt.*;
 import java.util.List;

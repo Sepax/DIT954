@@ -1,8 +1,8 @@
-package com.car.models;
+package com.car.model;
 
 import java.awt.Color;
 
-import com.car.models.Ramp.RampState;
+import com.car.model.Ramp.RampState;
 
 /**
  * Hauler is a class that represents a hauler truck and extends the Transporter

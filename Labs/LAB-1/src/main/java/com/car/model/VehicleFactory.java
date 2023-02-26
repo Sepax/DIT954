@@ -1,4 +1,4 @@
-package com.car.models;
+package com.car.model;
 
 import com.car.interfaces.ITurbo;
 import com.car.interfaces.ITurboVehicle;

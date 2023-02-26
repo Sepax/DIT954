@@ -1,4 +1,4 @@
-package com.car.models;
+package com.car.model;
 
 /**
  * Turbo is a class that represents a turbo feature, which can be turned on or

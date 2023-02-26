@@ -1,13 +1,13 @@
 package com.car.view;
 
-import com.car.models.VehicleFactory;
-import com.car.models.World;
+import com.car.model.VehicleFactory;
+import com.car.model.World;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.car.controller.VehicleController;
-import com.car.models.Vehicle;
+import com.car.model.Vehicle;
 
 public class Application {
 
@@ -17,7 +17,7 @@ public class Application {
     public static void main(String[] args) {
 
         World world = new World();
-        
+
         world.addVehicle(VehicleFactory.createVolvo240(0, 100));
         world.addTurboVehicle(VehicleFactory.createSaab95(0, 200));
         world.addVehicle(VehicleFactory.createScania(0, 300));

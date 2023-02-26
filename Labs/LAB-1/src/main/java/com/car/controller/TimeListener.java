@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.List;
 
 import com.car.interfaces.IVehicle;
-import com.car.models.Vehicle;
-import com.car.models.VehicleService;
-import com.car.models.World;
+import com.car.model.Vehicle;
+import com.car.model.VehicleService;
+import com.car.model.World;
 import com.car.view.ImageHandler;
 import com.car.view.VehicleView;
 

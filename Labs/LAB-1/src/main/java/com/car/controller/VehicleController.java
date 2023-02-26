@@ -3,13 +3,13 @@ package com.car.controller;
 import javax.swing.*;
 
 import com.car.interfaces.ITurbo;
-import com.car.models.Saab95;
-import com.car.models.Scania;
-import com.car.models.Vehicle;
-import com.car.models.VehicleFactory;
-import com.car.models.VehicleService;
-import com.car.models.Volvo240;
-import com.car.models.World;
+import com.car.model.Saab95;
+import com.car.model.Scania;
+import com.car.model.Vehicle;
+import com.car.model.VehicleFactory;
+import com.car.model.VehicleService;
+import com.car.model.Volvo240;
+import com.car.model.World;
 import com.car.view.VehicleView;
 
 import javax.swing.*;

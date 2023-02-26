@@ -1,9 +1,9 @@
-package com.car.models;
+package com.car.model;
 
 import java.util.List;
 
 import com.car.interfaces.IVehicle;
-import com.car.models.Vehicle.Facing;
+import com.car.model.Vehicle.Facing;
 
 public class VehicleService {
 

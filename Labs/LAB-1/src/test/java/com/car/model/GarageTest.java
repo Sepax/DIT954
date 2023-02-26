@@ -1,4 +1,4 @@
-package com.car.models;
+package com.car.model;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;

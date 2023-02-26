@@ -2,10 +2,10 @@ package com.car.controller;
 
 import java.util.List;
 
-import com.car.models.Vehicle;
-import com.car.models.VehicleFactory;
-import com.car.models.VehicleService;
-import com.car.models.World;
+import com.car.model.Vehicle;
+import com.car.model.VehicleFactory;
+import com.car.model.VehicleService;
+import com.car.model.World;
 import com.car.view.VehicleView;
 
 public class EventHandler {

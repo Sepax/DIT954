@@ -1,4 +1,4 @@
-package com.car.models;
+package com.car.model;
 
 /**
  * The class `Garage` represents a garage.

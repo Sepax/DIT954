@@ -1,4 +1,4 @@
-package com.car.models;
+package com.car.model;
 
 public class Position {
     double x;

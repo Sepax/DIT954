@@ -25,11 +25,11 @@ public class TimeListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        for (IVehicle car : world.getAllVehicles()) {
+        for (IVehicle car : world.getVehicles()) {
             try {
                 if (vehicleService.hasBumpedInWall(
                         car.getX(),
-                        ImageHandler.getImage(frame.getDrawPanel().getWorld().getAllVehicles().get(0).getImagePath())
+                        ImageHandler.getImage(frame.getDrawPanel().getWorld().getVehicles().get(0).getImagePath())
                                 .getWidth(),
                         frame.getWidth())) {
                     vehicleService.reverseDirection(car);
@@ -40,7 +40,7 @@ public class TimeListener implements ActionListener {
 
             car.move();
 
-            frame.getDrawPanel().getWorld().getAllVehicles().forEach(gameObj -> {
+            frame.getDrawPanel().getWorld().getVehicles().forEach(gameObj -> {
                 ImageHandler.getPoint(gameObj);
             });
 

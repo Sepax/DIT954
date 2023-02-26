@@ -1,5 +1,7 @@
 package com.car.model;
 
+import com.car.interfaces.ITurbo;
+
 /**
  * Turbo is a class that represents a turbo feature, which can be turned on or
  * off.

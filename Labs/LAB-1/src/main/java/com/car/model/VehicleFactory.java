@@ -1,7 +1,6 @@
 package com.car.model;
 
 import com.car.interfaces.ITurbo;
-import com.car.interfaces.ITurboVehicle;
 
 public class VehicleFactory {
 
@@ -9,7 +8,7 @@ public class VehicleFactory {
         return new Volvo240(new Position(x, y));
     }
 
-    public static final ITurboVehicle createSaab95(double x, double y) {
+    public static final Vehicle createSaab95(double x, double y) {
         return new Saab95(new Position(x, y));
     }
 

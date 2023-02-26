@@ -2,10 +2,12 @@ package com.car.model;
 
 import java.awt.*;
 
+import com.car.interfaces.ITrim;
+
 /**
  * Volvo240 represents a Volvo240 car and extends the Vehicle class.
  */
-public class Volvo240 extends Vehicle {
+public class Volvo240 extends Vehicle implements ITrim {
 	private Trim trim = new Trim();
 
 	/**

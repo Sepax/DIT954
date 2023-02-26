@@ -2,6 +2,8 @@ package com.car.model;
 
 import java.awt.Color;
 
+import com.car.interfaces.ICargo;
+import com.car.interfaces.IRamp;
 import com.car.model.Ramp.RampState;
 
 /**
@@ -12,7 +14,7 @@ import com.car.model.Ramp.RampState;
  * @author Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @since 2023-02-02
  */
-public class Hauler extends Vehicle {
+public class Hauler extends Vehicle implements ICargo, IRamp {
 	private Cargo<Vehicle> cargo;
 	private Ramp ramp;
 

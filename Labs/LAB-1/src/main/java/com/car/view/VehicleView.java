@@ -3,12 +3,8 @@ package com.car.view;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import com.car.model.Vehicle;
 import com.car.model.World;
-
 import java.awt.*;
-import java.util.List;
 
 /**
  * The view of the application
@@ -29,14 +25,14 @@ public class VehicleView extends JFrame {
 
     public JButton gasButton = new JButton("Gas");
     public JButton brakeButton = new JButton("Brake");
-    public JButton turboOnButton = new JButton("Saab Turbo on");
-    public JButton turboOffButton = new JButton("Saab Turbo off");
-    public JButton liftBedButton = new JButton("Scania Lift Bed");
-    public JButton lowerBedButton = new JButton("Lower Lift Bed");
+    public JButton turboOnButton = new JButton("Turbo on");
+    public JButton turboOffButton = new JButton("Turbo off");
+    public JButton liftBedButton = new JButton("Lift Bed");
+    public JButton lowerBedButton = new JButton("Lower Bed");
     public JButton addCarButton = new JButton("Add car");
     public JButton removeCarButton = new JButton("Remove car");
-    public JButton startButton = new JButton("Start all cars");
-    public JButton stopButton = new JButton("Stop all cars");
+    public JButton startButton = new JButton("Start cars");
+    public JButton stopButton = new JButton("Stop cars");
 
     // Constructor
     public VehicleView(String framename, World world) {
@@ -61,10 +57,7 @@ public class VehicleView extends JFrame {
 
         this.add(drawPanel);
 
-        SpinnerModel spinnerModel = new SpinnerNumberModel(0, // initial value
-                0, // min
-                100, // max
-                1);// step
+        SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
         gasSpinner = new JSpinner(spinnerModel);
         gasSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -112,6 +105,7 @@ public class VehicleView extends JFrame {
         // Make the frame visible
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
+
 }

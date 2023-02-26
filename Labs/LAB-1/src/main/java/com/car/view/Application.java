@@ -19,7 +19,7 @@ public class Application {
         World world = new World();
 
         world.addVehicle(VehicleFactory.createVolvo240(0, 100));
-        world.addTurboVehicle(VehicleFactory.createSaab95(0, 200));
+        world.addVehicle(VehicleFactory.createSaab95(0, 200));
         world.addVehicle(VehicleFactory.createScania(0, 300));
 
         VehicleView view = new VehicleView("Grabbarna Grus <3", world);

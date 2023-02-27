@@ -6,7 +6,6 @@ skinparam Linetype polyline
     
 
     package model {
-        Movable             <.. Vehicle
         Vehicle             <|-- Saab95
         Vehicle             <|-- Volvo240
         Vehicle             <|-- Scania
@@ -26,8 +25,23 @@ skinparam Linetype polyline
         Scania              *-- FlatBed
         Ramp                *-- RampState
         VehicleService      *.. Vehicle
-        VehicleFactory      <.. Vehicle 
+        VehicleFactory      <.. Vehicle
+
+        World               --> Application
     }
+
+    package interfaces {
+        IVehicle <|-- ICargo
+        IVehicle <|-- IFlatBed
+        IVehicle <|-- IRamp
+        IVehicle <|-- ITrim 
+        IVehicle <|-- ITurbo
+        Movable             <.. Vehicle
+        
+        World               o.. IVehicle
+        
+    }
+
 
     package view {
         VehicleView         *-- DrawPanel
@@ -45,6 +59,22 @@ skinparam Linetype polyline
     Application             *-- VehicleController
     Application             <.. VehicleFactory
     EventHandler            *-- VehicleService
+
+    ITurbo <.. Saab95
+    ITrim <.. Volvo240
+    ICargo <.. Hauler
+    ICargo <.. Ferry
+    IRamp <.. Hauler
+    IRamp <.. Ferry
+    IFlatBed <.. Scania
+    
+    class World {
+        -vehicles: ArrayList<IVehicle>
+        -view: VehicleView
+        -cc: VehicleController
+    }
+
+
 
     interface Movable {
 
@@ -276,6 +306,41 @@ skinparam Linetype polyline
     TimeListener *-- VehicleService
     TimeListener *-- VehicleView
     TimeListener *-- Vehicle
+
+    interface IVehicle {
+        +startEngine()
+        +stopEngine()
+        +gas(double amount)
+        +brake(double amount)
+        +turnLeft()
+        +turnRight()
+        +move()
+    }
+
+    interface IVehicle{
+    }
+
+    interface ITrim{
+
+    }
+
+    interface ICargo{
+
+    }
+
+    interface ITurbo {
+
+    }
+
+    interface IFlatBed {
+
+    }
+
+    interface IRamp {
+
+    }
+
+
     
 
 @enduml

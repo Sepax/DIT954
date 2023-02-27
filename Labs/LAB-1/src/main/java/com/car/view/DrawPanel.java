@@ -27,10 +27,6 @@ public class DrawPanel extends JPanel {
 
     }
 
-    public World getWorld() {
-        return this.world;
-    }
-
     /**
      * This method is called each time the panel updates/refreshes/repaints itself
      * It draws the images of the vehicles

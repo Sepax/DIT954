@@ -2,51 +2,55 @@ package com.car.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Timer;
+
 import com.car.interfaces.IVehicle;
-import com.car.model.Vehicle;
+import com.car.interfaces.Observer;
 import com.car.model.VehicleService;
 import com.car.model.World;
-import com.car.view.ImageHandler;
-import com.car.view.VehicleView;
 
 public class TimeListener implements ActionListener {
 
+    private final int delay = 50;
     private World world;
     private VehicleService vehicleService;
-    private VehicleView frame;
+    private final List<Observer> observers = new ArrayList<>();
+    private Timer timer;
 
-    public TimeListener(World world, VehicleView frame) {
+    public TimeListener(World world) {
         this.world = world;
         vehicleService = new VehicleService(world);
-        this.frame = frame;
+        timer = new Timer(delay, this);
     }
 
     public void actionPerformed(ActionEvent e) {
         for (IVehicle car : world.getVehicles()) {
-            try {
-                if (vehicleService.hasBumpedInWall(
-                        car.getX(),
-                        ImageHandler.getImage(frame.getDrawPanel().getWorld().getVehicles().get(0).getImagePath())
-                                .getWidth(),
-                        frame.getWidth())) {
-                    vehicleService.reverseDirection(car);
-                }
-            } catch (IOException e1) {
-                e1.printStackTrace();
+
+            if (vehicleService.hasBumpedInWall(
+                    car.getX(), 100, 800)) {
+                vehicleService.reverseDirection(car);
             }
 
             car.move();
 
-            frame.getDrawPanel().getWorld().getVehicles().forEach(gameObj -> {
-                ImageHandler.getPoint(gameObj);
-            });
-
-            // repaint() calls the paintComponent method of the panel
-            frame.getDrawPanel().repaint();
-            frame.getDrawPanel().revalidate();
+            for (Observer observer : observers) {
+                observer.notify(world.getVehicles());
+            }
         }
+    }
+
+    public void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    public void start() {
+        timer.start();
     }
 }

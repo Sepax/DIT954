@@ -3,7 +3,6 @@ package com.car.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.car.interfaces.ITurbo;
 import com.car.interfaces.IVehicle;
 
 public class World {
@@ -34,6 +33,10 @@ public class World {
 
     public void addVehicle(IVehicle vehicle) {
         this.vehicles.add(vehicle);
+    }
+
+    public void setVehicles(List<IVehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 
     public void removeVehicle(IVehicle vehicle) {

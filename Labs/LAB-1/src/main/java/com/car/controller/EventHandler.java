@@ -1,47 +1,43 @@
 package com.car.controller;
 
-import java.util.List;
-
-import com.car.model.Vehicle;
-import com.car.model.VehicleFactory;
 import com.car.model.VehicleService;
 import com.car.model.World;
 import com.car.view.VehicleView;
 
 public class EventHandler {
 
-    VehicleView view;
+    VehicleController cc;
     VehicleService vehicleService;
 
-    public EventHandler(VehicleView view, World world) {
-        this.view = view;
+    public EventHandler(VehicleController cc, World world) {
+        this.cc = cc;
         this.initActionListeners();
         this.vehicleService = new VehicleService(world);
     }
 
     private void initActionListeners() {
 
-        view.gasButton.addActionListener(e -> vehicleService.gas(view.getGasAmount()));
+        cc.gasButton.addActionListener(e -> vehicleService.gas(cc.getGasAmount()));
 
-        view.brakeButton.addActionListener(e -> vehicleService.brake(view.getGasAmount()));
+        cc.brakeButton.addActionListener(e -> vehicleService.brake(cc.getGasAmount()));
 
-        view.startButton.addActionListener(e -> vehicleService.start());
+        cc.startButton.addActionListener(e -> vehicleService.start());
 
-        view.stopButton.addActionListener(e -> vehicleService.stop());
+        cc.stopButton.addActionListener(e -> vehicleService.stop());
 
-        view.turboOnButton.addActionListener(e -> vehicleService.enableTurbo());
+        cc.turboOnButton.addActionListener(e -> vehicleService.enableTurbo());
 
-        view.turboOffButton.addActionListener(e -> vehicleService.disableTurbo());
+        cc.turboOffButton.addActionListener(e -> vehicleService.disableTurbo());
 
-        view.liftBedButton.addActionListener(e -> vehicleService.liftBed());
+        cc.liftBedButton.addActionListener(e -> vehicleService.liftBed());
 
-        view.lowerBedButton.addActionListener(e -> vehicleService.lowerBed());
+        cc.lowerBedButton.addActionListener(e -> vehicleService.lowerBed());
 
-        view.lowerBedButton.addActionListener(e -> vehicleService.disableTurbo());
+        cc.lowerBedButton.addActionListener(e -> vehicleService.disableTurbo());
 
-        view.addCarButton.addActionListener(e -> vehicleService.addRandomVehicle());
+        cc.addCarButton.addActionListener(e -> vehicleService.addRandomVehicle());
 
-        view.removeCarButton.addActionListener(e -> vehicleService.removeCar());
+        cc.removeCarButton.addActionListener(e -> vehicleService.removeCar());
 
     }
 

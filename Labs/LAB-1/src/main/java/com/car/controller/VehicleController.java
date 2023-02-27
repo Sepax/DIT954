@@ -1,23 +1,8 @@
 package com.car.controller;
 
 import javax.swing.*;
-
-import com.car.interfaces.ITurbo;
-import com.car.models.Saab95;
-import com.car.models.Scania;
-import com.car.models.Vehicle;
-import com.car.models.VehicleFactory;
-import com.car.models.VehicleService;
-import com.car.models.Volvo240;
-import com.car.models.World;
+import com.car.model.World;
 import com.car.view.VehicleView;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class represents the Controller part in the MVC pattern.
@@ -43,8 +28,8 @@ public class VehicleController {
 
     public VehicleController(VehicleView frame, World world) {
         this.frame = frame;
-        new EventHandler(frame, world);
         this.timer = new Timer(delay, new TimeListener(world, frame));
+        new EventHandler(frame, world);
     }
 
     public void startController() {

@@ -1,6 +1,6 @@
-package com.car.models;
+package com.car.model;
 
-import com.car.models.Vehicle.Facing;
+import com.car.model.Vehicle.Facing;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,48 +34,48 @@ public class VolvoTest {
   }
 
   @Test
-    public void shouldTurnLeft() {
-        Facing expectedFacing = null;
-        switch (mockVolvo.getFacing()) {
-            case NORTH:
-                expectedFacing = Facing.WEST;
-                break;
-            case EAST:
-                expectedFacing = Facing.NORTH;
-                break;
-            case SOUTH:
-                expectedFacing = Facing.EAST;
-                break;
-            case WEST:
-                expectedFacing = Facing.SOUTH;
-                break;
-        }
-
-        mockVolvo.turnLeft();
-        assertSame(expectedFacing, mockVolvo.getFacing());
+  public void shouldTurnLeft() {
+    Facing expectedFacing = null;
+    switch (mockVolvo.getFacing()) {
+      case NORTH:
+        expectedFacing = Facing.WEST;
+        break;
+      case EAST:
+        expectedFacing = Facing.NORTH;
+        break;
+      case SOUTH:
+        expectedFacing = Facing.EAST;
+        break;
+      case WEST:
+        expectedFacing = Facing.SOUTH;
+        break;
     }
 
-    @Test
-    public void shouldTurnRight() {
-        Facing expectedFacing = null;
-        switch (mockVolvo.getFacing()) {
-            case NORTH:
-                expectedFacing = Facing.EAST;
-                break;
-            case EAST:
-                expectedFacing = Facing.SOUTH;
-                break;
-            case SOUTH:
-                expectedFacing = Facing.WEST;
-                break;
-            case WEST:
-                expectedFacing = Facing.NORTH;
-                break;
-        }
+    mockVolvo.turnLeft();
+    assertSame(expectedFacing, mockVolvo.getFacing());
+  }
 
-        mockVolvo.turnRight();
-        assertSame(expectedFacing, mockVolvo.getFacing());
+  @Test
+  public void shouldTurnRight() {
+    Facing expectedFacing = null;
+    switch (mockVolvo.getFacing()) {
+      case NORTH:
+        expectedFacing = Facing.EAST;
+        break;
+      case EAST:
+        expectedFacing = Facing.SOUTH;
+        break;
+      case SOUTH:
+        expectedFacing = Facing.WEST;
+        break;
+      case WEST:
+        expectedFacing = Facing.NORTH;
+        break;
     }
+
+    mockVolvo.turnRight();
+    assertSame(expectedFacing, mockVolvo.getFacing());
+  }
 
   @Test
   public void shouldNotMove() {

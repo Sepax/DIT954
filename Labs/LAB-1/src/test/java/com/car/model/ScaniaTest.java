@@ -1,12 +1,10 @@
-package com.car.models;
-
+package com.car.model;
 
 import org.junit.jupiter.api.*;
 
-import com.car.models.Vehicle.Facing;
+import com.car.model.Vehicle.Facing;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 
 /**
  * Unit tests for Scania vehicles.
@@ -16,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ScaniaTest {
     private Scania mockScania;
 
-	@BeforeEach
-	void setup() {
-		mockScania = new Scania(new Position(0, 0));
-	}
+    @BeforeEach
+    void setup() {
+        mockScania = new Scania(new Position(0, 0));
+    }
 
     @Test
     public void shouldIncreaseSpeed() {
@@ -150,6 +148,7 @@ public class ScaniaTest {
         assertEquals(70, mockScania.getFlatbedTilt());
 
     }
+
     @Test
     public void shouldRaiseFlatbed() {
         mockScania.setFlatbedTilt(0);
@@ -161,7 +160,3 @@ public class ScaniaTest {
     }
 
 }
-
-
-    
-

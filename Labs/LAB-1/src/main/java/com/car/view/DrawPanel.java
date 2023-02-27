@@ -1,20 +1,10 @@
 package com.car.view;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.WritableRaster;
-import java.awt.image.ColorModel;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import com.car.interfaces.IVehicle;
-import com.car.models.Vehicle;
-import com.car.models.World;
+import com.car.model.World;
 
 /**
  * This class represents the View part in the MVC pattern. It extends JPanel.
@@ -49,7 +39,7 @@ public class DrawPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (IVehicle vehicle : world.getAllVehicles()) {
+        for (IVehicle vehicle : world.getVehicles()) {
             try {
                 g.drawImage(ImageHandler.getImage(vehicle.getImagePath()), (int) vehicle.getX(), (int) vehicle.getY(),
                         null);

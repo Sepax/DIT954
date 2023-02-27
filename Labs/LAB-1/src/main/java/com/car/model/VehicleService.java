@@ -1,9 +1,11 @@
-package com.car.models;
+package com.car.model;
 
 import java.util.List;
 
+import com.car.interfaces.IFlatBed;
+import com.car.interfaces.ITurbo;
 import com.car.interfaces.IVehicle;
-import com.car.models.Vehicle.Facing;
+import com.car.model.Vehicle.Facing;
 
 public class VehicleService {
 
@@ -16,71 +18,52 @@ public class VehicleService {
     }
 
     public void start() {
-        for (IVehicle car : world.getAllVehicles()) {
+        for (IVehicle car : world.getVehicles()) {
             car.startEngine();
         }
     }
 
     public void stop() {
-        for (IVehicle car : world.getAllVehicles()) {
+        for (IVehicle car : world.getVehicles()) {
             car.stopEngine();
         }
     }
 
-    /**
-     * Gas each vehicle
-     * 
-     * @param amount
-     */
-
     public void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (IVehicle car : world.getAllVehicles()) {
+        for (IVehicle car : world.getVehicles()) {
             car.gas(gas);
         }
     }
 
-    /**
-     * Brake each vehicle
-     * 
-     * @param amount
-     */
-    public void brake(double amount) {
+    public void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (IVehicle car : world.getAllVehicles()) {
+        for (IVehicle car : world.getVehicles()) {
             car.brake(brake);
         }
     }
 
     public void enableTurbo() {
-        for (IVehicle car : world.getAllVehicles()) {
-            if (car instanceof Saab95) {
-                ((Saab95) car).enableTurbo();
-            }
+        for (ITurbo vehicle : world.getVehicles(ITurbo.class)) {
+            vehicle.enableTurbo();
         }
     }
 
     public void disableTurbo() {
-        for (IVehicle car : world.getAllVehicles()) {
-            if (car instanceof Saab95) {
-                ((Saab95) car).disableTurbo();
-            }
+        for (ITurbo vehicle : world.getVehicles(ITurbo.class)) {
+            vehicle.disableTurbo();
         }
     }
 
     public void liftBed() {
-        for (IVehicle car : world.getAllVehicles()) {
-            if (car instanceof Scania) {
-                ((Scania) car).raiseFlatbed(10);
-            }
+        for (IFlatBed vehicle : world.getVehicles(IFlatBed.class)) {
+            vehicle.raiseFlatbed(10);
         }
     }
 
     public void lowerBed() {
-        for (IVehicle car : world.getAllVehicles()) {
-            if (car instanceof Scania) {
-                ((Scania) car).lowerFlatbed(10);
-            }
+        for (IFlatBed vehicle : world.getVehicles(IFlatBed.class)) {
+            vehicle.lowerFlatbed(10);
         }
     }
 
@@ -102,26 +85,26 @@ public class VehicleService {
         return carX <= 0 || carX + imageWidth >= borderWidth;
     }
 
-    public void addRandomCar() {
+    public void addRandomVehicle() {
         int random = (int) (Math.random() * 3);
         switch (random) {
             case 0:
-                addCar(VehicleFactory.createVolvo240(0, newCarY));
+                addVehicle(VehicleFactory.createVolvo240(0, newCarY));
                 break;
             case 1:
-                addCar(VehicleFactory.createSaab95(0, newCarY));
+                addVehicle(VehicleFactory.createSaab95(0, newCarY));
                 break;
             case 2:
-                addCar(VehicleFactory.createScania(0, newCarY));
+                addVehicle(VehicleFactory.createScania(0, newCarY));
                 break;
             default:
                 break;
         }
     }
 
-    public void addCar(IVehicle car) {
+    public void addVehicle(IVehicle car) {
 
-        if (this.world.getAllVehicles().size() < 10) {
+        if (this.world.getVehicles().size() < 10) {
             this.world.addVehicle(car);
             if (car.getY() > newCarY) {
                 newCarY = car.getY();
@@ -135,15 +118,15 @@ public class VehicleService {
     }
 
     public void removeCar() {
-        if (world.getAllVehicles().size() > 1) {
-            IVehicle first = world.getAllVehicles().get(0);
+        if (world.getVehicles().size() > 1) {
+            IVehicle first = world.getVehicles().get(0);
             world.removeVehicle(first);
         }
 
     }
 
-    public List<IVehicle> getCars() {
-        return world.getAllVehicles();
+    public List<IVehicle> getVehicles() {
+        return world.getVehicles();
     }
 
 }

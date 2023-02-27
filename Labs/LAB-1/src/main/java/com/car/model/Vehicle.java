@@ -1,13 +1,6 @@
-package com.car.models;
+package com.car.model;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
-import java.io.FileInputStream;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import com.car.interfaces.*;
 
@@ -317,4 +310,5 @@ public abstract class Vehicle implements IVehicle {
     public String getImagePath() {
         return imagePath;
     }
+
 }

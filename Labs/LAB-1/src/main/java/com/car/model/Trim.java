@@ -1,4 +1,4 @@
-package com.car.models;
+package com.car.model;
 
 /**
  * Trim is a class that represents the trim factor of a car.

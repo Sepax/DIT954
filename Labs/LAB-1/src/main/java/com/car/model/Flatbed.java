@@ -1,4 +1,4 @@
-package com.car.models;
+package com.car.model;
 
 /**
  * Flatbed is a class that represents the flatbed of a truck.
@@ -16,7 +16,7 @@ public class Flatbed {
     public Flatbed() {
         tilt = 0;
     }
-    
+
     /**
      * Gets the tilt of the flatbed.
      * 
@@ -55,4 +55,3 @@ public class Flatbed {
         tilt = Math.max(tilt - degrees, 0);
     }
 }
-

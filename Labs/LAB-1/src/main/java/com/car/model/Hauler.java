@@ -1,8 +1,10 @@
-package com.car.models;
+package com.car.model;
 
 import java.awt.Color;
 
-import com.car.models.Ramp.RampState;
+import com.car.interfaces.ICargo;
+import com.car.interfaces.IRamp;
+import com.car.model.Ramp.RampState;
 
 /**
  * Hauler is a class that represents a hauler truck and extends the Transporter
@@ -12,7 +14,7 @@ import com.car.models.Ramp.RampState;
  * @author Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @since 2023-02-02
  */
-public class Hauler extends Vehicle {
+public class Hauler extends Vehicle implements ICargo, IRamp {
 	private Cargo<Vehicle> cargo;
 	private Ramp ramp;
 

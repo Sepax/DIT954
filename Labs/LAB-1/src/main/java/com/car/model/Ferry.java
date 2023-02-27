@@ -1,8 +1,10 @@
-package com.car.models;
+package com.car.model;
 
 import java.awt.Color;
 
-import com.car.models.Ramp.RampState;
+import com.car.interfaces.ICargo;
+import com.car.interfaces.IRamp;
+import com.car.model.Ramp.RampState;
 
 /**
  * The class `Ferry` represents a ferry that can transport vehicles.
@@ -10,7 +12,7 @@ import com.car.models.Ramp.RampState;
  * @author Kiril Curlinov, Sebastian Pålsson, Gabriele Frattini
  * @since 2023-02-01
  */
-public class Ferry extends Vehicle {
+public class Ferry extends Vehicle implements ICargo, IRamp {
     private Cargo<Vehicle> cargo;
     private Ramp ramp;
 
@@ -21,7 +23,7 @@ public class Ferry extends Vehicle {
      * 
      */
     public Ferry(Position position) {
-        super(2, Color.ORANGE, 1300, 30000, "CarFerry", Facing.EAST, position,"");
+        super(2, Color.ORANGE, 1300, 30000, "CarFerry", Facing.EAST, position, "");
         this.cargo = new Cargo<>(5000, 30);
         this.ramp = new Ramp();
     }

@@ -1,7 +1,7 @@
-package com.car.models;
+package com.car.model;
 
-import com.car.models.Ramp.RampState;
-import com.car.models.Vehicle.Facing;
+import com.car.model.Ramp.RampState;
+import com.car.model.Vehicle.Facing;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;

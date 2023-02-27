@@ -10,10 +10,7 @@ import javax.imageio.ImageIO;
 
 import com.car.interfaces.IVehicle;
 
-public abstract class ImageHandler {
-
-    protected ImageHandler() {
-    }
+public interface ImageHandler {
 
     public static Point getPoint(IVehicle vehicle) {
         Point point = new Point();

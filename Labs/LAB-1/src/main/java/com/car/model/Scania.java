@@ -1,6 +1,8 @@
-package com.car.models;
+package com.car.model;
 
 import java.awt.Color;
+
+import com.car.interfaces.IFlatBed;
 
 /**
  * Scania is a class that represents a Scania truck and extends the Vehicle
@@ -11,7 +13,7 @@ import java.awt.Color;
  * @authors Sebastian Pålsson, Gabriele Frattini, Kiril Curlinov
  * @since 2023-01-31
  */
-public class Scania extends Vehicle {
+public class Scania extends Vehicle implements IFlatBed {
     private Flatbed flatbed;
 
     /*
@@ -39,6 +41,7 @@ public class Scania extends Vehicle {
     /*
      * Raises the flatbed if the speed of the truck is 0.
      */
+    @Override
     public void raiseFlatbed(double degrees) {
         if (getCurrentSpeed() == 0) {
             flatbed.raise(degrees);
@@ -51,6 +54,7 @@ public class Scania extends Vehicle {
     /*
      * Lowers the flatbed if the speed of the truck is 0.
      */
+    @Override
     public void lowerFlatbed(double degrees) {
         if (getCurrentSpeed() == 0) {
             flatbed.lower(degrees);

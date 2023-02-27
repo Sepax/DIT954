@@ -1,6 +1,6 @@
 package com.car.interfaces;
 
-public interface ITurbo {
+public interface ITurbo extends IVehicle {
 
     public void enableTurbo();
 

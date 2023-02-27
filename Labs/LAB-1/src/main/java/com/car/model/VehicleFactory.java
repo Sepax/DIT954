@@ -1,7 +1,5 @@
 package com.car.model;
 
-import com.car.interfaces.ITurbo;
-
 public class VehicleFactory {
 
     public static final Vehicle createVolvo240(double x, double y) {

@@ -1,20 +1,43 @@
 package com.car.model;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.car.interfaces.IVehicle;
+import javax.swing.Timer;
 
-public class World {
+import com.car.interfaces.IVehicle;
+import com.car.interfaces.Observer;
+
+public class World implements ActionListener {
 
     List<IVehicle> vehicles;
-
-    public World(List<IVehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
+    private final int delay = 50;
+    private World world;
+    private VehicleService vehicleService;
+    private final List<Observer> observers = new ArrayList<>();
+    private Timer timer;
 
     public World() {
-        this(new ArrayList<>());
+        this.setVehicles(new ArrayList<>());
+        vehicleService = new VehicleService(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        for (IVehicle car : this.vehicles) {
+
+            if (vehicleService.hasBumpedInWall(
+                    car.getX(), 100, 800)) {
+                vehicleService.reverseDirection(car);
+            }
+
+            car.move();
+
+            for (Observer observer : observers) {
+                observer.notify(this.getVehicles());
+            }
+        }
     }
 
     public List<IVehicle> getVehicles() {
@@ -41,6 +64,19 @@ public class World {
 
     public void removeVehicle(IVehicle vehicle) {
         this.vehicles.remove(vehicle);
+    }
+
+    public void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    public void start() {
+        timer = new Timer(delay, this);
+        timer.start();
     }
 
 }

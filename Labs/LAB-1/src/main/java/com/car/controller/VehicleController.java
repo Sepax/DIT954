@@ -9,12 +9,10 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import com.car.view.DrawPanel;
-import com.car.view.VehicleView;
 
 /**
  * This class represents the Controller part in the MVC pattern.

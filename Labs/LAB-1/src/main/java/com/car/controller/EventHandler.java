@@ -2,7 +2,6 @@ package com.car.controller;
 
 import com.car.model.VehicleService;
 import com.car.model.World;
-import com.car.view.VehicleView;
 
 public class EventHandler {
 

@@ -3,10 +3,7 @@ package com.car.view;
 import com.car.model.VehicleFactory;
 import com.car.model.World;
 
-import javax.swing.Timer;
-
 import com.car.controller.EventHandler;
-import com.car.controller.TimeListener;
 import com.car.controller.VehicleController;
 
 public class Application {
@@ -25,11 +22,10 @@ public class Application {
         VehicleView view = new VehicleView(drawPanel, world);
         VehicleController cc = new VehicleController(drawPanel, "CarSim 1.0");
 
-        TimeListener timeListener = new TimeListener(world);
-        timeListener.addObserver(view);
+        world.addObserver(view);
         new EventHandler(cc, world);
 
-        timeListener.start();
+        world.start();
 
     }
 }

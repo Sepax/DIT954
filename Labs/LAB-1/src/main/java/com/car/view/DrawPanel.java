@@ -2,9 +2,10 @@ package com.car.view;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.List;
+
 import javax.swing.*;
 import com.car.interfaces.IVehicle;
-import com.car.model.World;
 
 /**
  * This class represents the View part in the MVC pattern. It extends JPanel.
@@ -16,14 +17,14 @@ import com.car.model.World;
 
 public class DrawPanel extends JPanel {
 
-    private World world;
+    List<IVehicle> vehicles;
 
     // Initializes the panel and reads the images
-    public DrawPanel(World world, int x, int y) {
+    public DrawPanel(List<IVehicle> vehicles, int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.pink);
-        this.world = world;
+        this.vehicles = vehicles;
 
     }
 
@@ -35,7 +36,7 @@ public class DrawPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (IVehicle vehicle : world.getVehicles()) {
+        for (IVehicle vehicle : vehicles) {
             try {
                 g.drawImage(ImageHandler.getImage(vehicle.getImagePath()), (int) vehicle.getX(), (int) vehicle.getY(),
                         null);

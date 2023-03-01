@@ -18,7 +18,7 @@ public class Application {
         world.addVehicle(VehicleFactory.createSaab95(0, 200));
         world.addVehicle(VehicleFactory.createScania(0, 300));
 
-        DrawPanel drawPanel = new DrawPanel(world, 800, 800 - 240);
+        DrawPanel drawPanel = new DrawPanel(world.getVehicles(), 800, 800 - 240);
         VehicleView view = new VehicleView(drawPanel, world);
         VehicleController cc = new VehicleController(drawPanel, "CarSim 1.0");
 

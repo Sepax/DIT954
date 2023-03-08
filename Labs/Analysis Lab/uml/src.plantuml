@@ -102,17 +102,18 @@ class PanelGame {
   - boomEffects: List<Effect>
   ----
   + start(): void
-  - drawGame(): void
-  - sleep(long): void
-  - initKeyboard(): void
-  - drawBackground(): void
-  - render(): void
-  - addRocket(): void
-  - checkPlayer(Rocket): void
-  - initObjectGame(): void
   - resetGame(): void
-  - checkBullets(Bullet): void
+
+  - drawGame(): void
+  - drawBackground(): void
+  
+  - initObjectGame(): void
   - initBullets(): void
+  - initKeyboard(): void
+  - addRocket(): void
+  
+  - checkPlayer(Rocket): void
+  - checkBullets(Bullet): void
 }
 class Player {
   + Player()

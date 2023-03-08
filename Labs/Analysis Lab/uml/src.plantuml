@@ -1,0 +1,196 @@
+@startuml plane-game
+top to bottom direction
+skinparam nodesep 120
+skinparam ranksep 120
+skinparam linetype polyline
+
+class Bullet {
+  + Bullet(double, double, float, double, float): 
+  - x: double
+  - y: double
+  - speed: float
+  - shape: Shape
+  - angle: float
+  - color: Color
+  - size: double
+  + getX(): double
+  + getShape(): Shape
+  + getY(): double
+  + getSize(): double
+  + getCenterY(): double
+  + draw(Graphics2D): void
+  + check(int, int): boolean
+  + getCenterX(): double
+  + update(): void
+}
+class Effect {
+  + Effect(double, double, int, int, double, float, Color): 
+  - x: double
+  - current_distance: double
+  - alpha: float
+  - y: double
+  - booms: ModelBoom[]
+  - speed: float
+  - max_distance: double
+  - color: Color
+  - totalEffect: int
+  - max_size: int
+  + update(): void
+  - createRandom(): void
+  + draw(Graphics2D): void
+  + check(): boolean
+}
+class HP {
+  + HP(double, double): 
+  + HP(): 
+  - currentHp: double
+  - MAX_HP: double
+  + getMAX_HP(): double
+  + getCurrentHp(): double
+  + setMAX_HP(double): void
+  + setCurrentHp(double): void
+}
+class HpRender {
+  + HpRender(HP): 
+  - hp: HP
+  + resetHP(): void
+  + updateHP(double): boolean
+  + getHP(): double
+  # hpRender(Graphics2D, Shape, double): void
+}
+class Key {
+  + Key(): 
+  - key_left: boolean
+  - key_space: boolean
+  - key_enter: boolean
+  - key_right: boolean
+  - key_j: boolean
+  - key_k: boolean
+  + isKey_right(): boolean
+  + isKey_k(): boolean
+  + isKey_left(): boolean
+  + setKey_k(boolean): void
+  + isKey_space(): boolean
+  + setKey_space(boolean): void
+  + setKey_enter(boolean): void
+  + setKey_j(boolean): void
+  + setKey_left(boolean): void
+  + isKey_j(): boolean
+  + setKey_right(boolean): void
+  + isKey_enter(): boolean
+}
+class Main {
+  + Main(): 
+  + main(String[]): void
+  - init(): void
+}
+class ModelBoom {
+  + ModelBoom(double, float): 
+  + ModelBoom(): 
+  - size: double
+  - angle: float
+  + setSize(double): void
+  + setAngle(float): void
+  + getSize(): double
+  + getAngle(): float
+}
+class PanelGame {
+  + PanelGame(): 
+  - bullets: List<Bullet>
+  - sound: Sound
+  - player: Player
+  - thread: Thread
+  - key: Key
+  - image: BufferedImage
+  - g2: Graphics2D
+  - start: boolean
+  - width: int
+  - TARGET_TIME: int
+  - shotTime: int
+  - rockets: List<Rocket>
+  - boomEffects: List<Effect>
+  - FPS: int
+  - score: int
+  - height: int
+  - drawGame(): void
+  - sleep(long): void
+  - initKeyboard(): void
+  - drawBackground(): void
+  - render(): void
+  + start(): void
+  - addRocket(): void
+  - checkPlayer(Rocket): void
+  - initObjectGame(): void
+  - resetGame(): void
+  - checkBullets(Bullet): void
+  - initBullets(): void
+}
+class Player {
+  + Player(): 
+  - image_speed: Image
+  - speed: float
+  - speedUp: boolean
+  + PLAYER_SIZE: double
+  - y: double
+  - MAX_SPEED: float
+  - angle: float
+  - x: double
+  - image: Image
+  - playerShap: Area
+  - alive: boolean
+  + speedDown(): void
+  + changeLocation(double, double): void
+  + reset(): void
+  + getX(): double
+  + getAngle(): float
+  + draw(Graphics2D): void
+  + getShape(): Area
+  + speedUp(): void
+  + setAlive(boolean): void
+  + getY(): double
+  + update(): void
+  + changeAngle(float): void
+  + isAlive(): boolean
+}
+class Rocket {
+  + Rocket(): 
+  - x: double
+  - y: double
+  - speed: float
+  - image: Image
+  + ROCKET_SIZE: double
+  - angle: float
+  - rocketShap: Area
+  + check(int, int): boolean
+  + getShape(): Area
+  + getY(): double
+  + getX(): double
+  + getAngle(): float
+  + update(): void
+  + changeLocation(double, double): void
+  + changeAngle(float): void
+  + draw(Graphics2D): void
+}
+class Sound {
+  + Sound(): 
+  - hit: URL
+  - destroy: URL
+  - shoot: URL
+  + soundHit(): void
+  + soundShoot(): void
+  - play(URL): void
+  + soundDestroy(): void
+}
+
+Effect    "1" *-[#595959,plain]-> "booms\n1" ModelBoom 
+HpRender  "1" *-[#595959,plain]-> "hp\n1" HP        
+Main       -[#595959,dashed]->  PanelGame : "«create»"
+PanelGame "1" *-[#595959,plain]-> "bullets\n*" Bullet    
+PanelGame "1" *-[#595959,plain]-> "boomEffects\n*" Effect    
+PanelGame "1" *-[#595959,plain]-> "key\n1" Key       
+PanelGame "1" *-[#595959,plain]-> "player\n1" Player    
+PanelGame "1" *-[#595959,plain]-> "rockets\n*" Rocket    
+PanelGame "1" *-[#595959,plain]-> "sound\n1" Sound     
+Player     -[#000082,plain]-^  HpRender  
+Rocket     -[#000082,plain]-^  HpRender  
+@enduml
